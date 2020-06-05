@@ -68,8 +68,8 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-	assets = loadTexture("man01.svg");
-    gTexture = loadTexture("hu.png");
+	assets = loadTexture("images/man01.svg");
+    gTexture = loadTexture("images/hu.png");
 	if(gTexture==NULL || gTexture==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -219,7 +219,7 @@ void Game::run( )
 		}
 		if (!pause){
             SDL_RenderClear(gRenderer); //removes everything from renderer
-            SDL_RenderCopy(gRenderer, assets, NULL, NULL);//Draws background to renderer
+            SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
             // SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 
             // (obj).draw(gRenderer);

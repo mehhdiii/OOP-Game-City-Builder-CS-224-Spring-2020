@@ -17,5 +17,5 @@ class Unit{
         Unit(SDL_Texture *); //constructor passed with the object pointer to be drawn
         virtual void Draw(SDL_Renderer*)=0; //draws on screen
         void setCoordinates(int, int); //sets coordinates;
-        void setSize(int, int); //sets size of the object;
+        void setSize(int, int); //sets size of the object;-
 };

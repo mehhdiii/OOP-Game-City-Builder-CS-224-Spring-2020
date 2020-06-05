@@ -11,7 +11,7 @@
 #include<vector>
 // #include<ctime>
 
-#include"fountain.hpp"
+
 using namespace std;
 
 class Game{
