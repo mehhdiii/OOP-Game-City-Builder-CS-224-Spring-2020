@@ -220,7 +220,7 @@ void Game::run( )
 		if (!pause){
             SDL_RenderClear(gRenderer); //removes everything from renderer
             SDL_RenderCopy(gRenderer, assets, NULL, NULL);//Draws background to renderer
-            SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
+            // SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 
             // (obj).draw(gRenderer);
             SDL_RenderPresent(gRenderer); //displays the updated renderer

@@ -9,7 +9,7 @@ public:
     const int SCREEN_HEIGHT = 600; //screen height of the sdl window
 public:
     Building(SDL_Texture*); //constructor
-    virtual void draw(SDL_Renderer*) = 0; //virtual draw function as there is no synthesizable object of the type UNIT
+    // virtual void draw(SDL_Renderer*) = 0; //virtual draw function as there is no synthesizable object of the type UNIT
     SDL_Rect getMover(); //gets the mover object of a given object
 
     void setCoordinates(int, int); //sets coordinates of this object

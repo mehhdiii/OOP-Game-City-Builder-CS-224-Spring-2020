@@ -27,8 +27,8 @@ class Game{
 
     //Current displayed texture
     SDL_Texture* gTexture = NULL;
-    //global reference to png image sheets
-    SDL_Texture* assets=NULL;
+    //global reference to sprites;
+    SDL_Texture* assets;
 
     //You may use C++ linked lists, or you can create your own.
 
