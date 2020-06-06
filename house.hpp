@@ -17,5 +17,7 @@ class House: public InAnimate{
         void setPeoplecount(int);
         void setPrice(int);
 
+        
+
 
 };
