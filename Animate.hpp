@@ -9,5 +9,7 @@ class Animate: public Unit{
     public:
         Animate(SDL_Texture * asset);
 
+        void setSpeed();
 
+        void mover();
 };
