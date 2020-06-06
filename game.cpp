@@ -69,7 +69,7 @@ bool Game::loadMedia()
 	bool success = true;
 	
 	assets = loadTexture("images/man01.svg");
-    gTexture = loadTexture("images/hu.png");
+    gTexture = loadTexture("images/map.png");
 	if(gTexture==NULL || gTexture==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
