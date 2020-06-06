@@ -7,7 +7,6 @@ class House: public InAnimate{
     private:
         int peopleCount;
         int localityGrading;
-        // string locality;
         int houseSize;
         int pricing;
 

@@ -11,6 +11,7 @@ void House::setPeoplecount(int people){
 
 
 }
+
 void House::setPrice(int house_price){
     pricing = house_price;
 }
