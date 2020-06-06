@@ -13,7 +13,7 @@ class Unit{
         const int SCREEN_HEIGHT = 600; //screen height of the sdl window
 
     public:
-
+        
         Unit(SDL_Texture *); //constructor passed with the object pointer to be drawn
         virtual void Draw(SDL_Renderer*)=0; //draws on screen
         void setCoordinates(int, int); //sets coordinates;
