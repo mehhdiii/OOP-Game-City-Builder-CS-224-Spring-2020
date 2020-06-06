@@ -68,8 +68,9 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-	assets = loadTexture("images/man01.svg");
+	assets = loadTexture("images/car-front-02.svg");
     gTexture = loadTexture("images/map.png");
+
 	if(gTexture==NULL || gTexture==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -189,7 +190,11 @@ void Game::run( )
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 				
-                
+                House * house = new House(assets);
+				house->setCoordinates(xMouse, yMouse);
+				house->setSize(175/2,  100/2);
+				houses.push_back(house);
+
                
 				
 			}
@@ -220,6 +225,10 @@ void Game::run( )
 		if (!pause){
             SDL_RenderClear(gRenderer); //removes everything from renderer
             SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
+			
+			for( auto i = houses.begin(); i<houses.end(); i++){
+				(*i)->draw(gRenderer);
+			}
             // SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 
             // (obj).draw(gRenderer);

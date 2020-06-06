@@ -11,5 +11,5 @@ class InAnimate: public Unit{
     public:
 
         InAnimate(SDL_Texture *);
-
+        void draw(SDL_Renderer *);
 };
