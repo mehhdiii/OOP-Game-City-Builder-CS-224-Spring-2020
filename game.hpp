@@ -11,6 +11,7 @@
 #include<vector>
 // #include<ctime>
 
+#include"house.hpp"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ class Game{
 
     //You may use C++ linked lists, or you can create your own.
 
+    vector <House*> houses;
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
     // SDL_Rect mover = {25,25,50,100}; //size of the object to draw on screen
