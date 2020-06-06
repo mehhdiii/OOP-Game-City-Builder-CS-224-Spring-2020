@@ -60,6 +60,7 @@ public:
     bool loadMedia();
     void close();
     SDL_Texture* loadTexture( std::string path );
+    void main_menu(SDL_Texture *);
     void range_OptionBar(int xMouse, int yMouse);
     void run();
     
