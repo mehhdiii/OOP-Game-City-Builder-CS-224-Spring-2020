@@ -3,6 +3,13 @@
 #include <typeinfo>
 using namespace std;
 #include<list>
+// void Game::ToggleFullscreen(SDL_Window* Window) {
+//     Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
+//     bool IsFullscreen = SDL_GetWindowFlags(Window) & FullscreenFlag;
+//     SDL_SetWindowFullscreen(Window, IsFullscreen ? 0 : FullscreenFlag);
+//     SDL_ShowCursor(IsFullscreen);
+// }
+
 bool Game::init()
 {
 	//Initialization flag
@@ -23,7 +30,9 @@ bool Game::init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "Green City", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+
+
+		gWindow = SDL_CreateWindow( "Green City", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );

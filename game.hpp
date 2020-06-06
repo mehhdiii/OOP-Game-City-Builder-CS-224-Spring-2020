@@ -16,8 +16,8 @@ using namespace std;
 
 class Game{
     //Screen dimension constants
-    const int SCREEN_WIDTH = 800;
-    const int SCREEN_HEIGHT = 600;
+    const int SCREEN_WIDTH = 1360;
+    const int SCREEN_HEIGHT = 725;
 
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
@@ -45,6 +45,7 @@ class Game{
     
 public:
 
+    void ToggleFullscreen(SDL_Window* Window);
     bool init();
     bool loadMedia();
     void close();
