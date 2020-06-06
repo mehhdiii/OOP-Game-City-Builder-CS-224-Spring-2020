@@ -165,6 +165,8 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 	}
 }
 
+void Game::main_menu()
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );
@@ -173,7 +175,7 @@ void Game::run( )
 	bool pause = false;
 	bool egg_constraint = false; //if games needs to end
 
-	bool flag = false; // option is disabled
+	bool option_bar_flag = false; // option is disabled
 	//Event handler
 	SDL_Event e;
 	
@@ -214,18 +216,18 @@ void Game::run( )
 				//this is a good location to add pigeon in linked list.
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
-				cout<< "X Coordinates : " << xMouse << endl;
-				cout<< "Y Coordinates : " << yMouse << endl;
-				if (xMouse < 70 && yMouse > 635 && flag == false){ // to enable option bar
-					flag = true; // option bar is enabled
-					cout<< "The option bar will now open.! "<<endl;
+				// cout<< "X Coordinates : " << xMouse << endl;
+				// cout<< "Y Coordinates : " << yMouse << endl;
+				if (xMouse < 70 && yMouse > 635 && option_bar_flag == false){ // to enable option bar
+					option_bar_flag = true; // option bar is enabled
+
 					optionBar = new OptionBar(assets2);
 					optionBar->setCoordinates(xMouse, yMouse);
 					optionBar->setSize(175/2,  100/2);
 					// optionBars.push_back(optionBar);
 				}
-				else if (xMouse < 70 && yMouse > 635 && flag == true){ // to disable option bar
-					flag = false; // option bar is disabled
+				else if (xMouse < 70 && yMouse > 635 && option_bar_flag == true){ // to disable option bar
+					option_bar_flag = false; // option bar is disabled
 
 					// we need to remove the option bar from the screen ..
 					delete optionBar;
@@ -238,15 +240,17 @@ void Game::run( )
 					house->setCoordinates(xMouse, yMouse);
 					house->setSize(175/2,  100/2);
 					houses.push_back(house);
+
+					Park * park = new Park(assets);
+					park->setCoordinates(xMouse, yMouse);
+					parks.push_back(park);
+
+					Farm * farm = new Farm(assets);
+					farm->setCoordinates(xMouse, yMouse);
+					farms.push_back(farm);
 				}
 
-				Park * park = new Park(assets);
-				park->setCoordinates(xMouse, yMouse);
-				parks.push_back(park);
-
-				Farm * farm = new Farm(assets);
-				farm->setCoordinates(xMouse, yMouse);
-				farms.push_back(farm);
+				
                
 				
 			}
