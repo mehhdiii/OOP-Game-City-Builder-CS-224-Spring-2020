@@ -3,12 +3,6 @@
 #include <typeinfo>
 using namespace std;
 #include<list>
-// void Game::ToggleFullscreen(SDL_Window* Window) {
-//     Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-//     bool IsFullscreen = SDL_GetWindowFlags(Window) & FullscreenFlag;
-//     SDL_SetWindowFullscreen(Window, IsFullscreen ? 0 : FullscreenFlag);
-//     SDL_ShowCursor(IsFullscreen);
-// }
 
 bool Game::init()
 {
@@ -77,14 +71,10 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-<<<<<<< HEAD
-	assets = loadTexture("images/man01.svg");
-    gTexture = loadTexture("images/back.jpg");
-=======
 	assets = loadTexture("images/car-front-02.svg");
+	assets2 = loadTexture("images/house-02.svg");
     gTexture = loadTexture("images/map.png");
 
->>>>>>> mehdi
 	if(gTexture==NULL || gTexture==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -156,6 +146,25 @@ SDL_Texture* Game::loadTexture( std::string path )
 }
 
 
+void Game::range_OptionBar(int xMouse, int yMouse){
+	if (xMouse >= 70 && xMouse <= 80 && yMouse > 635){
+		// we will make a house from here
+
+	}
+	else if (xMouse >= 80 && xMouse <= 90 && yMouse > 635){
+		// we will make a car from here
+
+	}
+	else if (xMouse >= 90 && xMouse <= 100 && yMouse > 635){
+		// we will make a factory from here
+	
+	}
+	else if (xMouse >= 100 && xMouse <= 110 && yMouse > 635){
+		// we will make a bird from here
+	
+	}
+}
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );
@@ -163,6 +172,8 @@ void Game::run( )
 	bool quit = false;
 	bool pause = false;
 	bool egg_constraint = false; //if games needs to end
+
+	bool flag = false; // option is disabled
 	//Event handler
 	SDL_Event e;
 	
@@ -203,11 +214,31 @@ void Game::run( )
 				//this is a good location to add pigeon in linked list.
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
-				
-                House * house = new House(assets);
-				house->setCoordinates(xMouse, yMouse);
-				house->setSize(175/2,  100/2);
-				houses.push_back(house);
+				cout<< "X Coordinates : " << xMouse << endl;
+				cout<< "Y Coordinates : " << yMouse << endl;
+				if (xMouse < 70 && yMouse > 635 && flag == false){ // to enable option bar
+					flag = true; // option bar is enabled
+					cout<< "The option bar will now open.! "<<endl;
+					optionBar = new OptionBar(assets2);
+					optionBar->setCoordinates(xMouse, yMouse);
+					optionBar->setSize(175/2,  100/2);
+					// optionBars.push_back(optionBar);
+				}
+				else if (xMouse < 70 && yMouse > 635 && flag == true){ // to disable option bar
+					flag = false; // option bar is disabled
+
+					// we need to remove the option bar from the screen ..
+					delete optionBar;
+					
+				}
+				else{
+					range_OptionBar(xMouse, yMouse);
+					
+					House * house = new House(assets);
+					house->setCoordinates(xMouse, yMouse);
+					house->setSize(175/2,  100/2);
+					houses.push_back(house);
+				}
 
                
 				
@@ -243,6 +274,13 @@ void Game::run( )
 			for( auto i = houses.begin(); i<houses.end(); i++){
 				(*i)->draw(gRenderer);
 			}
+
+			if (flag == true){
+				(*optionBar).draw(gRenderer);
+			}
+			// for( auto i = optionBars.begin(); i<optionBars.end(); i++){
+			// 	(*i)->draw(gRenderer);
+			// }
             // SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 
             // (obj).draw(gRenderer);
