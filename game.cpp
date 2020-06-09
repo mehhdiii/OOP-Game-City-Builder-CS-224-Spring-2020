@@ -4,6 +4,12 @@
 using namespace std;
 #include<list>
 
+
+void Game::update_parameters(){
+	// Objects : birds - building - farm - house - laboratory - industry - park - vehicle - worker - scientist. 
+
+}
+
 bool Game::init()
 {
 	//Initialization flag

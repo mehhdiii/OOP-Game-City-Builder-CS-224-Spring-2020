@@ -56,6 +56,7 @@ class Game{
     
 public:
 
+    void update_parameters();
     bool init();
     bool loadMedia();
     void close();
