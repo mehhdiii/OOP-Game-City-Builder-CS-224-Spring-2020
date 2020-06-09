@@ -1,12 +1,30 @@
 #include "game.hpp"
 #include<iostream>
 #include <typeinfo>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 using namespace std;
 #include<list>
 
 
 void Game::update_parameters(){
-	// Objects : birds - building - farm - house - laboratory - industry - park - vehicle - worker - scientist. 
+	// Objects : 1. birds - 2. building - 3. farm - 4. house - 5. laboratory - 6. industry - 7. park - 8. vehicle 
+	// - 9. worker - 10. scientist.
+
+	int money = 10000; // dollars
+	int electricity = 250; // MegaWatts
+	int XP_level = 100;
+	int P_level = 1; // first level
+
+	int input_user; 	
+
+	for (int i = 0 ; i <= 10 ; i++){
+		/* initialize random seed: */
+  		srand (time(NULL));
+
+  		/* generate secret number between 1 and 10: */
+  		input_user = rand() % 10 + 1;
+	}
 
 }
 
@@ -300,8 +318,5 @@ void Game::run( )
             SDL_RenderPresent(gRenderer); //displays the updated renderer
 		}
 		SDL_Delay(180);	//causes sdl engine to delay for specified miliseconds
-		
-		
 	}
-			
 }
