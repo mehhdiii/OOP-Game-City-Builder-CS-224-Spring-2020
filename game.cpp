@@ -71,8 +71,31 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
+	//loading menu
+	//creating  menu object:
+	
+	int menu_sprite_range = 6;
+	string spritename;
+	//loading mainmenu
+	for(int i=1; i<menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Main_Menu_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		menu.add_sprite(loadTexture(spritename), 0); 
+	}
+	//loading map menu
+	for(int i=1; i<menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Map_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		menu.add_sprite(loadTexture(spritename), 1); 
+	}
+
+
+	//loading other sprites
 	assets = loadTexture("images/car-front-02.svg");
 	assets2 = loadTexture("images/house-02.svg");
+	
     gTexture = loadTexture("images/map.png");
 
 	if(gTexture==NULL || gTexture==NULL)
@@ -165,9 +188,9 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 	}
 }
 
-void Game::main_menu(SDL_Texture * ){
-	
-}
+// void Game::main_menu(list <SDL_Texture *> sprites, SDL_Event * ){
+// 	while()
+// }
 
 void Game::run( )
 {
@@ -175,12 +198,46 @@ void Game::run( )
 	//Main loop flag
 	bool quit = false;
 	bool pause = false;
-	bool egg_constraint = false; //if games needs to end
+	bool menuactive = true;
 
 	bool option_bar_flag = false; // option is disabled
 	//Event handler
 	SDL_Event e;
-	
+
+	//main menu running
+
+	int xMouse, yMouse;
+	bool click; 
+	while(menuactive){
+		// if (true){
+			
+
+		// }
+
+		//check for keyboard event
+		while( SDL_PollEvent( &e ) != 0 ){
+			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				menuactive = false;
+				break;
+			}
+			
+			SDL_GetMouseState(&xMouse,&yMouse);
+			// cout << "xMouse: " << xMouse <<endl;
+			// cout << "yMouse: " << yMouse <<endl;
+
+			SDL_RenderClear(gRenderer); //removes everything from renderer
+			
+			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
+				click =1;
+			}
+			menu.refresh(gRenderer, xMouse, yMouse, click);
+			SDL_RenderPresent(gRenderer);
+			click =0;
+
+		}
+	}
+
 	//While application is running
 	while( !quit )
 	{
@@ -216,7 +273,7 @@ void Game::run( )
 
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT &&!pause){
 				//this is a good location to add pigeon in linked list.
-				int xMouse, yMouse;
+				// int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 				// cout<< "X Coordinates : " << xMouse << endl;
 				// cout<< "Y Coordinates : " << yMouse << endl;
@@ -288,7 +345,7 @@ void Game::run( )
 				(*i)->draw(gRenderer);
 			}
 
-			if (flag == true){
+			if (option_bar_flag == true){
 				(*optionBar).draw(gRenderer);
 			}
 			// for( auto i = optionBars.begin(); i<optionBars.end(); i++){
