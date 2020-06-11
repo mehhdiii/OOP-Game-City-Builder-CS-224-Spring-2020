@@ -106,14 +106,14 @@ bool Game::loadMedia()
 
 	//loading all music for the game:
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	// background_music = Mix_LoadMUS("Waltz-music-loop/Waltz-music-loop.wav");
+	background_music = Mix_LoadMUS("music/inception.wav");
 	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
 	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	// if( eggy == NULL || background_music ==NULL || bird1==NULL || bird2==NULL)
-	// {
-	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-	// 	success = false;
-	// }
+	if(background_music ==NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
 	
 	return success;
 }
@@ -216,6 +216,11 @@ void Game::run( )
 
 		//check for keyboard event
 		while( SDL_PollEvent( &e ) != 0 ){
+			if( Mix_PlayingMusic() == 0 )
+			{
+				//Play the music
+				Mix_PlayMusic( background_music, 1 );
+			}
 			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 			{
 				menuactive = false;
@@ -242,11 +247,7 @@ void Game::run( )
 	while( !quit )
 	{
 		//play the background music
-		if( Mix_PlayingMusic() == 0 )
-				{
-				//Play the music
-				// Mix_PlayMusic( background_music, 1 );
-		}
+		
 		
 		
 		//Handle events on queue
