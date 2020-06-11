@@ -50,7 +50,7 @@ class Game{
     // SDL_Rect mover = {25,25,50,100}; //size of the object to draw on screen
     //sound variables:
     // Mix_Chunk *eggy = NULL; //egg splash.
-    // Mix_Music *background_music = NULL; //plays in the background
+    Mix_Music *background_music = NULL; //plays in the background
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
 
