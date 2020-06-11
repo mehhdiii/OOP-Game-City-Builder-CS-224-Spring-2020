@@ -2,13 +2,13 @@
 #include "Animate.hpp"
 #pragma once
 
-class bird: public Animate{
+class Bird: public Animate{
     private:
 
         SDL_Rect Image;
     public:
 
-        bird(SDL_Texture *);
+        Bird(SDL_Texture *);
         void setCoordinates(int , int );
 
 };

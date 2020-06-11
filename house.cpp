@@ -8,12 +8,16 @@ House::House(SDL_Texture * asset): InAnimate(asset) {
 void House::setPeoplecount(int people){
     peopleCount = people;
     
+}
 
+int House::getLocalityGrading(){
 
+    return 0;
 }
 
 void House::setPrice(int house_price){
     pricing = house_price;
+
 }
 
 
