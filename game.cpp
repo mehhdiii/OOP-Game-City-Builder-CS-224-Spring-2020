@@ -324,7 +324,7 @@ SDL_Texture* Game::loadTexture( std::string path )
 void Game::range_OptionBar(int xMouse, int yMouse){
 	if (xMouse >= 70 && xMouse <= 80 && yMouse > 635){
 		// we will make a house from here
-
+		
 	}
 	else if (xMouse >= 80 && xMouse <= 90 && yMouse > 635){
 		// we will make a car from here
