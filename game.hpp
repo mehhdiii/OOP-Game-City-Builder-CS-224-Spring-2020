@@ -10,7 +10,7 @@
 #include <list>
 #include<vector>
 // #include<ctime>
-
+#include"menu.hpp"
 #include"house.hpp"
 #include"park.hpp"
 #include"farm.hpp"
@@ -37,18 +37,20 @@ class Game{
     //global reference to sprites2;
     SDL_Texture* assets2;
 
+
     //You may use C++ linked lists, or you can create your own.
 
     vector <House*> houses;
     vector <Park*> parks;
     vector <Farm*> farms;
     OptionBar * optionBar;
+    Menu menu; //menu objects
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
     // SDL_Rect mover = {25,25,50,100}; //size of the object to draw on screen
     //sound variables:
     // Mix_Chunk *eggy = NULL; //egg splash.
-    // Mix_Music *background_music = NULL; //plays in the background
+    Mix_Music *background_music = NULL; //plays in the background
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
 
@@ -58,8 +60,12 @@ public:
 
     bool init();
     bool loadMedia();
+    // void loadMenu();
     void close();
     SDL_Texture* loadTexture( std::string path );
+    
+    
+    // void main_menu(list <SDL_Texture *>);
     void range_OptionBar(int xMouse, int yMouse);
     void run();
     
