@@ -2,7 +2,7 @@
 #include "Animate.hpp"
 #pragma once
 
-class scientist: public Animate{
+class Scientist: public Animate{
     private:
 
         SDL_Rect Image;
@@ -10,7 +10,7 @@ class scientist: public Animate{
         bool work_Power;
     public:
 
-        scientist(SDL_Texture *);
+        Scientist(SDL_Texture *);
         int getworkPower();
 
 };
