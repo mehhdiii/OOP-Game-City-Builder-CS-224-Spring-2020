@@ -39,10 +39,18 @@ class Game{
 
     //You may use C++ linked lists, or you can create your own.
 
-    vector <House*> houses;
-    vector <Park*> parks;
+    // vector <Bird*> birds;
+    // vector <Building*> buildings;
     vector <Farm*> farms;
+    vector <House*> houses;
+    // vector <Laboratory*> laboratories;
+    // vector <Industry*> industries;
+    vector <Park*> parks;
+    // vector <Vehicle*> vehicles;
+    // vector <Worker*> workers;
+    // vector <Scientist*> scientists;
     OptionBar * optionBar;
+    
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
     // SDL_Rect mover = {25,25,50,100}; //size of the object to draw on screen
