@@ -174,6 +174,7 @@ void Game::update_parameters(){
 		}
 		cout<<"Money : "<<money<<endl;
 		cout<<"XP_level : "<<XP_level<<endl;
+		cout<<"Player level : "<<P_level<<endl;
 	}
 
 }
