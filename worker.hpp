@@ -2,7 +2,7 @@
 #include "Animate.hpp"
 #pragma once
 
-class worker: public Animate{
+class Worker: public Animate{
     private:
 
         SDL_Rect Image;
@@ -10,7 +10,7 @@ class worker: public Animate{
         bool probation_period;
     public:
 
-        worker(SDL_Texture *);
+        Worker(SDL_Texture *);
         void deploy();
 
 };
