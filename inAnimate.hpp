@@ -3,6 +3,7 @@
 #pragma once
 
 class InAnimate: public Unit{
+    
     private:
 
         int width;

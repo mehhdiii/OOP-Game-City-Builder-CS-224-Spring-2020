@@ -3,6 +3,7 @@
 #pragma once
 
 class Bird: public Animate{
+
     private:
 
         SDL_Rect Image;
@@ -10,5 +11,4 @@ class Bird: public Animate{
 
         Bird(SDL_Texture *);
         void setCoordinates(int , int );
-
 };

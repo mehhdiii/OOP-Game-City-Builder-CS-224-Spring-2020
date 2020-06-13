@@ -1,6 +1,6 @@
 #include "vehicle.hpp"
 
-Vehicle::Vehicle(SDL_Texture * asset): Animate(asset){
+Vehicle::Vehicle(SDL_Texture * asset): InAnimate(asset){
     setSize(175/2,  100/2); 
 }
 

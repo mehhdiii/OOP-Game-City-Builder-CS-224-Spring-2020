@@ -269,7 +269,7 @@ bool Game::loadMedia()
 
 	//loading other sprites
 	assets = loadTexture("images/car-front-02.svg");
-	assets2 = loadTexture("images/house-02.svg");
+	// assets2 = loadTexture("images/house-02.svg");
 	
     gTexture = loadTexture("images/map.png");
 
@@ -279,16 +279,16 @@ bool Game::loadMedia()
         success =false;
     }
 
-	//loading all music for the game:
-	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	background_music = Mix_LoadMUS("music/inception.wav");
-	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
-	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	if(background_music ==NULL )
-	{
-		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-		success = false;
-	}
+	// //loading all music for the game:
+	// // eggy = Mix_LoadWAV( "eggy_splash.wav" );
+	// background_music = Mix_LoadMUS("music/inception.wav");
+	// // bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
+	// // bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
+	// if(background_music ==NULL )
+	// {
+	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+	// 	success = false;
+	// }
 	
 	return success;
 }
@@ -376,7 +376,7 @@ void Game::run( )
 	bool menuactive = true;
 
 
-	update_parameters();
+	// update_parameters();
 	bool option_bar_flag = false; // option is disabled
 
 	//Event handler
@@ -459,9 +459,9 @@ void Game::run( )
 				if (xMouse < 70 && yMouse > 635 && option_bar_flag == false){ // to enable option bar
 					option_bar_flag = true; // option bar is enabled
 
-					optionBar = new OptionBar(assets2);
-					optionBar->setCoordinates(xMouse, yMouse);
-					optionBar->setSize(175/2,  100/2);
+					// OptionBar *optionBar = new OptionBar(assets2);
+					// optionBar->setCoordinates(xMouse, yMouse);
+					// optionBar->setSize(175/2,  100/2);
 					// optionBars.push_back(optionBar);
 				}
 				else if (xMouse < 70 && yMouse > 635 && option_bar_flag == true){ // to disable option bar

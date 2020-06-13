@@ -1,6 +1,6 @@
 #include"optionBar.hpp"
 
-OptionBar::OptionBar(SDL_Texture * asset): InAnimate(asset) {}
+OptionBar::OptionBar(SDL_Texture * asset): Unit(asset) {}
 
 // void optionBar::setPeoplecount(int people){
 //     // peopleCount = people;

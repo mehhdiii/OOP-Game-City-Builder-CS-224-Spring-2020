@@ -1,6 +1,6 @@
 #include "park.hpp"
 
-Park::Park(SDL_Texture * asset): Building(asset){
+Park::Park(SDL_Texture * asset): InAnimate(asset){
      setSize(175/2,  100/2);
 
 }
@@ -8,6 +8,3 @@ Park::Park(SDL_Texture * asset): Building(asset){
 int Park::showEnvImpact(){
     return env_impact;
 }
-
-
-

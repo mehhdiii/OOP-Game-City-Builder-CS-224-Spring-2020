@@ -1,8 +1,9 @@
 #include "SDL.h"
-#include "inAnimate.hpp"
+#include "inanimate.hpp"
 #pragma once
 
 class Building: public InAnimate{
+    
     protected:
 
         int structure_level;
@@ -14,5 +15,4 @@ class Building: public InAnimate{
         Building(SDL_Texture *);
         int upgrade(int balance);
         int showStructureLevel();
-
 };

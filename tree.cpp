@@ -6,5 +6,5 @@ Tree::Tree(SDL_Texture * asset): InAnimate(asset){
 }
 
 void Tree::showOxygenGen(){
-    
+     cout << "Oxygen Generated : " <<  oxygenGenerated << endl;
 }

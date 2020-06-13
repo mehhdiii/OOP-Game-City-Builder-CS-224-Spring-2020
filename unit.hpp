@@ -2,16 +2,18 @@
 #pragma once
 
 class Unit{
-    protected:
 
-        SDL_Texture* assets; //picture object
-        SDL_Rect src; //object containing the coordinates to render from assets
-        SDL_Rect mover = {0,0,50,50}; //size of the object to draw on screen
     private:
 
         //make this full screen
         const int SCREEN_WIDTH = 800; //screen width of sdl window
         const int SCREEN_HEIGHT = 600; //screen height of the sdl window
+
+    protected:
+
+        SDL_Texture* assets; //picture object
+        SDL_Rect src; //object containing the coordinates to render from assets
+        SDL_Rect mover = {0,0,50,50}; //size of the object to draw on screen
 
     public:
         
