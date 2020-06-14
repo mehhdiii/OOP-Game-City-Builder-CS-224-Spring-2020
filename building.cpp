@@ -1,6 +1,8 @@
 #include "building.hpp"
 
-Building::Building(SDL_Texture * asset): InAnimate(asset){}
+Building::Building(SDL_Texture * asset): InAnimate(asset){
+    name = "building";
+}
 
 int Building::upgrade(int balance){
     int new_bal = balance-upgrade_cost;

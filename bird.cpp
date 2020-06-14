@@ -1,9 +1,10 @@
-
 #include "bird.hpp"
 // #include <iostream>
 // using namespace std;
 
-Bird::Bird(SDL_Texture * asset): Animate(asset){}
+Bird::Bird(SDL_Texture * asset): Animate(asset){
+    name = "bird";
+}
 
 void Bird::setCoordinates(int , int ){}
 

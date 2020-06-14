@@ -1,6 +1,8 @@
 #include "industry.hpp"
 
-Industry::Industry(SDL_Texture * asset): Building(asset){}
+Industry::Industry(SDL_Texture * asset): Building(asset){
+    name = "industry";
+}
 
 int Industry::upgrade_industry(int balance){
 

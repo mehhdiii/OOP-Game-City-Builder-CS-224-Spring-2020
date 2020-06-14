@@ -2,7 +2,7 @@
 
 Tree::Tree(SDL_Texture * asset): InAnimate(asset){
      setSize(175/2,  100/2);
-
+     name = "tree";
 }
 
 void Tree::showOxygenGen(){
