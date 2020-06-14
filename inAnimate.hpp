@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "unit.hpp"
+
 #pragma once
 
 class InAnimate: public Unit{
@@ -8,8 +9,9 @@ class InAnimate: public Unit{
         int width;
         int height;
         int price;
-    public:
 
+    public:
+        
         InAnimate(SDL_Texture *);
         void draw(SDL_Renderer *);
 };

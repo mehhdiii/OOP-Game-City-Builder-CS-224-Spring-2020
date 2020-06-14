@@ -1,17 +1,17 @@
-#include "laboratory.hpp"
+// #include "laboratory.hpp"
 
-Laboratory::Laboratory(SDL_Texture * asset): InAnimate(asset){
-    setSize(175/2,  100/2); 
-}
+// Laboratory::Laboratory(SDL_Texture * asset): InAnimate(asset){
+//     setSize(175/2,  100/2); 
+// }
 
-void Laboratory::addScientist(){
+// void Laboratory::addScientist(){
     
-}
+// }
 
-void Laboratory::getTechnology(){
+// void Laboratory::getTechnology(){
 
-}
+// }
 
-void Laboratory::getProgress(){
+// void Laboratory::getProgress(){
 
-}
+// }
