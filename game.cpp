@@ -267,7 +267,15 @@ bool Game::loadMedia()
 	}
 
 	//loading option bar:
-	optionBar = new OptionBar(loadTexture("optionbar/OptionBar2.png"));
+	optionBar = new OptionBar(loadTexture("bars/Shop.png"));
+
+	//loading top bar:
+	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
+	//now load the statics sprites on the topbar;
+	// topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
+
+	
+
 
 
 	//loading other sprites
@@ -320,6 +328,8 @@ void Game::close()
 	assets=NULL;
 	SDL_DestroyTexture(gTexture);
 	//free sound:
+	delete optionBar;
+	delete topbar;
 
 	// Mix_FreeChunk(eggy);
 	// Mix_FreeMusic(background_music);
@@ -392,6 +402,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		if (optionBar->enabled){
 			optionBar->draw(gRenderer);
 		}
+		topbar->draw(gRenderer);
 
 		for( auto i = farms.begin(); i<farms.end(); i++){
 			// cout << "this caused" <<endl;
@@ -412,9 +423,81 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 void Game::select_object_in_optionbar(int xMouse, int yMouse){
 	
 	int object_to_draw = optionBar->detect_selection(xMouse, yMouse); //this variable stores the int for recognizing the object type <1=farm, 2=building, ....fill it up>
+	//0->
 	switch (object_to_draw)
 	{
 	case 0:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Industry * newindustry = new Industry(industry_texture);
+		newindustry->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newindustry;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 1:
+		{
+		// if(temp_object!=NULL){
+		// 	// cout << "here" <<endl;
+		// 	delete temp_object;
+		// 	temp_object = NULL;
+		// }
+		// Bank * newobject = new Bank(bank_texture);
+		// newobject->setCoordinates(xMouse+100, yMouse-100);
+		// temp_object = newobject;
+		// // farms.push_back(newfarm);
+		break;
+		}
+
+	case 2:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Laboratory * newlaboratory = new Laboratory(lab_texture);
+		newlaboratory->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newlaboratory;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 3:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		House * newhouse = new House(house_texture);
+		newhouse->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newhouse;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 4:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Park * newpark = new Park(park_texture);
+		newpark->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newpark;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 5:
+		{
 		if(temp_object!=NULL){
 			// cout << "here" <<endl;
 			delete temp_object;
@@ -425,7 +508,49 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 		temp_object = newfarm;
 		// farms.push_back(newfarm);
 		break;
+		}
+
+	case 6:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Tree * newtree = new Tree(tree_texture);
+		newtree->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newtree;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 7:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Vehicle * newvehicle = new Vehicle(vehicle_texture);
+		newvehicle->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newvehicle;
+		// farms.push_back(newfarm);
+		break;
+		}
 	}
+	// case 8:
+	// 	if(temp_object!=NULL){
+	// 		// cout << "here" <<endl;
+	// 		delete temp_object;
+	// 		temp_object = NULL;
+	// 	}
+	// 	Vehicle * newobject = new Vehicle(vehicle_texture);
+	// 	newobject->setCoordinates(xMouse+100, yMouse-100);
+	// 	temp_object = newobject;
+	// 	// farms.push_back(newfarm);
+	// 	break;
+	// }
+	
 	// case 1: 
 
 
@@ -575,7 +700,7 @@ void Game::run( )
 		//play the background music
 
 		currentTime = SDL_GetTicks();
-		cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
+		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
 		
 		if( Mix_PlayingMusic() == 0 )
@@ -612,7 +737,7 @@ void Game::run( )
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 
-				cout << xMouse << " " << yMouse <<endl;
+				// cout << xMouse << " " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);
