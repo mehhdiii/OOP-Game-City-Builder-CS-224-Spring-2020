@@ -1,5 +1,6 @@
 #include"optionBar.hpp"
 
+
 OptionBar::OptionBar(SDL_Texture * asset): Unit(asset) {
     
     setCoordinates(0, SCREEN_HEIGHT-250);

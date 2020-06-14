@@ -271,6 +271,9 @@ bool Game::loadMedia()
 
 
 	//loading other sprites
+
+	assets = loadTexture("images/car-front-02.svg");
+
 	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
 	forest_texture = loadTexture("images/Farm.png");
@@ -288,6 +291,7 @@ bool Game::loadMedia()
 
 
     gTexture = loadTexture("maps/map1.png");
+
 
 	if(gTexture==NULL || gTexture==NULL)
     {
@@ -514,18 +518,28 @@ void Game::run( )
 	bool quit = false;
 	bool pause = false;
 	bool menuactive = true;
+
+
+	unsigned int lastTime = 0, currentTime = 0;
 	// update_parameters();
-	// bool optionbar_enabled = true; // option is disabled
+	bool option_bar_flag = false; // option is disabled
+
+
 	//Event handler
 	SDL_Event e;
 	//main menu running
 	// int xMouse, yMouse;
 	bool click; 
+	// while(menuactive){
+	// 	// if (true){
+			
+	// 	currentTime = SDL_GetTicks();
+	// 	cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
+
+
 
 	
-	// while(menuactive){
-	// 	// if (true){	
-	// 	// }
+
 	// 	//check for keyboard event
 	// 	while( SDL_PollEvent( &e ) != 0 ){
 	// 		if( Mix_PlayingMusic() == 0 )
@@ -559,6 +573,11 @@ void Game::run( )
 	while( !quit )
 	{
 		//play the background music
+
+		currentTime = SDL_GetTicks();
+		cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
+		
+		
 		if( Mix_PlayingMusic() == 0 )
 		{
 			//Play the music
@@ -592,6 +611,7 @@ void Game::run( )
 				
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
+
 				cout << xMouse << " " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
@@ -649,9 +669,11 @@ void Game::run( )
 			
 		}
 		if (!pause){
+
 			// cout << "here" <<endl;
             draw_all(gRenderer);
 		}
 		SDL_Delay(120);	//causes sdl engine to delay for specified miliseconds
+
 	}
 }

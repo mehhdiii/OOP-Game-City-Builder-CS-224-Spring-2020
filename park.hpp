@@ -1,17 +1,17 @@
 #include "SDL.h"
-#include "building.hpp"
+#include "inanimate.hpp"
 #pragma once
 
 
-class Park: public Building{
+class Park: public InAnimate{
+    
     private:
         
-        int env_impact; 
-        
+        int env_impact;  
+        float creation_time;       
     public:
-        Park(SDL_Texture * );
-        int showEnvImpact();
-        
-        
 
+        Park(SDL_Texture * );
+        int showEnvImpact();   
+        void set_creation_time(int);
 };

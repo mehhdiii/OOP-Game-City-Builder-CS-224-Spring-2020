@@ -1,5 +1,6 @@
 #include "farm.hpp"
 
+
 Farm::Farm(SDL_Texture * asset): InAnimate(asset), active_products(15){
     setSize(87.5,  50); 
     name = "farm";
@@ -21,6 +22,8 @@ void Farm::addProduct(std::string product, int balance){
         } 
         index++;
     }
-    
-    
+}
+
+void Farm::set_creation_time(int c_t){
+    creation_time = c_t/1000; //creation time in seconds
 }

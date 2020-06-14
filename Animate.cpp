@@ -8,11 +8,8 @@
 //     SDL_RenderCopy(renderer, assets, NULL, &mover);
 // }
 
-// void Animate::setSpeed(){
+void Animate::setSpeed(){}
 
-// }
+void Animate::movement(){}
 
 
-// void Animate::mover(){
-    
-// }
