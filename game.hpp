@@ -20,8 +20,10 @@
 #include"industry.hpp"
 #include"laboratory.hpp"
 #include"optionBar.hpp"
+#include"park.hpp"
 #include"scientist.hpp"
 #include"solarpanel.hpp"
+#include"topbar.hpp"
 #include"tree.hpp"
 #include"vehicle.hpp"
 #include"worker.hpp"
@@ -79,8 +81,10 @@ class Game{
     vector <Worker*> workers;
     vector <Scientist*> scientists;
     
+    //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
     Menu menu; //menu objects
+    Topbar * topbar = NULL; 
 
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
