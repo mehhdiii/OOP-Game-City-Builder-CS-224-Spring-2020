@@ -2,7 +2,7 @@
 
 House::House(SDL_Texture * asset): Building(asset) {
     setSize(175/2,  100/2);
-    
+    name = "house";
 }
 
 void House::setPeoplecount(int people){

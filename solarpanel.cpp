@@ -2,6 +2,7 @@
 
 SolarPanel::SolarPanel(SDL_Texture * asset): InAnimate(asset){
      setSize(175/2,  100/2);
+     name = "solarpanel";
 }
 
 void SolarPanel::setEnergy(int assigned_energy){

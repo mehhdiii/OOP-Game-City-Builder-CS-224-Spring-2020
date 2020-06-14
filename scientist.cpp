@@ -2,6 +2,7 @@
 
 Scientist::Scientist(SDL_Texture * asset): Animate(asset){
     setSize(175/2,  100/2); 
+    name = "scientist";
 }
 
 int Scientist::getworkPower(){

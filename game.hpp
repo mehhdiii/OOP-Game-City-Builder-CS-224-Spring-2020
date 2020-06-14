@@ -75,6 +75,8 @@ class Game{
     vector <Laboratory*> laboratories;
     vector <Industry*> industries;
     vector <Park*> parks;
+    vector <Tree*> trees;
+    vector <SolarPanel*> solarpanels;
     vector <Vehicle*> vehicles;
     vector <Worker*> workers;
     vector <Scientist*> scientists;

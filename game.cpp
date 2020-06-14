@@ -762,6 +762,93 @@ void Game::run( )
 						temp_object = NULL;
 					}
 					//check other objects here!
+					else if (temp_object->name == "bird"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Bird * mybird = dynamic_cast<Bird *>(temp_object);
+						mybird->setCoordinates(xMouse, yMouse);
+						birds.push_back(mybird);
+						temp_object = NULL;
+					}
+					
+					else if (temp_object->name == "building"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Building * mybuilding = dynamic_cast<Building *>(temp_object);
+						mybuilding->setCoordinates(xMouse, yMouse);
+						buildings.push_back(mybuilding);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "house"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						House * myhouse = dynamic_cast<House *>(temp_object);
+						myhouse->setCoordinates(xMouse, yMouse);
+						houses.push_back(myhouse);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "industry"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
+						myindustry->setCoordinates(xMouse, yMouse);
+						industries.push_back(myindustry);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "laboratory"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
+						mylaboratory->setCoordinates(xMouse, yMouse);
+						laboratories.push_back(mylaboratory);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "park"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Park * mypark = dynamic_cast<Park *>(temp_object);
+						mypark->setCoordinates(xMouse, yMouse);
+						parks.push_back(mypark);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "scientist"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
+						myscientist->setCoordinates(xMouse, yMouse);
+						scientists.push_back(myscientist);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "solarpanel"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
+						mysolarpanel->setCoordinates(xMouse, yMouse);
+						solarpanels.push_back(mysolarpanel);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "tree"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Tree * mytree = dynamic_cast<Tree *>(temp_object);
+						mytree->setCoordinates(xMouse, yMouse);
+						trees.push_back(mytree);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "vehicle"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
+						myvehicle->setCoordinates(xMouse, yMouse);
+						vehicles.push_back(myvehicle);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "worker"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Worker * myworker = dynamic_cast<Worker *>(temp_object);
+						myworker->setCoordinates(xMouse, yMouse);
+						workers.push_back(myworker);
+						temp_object = NULL;
+					}
 				}
 
 			}
