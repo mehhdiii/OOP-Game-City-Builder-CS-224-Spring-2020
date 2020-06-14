@@ -15,9 +15,11 @@
 #include"house.hpp"
 #include"park.hpp"
 #include"farm.hpp"
+#include"industry.hpp"
 #include"optionBar.hpp"
 
 using namespace std;
+Uint32 SDL_GetTicks(void);
 
 class Game{
     //Screen dimension constants
@@ -61,7 +63,7 @@ class Game{
     vector <Farm*> farms;
     vector <House*> houses;
     // vector <Laboratory*> laboratories;
-    // vector <Industry*> industries;
+    vector <Industry*> industries;
     vector <Park*> parks;
     // vector <Vehicle*> vehicles;
     // vector <Worker*> workers;

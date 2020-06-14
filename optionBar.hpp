@@ -7,13 +7,17 @@
 #pragma once
 
 class OptionBar: public Unit{
-    private:
-        int options;
+//     private:
+
+
+//         int options;
+    public:
+
 
         // std::vector <std::tuple<int, int> > coordinates_of_objects; //coordinates of objects visible at the option bar  
-        
-    public:
+
         bool enabled;
+
         OptionBar(SDL_Texture * );
         
         int detect_selection( int x, int y); //select object at present at the option bar
@@ -23,5 +27,4 @@ class OptionBar: public Unit{
         // int getLocalityGrading();
         // void setPeoplecount(int);
         // void setPrice(int);
-
 };
