@@ -375,7 +375,7 @@ void Game::run( )
 	bool pause = false;
 	bool menuactive = true;
 
-
+	unsigned int lastTime = 0, currentTime = 0;
 	// update_parameters();
 	bool option_bar_flag = false; // option is disabled
 
@@ -386,47 +386,49 @@ void Game::run( )
 
 	int xMouse, yMouse;
 	bool click; 
-	while(menuactive){
-		// if (true){
+	// while(menuactive){
+	// 	// if (true){
 			
+	// 	currentTime = SDL_GetTicks();
+	// 	cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
 
-		// }
-
-		//check for keyboard event
-		while( SDL_PollEvent( &e ) != 0 ){
-			if( Mix_PlayingMusic() == 0 )
-			{
-				//Play the music
-				Mix_PlayMusic( background_music, 1 );
-			}
-			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
-			{
-				menuactive = false;
-				break;
-			}
+	// 	//check for keyboard event
+	// 	while( SDL_PollEvent( &e ) != 0 ){
+	// 		if( Mix_PlayingMusic() == 0 )
+	// 		{
+	// 			//Play the music
+	// 			Mix_PlayMusic( background_music, 1 );
+	// 		}
+	// 		if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+	// 		{
+	// 			menuactive = false;
+	// 			break;
+	// 		}
 			
-			SDL_GetMouseState(&xMouse,&yMouse);
-			// cout << "xMouse: " << xMouse <<endl;
-			// cout << "yMouse: " << yMouse <<endl;
+	// 		SDL_GetMouseState(&xMouse,&yMouse);
+	// 		// cout << "xMouse: " << xMouse <<endl;
+	// 		// cout << "yMouse: " << yMouse <<endl;
 
-			SDL_RenderClear(gRenderer); //removes everything from renderer
+	// 		SDL_RenderClear(gRenderer); //removes everything from renderer
 			
-			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
-				click =1;
-			}
-			menu.refresh(gRenderer, xMouse, yMouse, click);
-			SDL_RenderPresent(gRenderer);
-			click =0;
+	// 		if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
+	// 			click =1;
+	// 		}
+	// 		menu.refresh(gRenderer, xMouse, yMouse, click);
+	// 		SDL_RenderPresent(gRenderer);
+	// 		click =0;
 
-		}
-	}
+	// 	}
+	// }
 
 	//While application is running
 	while( !quit )
 	{
 		//play the background music
+		currentTime = SDL_GetTicks();
+		cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
-		
+		// houses.push_back(house);
 		
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
@@ -473,6 +475,12 @@ void Game::run( )
 				}
 				else{
 					range_OptionBar(xMouse, yMouse);
+
+					Industry * industry_check = new Industry(assets);
+					industry_check->setCoordinates(xMouse, yMouse);
+					industry_check->setSize(175/2,  100/2);
+					industry_check->set_creation_time(currentTime);
+					industries.push_back(industry_check);
 					
 					House * house = new House(assets);
 					house->setCoordinates(xMouse, yMouse);
@@ -486,10 +494,7 @@ void Game::run( )
 					Farm * farm = new Farm(assets);
 					farm->setCoordinates(xMouse, yMouse);
 					farms.push_back(farm);
-				}
-
-				
-               
+				}		
 				
 			}
 			// if (e.type == SDL_KEYDOWN && !pause){ //handling keyboard events
@@ -523,6 +528,9 @@ void Game::run( )
 			for( auto i = farms.begin(); i<farms.end(); i++){
 				(*i)->draw(gRenderer);
 			}
+			for( auto i = industries.begin(); i<industries.end(); i++){
+				(*i)->show_progress();
+			}
 
 			if (option_bar_flag == true){
 				(*optionBar).draw(gRenderer);
@@ -536,5 +544,6 @@ void Game::run( )
             SDL_RenderPresent(gRenderer); //displays the updated renderer
 		}
 		SDL_Delay(180);	//causes sdl engine to delay for specified miliseconds
+		
 	}
 }

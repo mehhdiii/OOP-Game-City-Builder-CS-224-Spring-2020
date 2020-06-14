@@ -51,3 +51,25 @@ std::string Laboratory::getTechnology(){
 int Laboratory::getProgress(){
     return progress;
 }
+
+void Laboratory::set_creation_time(int c_t){
+    creation_time = c_t/1000; //creation time in seconds
+}
+
+void Laboratory::show_progress(){
+    float current_time = SDL_GetTicks()/1000; // current time in seconds
+    int required_time = 120; // the time required for a work to be completed | 2 minutes
+    progress = ((current_time-creation_time)/required_time)*100; // percentage of progress i.e. how much time-wise work should be completed.
+    // std::cout << "Progress " << progress << std::endl;
+    // std::cout << "Creation time " << creation_time << " seconds" << std::endl;
+    // std::cout << "Current time " << current_time << " seconds" << std::endl;
+    // std::cout << " current_time - creation_time " << current_time - creation_time << std::endl;
+    // std::cout << "Required time " << required_time << " seconds" << std::endl;    
+    if (progress >= 100){
+        std::cout << "Your technology is ready! " << std::endl; 
+        creation_time = SDL_GetTicks()/1000;    // resetting the creation time to current time in order start working on the next product.
+    }
+    else{
+        std::cout << "Your technology is still in progress " << progress << " %." << std::endl; 
+    }
+}

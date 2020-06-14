@@ -13,3 +13,7 @@ void SolarPanel::show_all_features(){
      cout << "Production period of this solar panel is " << productionPeriod << "days."<< endl;
      cout << "Energy produced of this solar panel is " << energyProduced << "MW."<< endl;
 }
+
+void SolarPanel::set_creation_time(int c_t){
+    creation_time = c_t/1000; //creation time in seconds
+}

@@ -1,5 +1,6 @@
 #include "SDL.h"
 #pragma once
+Uint32 SDL_GetTicks(void);
 
 class Unit{
 

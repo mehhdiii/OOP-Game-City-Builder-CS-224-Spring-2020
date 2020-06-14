@@ -11,6 +11,7 @@ class Tree: public InAnimate{
     private:
 
         int oxygenGenerated;
+        float creation_time;
         std::string type;
         std::vector <std::string> all_types; //various tree types, all locked initially. the user has to spend money to unlock product production. 
         std::vector <int> respective_cost; //costs of all types of trees
@@ -18,5 +19,6 @@ class Tree: public InAnimate{
     
         Tree (SDL_Texture *);
         void showOxygenGen();
+        void set_creation_time(int);
 };
 

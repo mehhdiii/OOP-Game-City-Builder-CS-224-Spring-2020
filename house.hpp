@@ -12,6 +12,7 @@ class House: public Building{
         int localityGrading;
         int houseSize;
         int pricing;
+        float creation_time;
         // std::vector <int> house_prices; //costs of all houses
     public:
 
@@ -19,4 +20,5 @@ class House: public Building{
         int getLocalityGrading();
         void setPeoplecount(int);
         void setPrice(int);
+        void set_creation_time(int);
 };

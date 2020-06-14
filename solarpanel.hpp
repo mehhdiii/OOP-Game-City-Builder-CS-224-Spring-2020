@@ -12,10 +12,12 @@ class SolarPanel: public InAnimate{
         int productionPeriod;
         int energyProduced;
         int lifeTime;
+        float creation_time;
     public:
     
         SolarPanel(SDL_Texture *);
         void setEnergy(int);
         void show_all_features();
+        void set_creation_time(int);
 };
 

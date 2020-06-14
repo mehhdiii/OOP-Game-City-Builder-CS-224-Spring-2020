@@ -15,6 +15,8 @@ class Industry: public Building{
         int greenEnergyDependence;
         int fossilFeulDependence;
         int upgrade_cost;
+        float creation_time;
+        float progress;
         
         std::string industry_type;
         std::vector <std::string> all_types; //various industry types, all locked initially. the user has to spend money to unlock product production. 
@@ -30,4 +32,6 @@ class Industry: public Building{
         void set_fossilFuel_dependency(int);
         int showStructureLevel();
         void show_all_features();
+        void show_progress();
+        void set_creation_time(int);
 };

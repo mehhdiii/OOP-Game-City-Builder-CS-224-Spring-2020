@@ -10,9 +10,10 @@ class Laboratory: public Building{
 
     private:
 
-        int progress;               // the percentage of completion of a given task 
+        float progress;               // the percentage of completion of a given task 
         int efficiency;             // 
         int labNo;                  // to number the labs created
+        float creation_time;
         
         std::string labType;        // states the type of the lab.. energy research, bio-research, tech-update etc
         std::vector <std::string> tech_list; //different technologies, all locked initially. the user has to spend money to unlock working on respective tech.
@@ -25,4 +26,6 @@ class Laboratory: public Building{
         void assignWork(std::string, int);
         std::string getTechnology();
         int getProgress();
+        void set_creation_time(int);
+        void show_progress();
 };
