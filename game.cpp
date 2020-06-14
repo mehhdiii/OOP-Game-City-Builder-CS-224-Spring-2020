@@ -267,7 +267,15 @@ bool Game::loadMedia()
 	}
 
 	//loading option bar:
-	optionBar = new OptionBar(loadTexture("optionbar/OptionBar2.png"));
+	optionBar = new OptionBar(loadTexture("bars/Shop.png"));
+
+	//loading top bar:
+	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
+	//now load the statics sprites on the topbar;
+	topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
+
+	
+
 
 
 	//loading other sprites
@@ -320,6 +328,8 @@ void Game::close()
 	assets=NULL;
 	SDL_DestroyTexture(gTexture);
 	//free sound:
+	delete optionBar;
+	delete topbar;
 
 	// Mix_FreeChunk(eggy);
 	// Mix_FreeMusic(background_music);
@@ -392,6 +402,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		if (optionBar->enabled){
 			optionBar->draw(gRenderer);
 		}
+		topbar->draw(gRenderer);
 
 		for( auto i = farms.begin(); i<farms.end(); i++){
 			// cout << "this caused" <<endl;
@@ -412,6 +423,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 void Game::select_object_in_optionbar(int xMouse, int yMouse){
 	
 	int object_to_draw = optionBar->detect_selection(xMouse, yMouse); //this variable stores the int for recognizing the object type <1=farm, 2=building, ....fill it up>
+	//0->
 	switch (object_to_draw)
 	{
 	case 0:

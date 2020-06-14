@@ -17,6 +17,7 @@
 #include"farm.hpp"
 #include"industry.hpp"
 #include"optionBar.hpp"
+#include"topbar.hpp"
 
 using namespace std;
 Uint32 SDL_GetTicks(void);
@@ -69,8 +70,10 @@ class Game{
     // vector <Worker*> workers;
     // vector <Scientist*> scientists;
     
+    //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
     Menu menu; //menu objects
+    Topbar * topbar = NULL; 
 
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
