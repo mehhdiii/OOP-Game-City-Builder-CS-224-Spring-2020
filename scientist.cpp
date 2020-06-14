@@ -5,7 +5,6 @@ Scientist::Scientist(SDL_Texture * asset): Animate(asset){
 }
 
 int Scientist::getworkPower(){
-    
     return 0;
 }
 

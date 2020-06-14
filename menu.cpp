@@ -67,6 +67,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
 }
 
 Menu::~Menu(){
-    for(auto i = menu_sprites.begin(); i<menu_sprites.end(); i++){}
+    //for(auto i = menu_sprites.begin(); i<menu_sprites.end(); i++){
         // delete  (*i);
+    //}
 }

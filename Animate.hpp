@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "unit.hpp"
+#include<string>
 #pragma once
 
 class Animate: public Unit{
@@ -8,7 +9,7 @@ class Animate: public Unit{
 
         int speed;
     public:
-
+  
         Animate(SDL_Texture *);
         void draw(SDL_Renderer *);
         void setSpeed();

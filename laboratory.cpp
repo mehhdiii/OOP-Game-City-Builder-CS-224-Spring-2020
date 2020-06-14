@@ -1,4 +1,5 @@
-#include "laboratory.hpp"
+// #include "laboratory.hpp"
+
 
 Laboratory::Laboratory(SDL_Texture * asset): Building(asset){
     setSize(175/2,  100/2); 

@@ -1,3 +1,4 @@
+
 #include "SDL.h"
 #include "building.hpp"
 #include "scientist.hpp"

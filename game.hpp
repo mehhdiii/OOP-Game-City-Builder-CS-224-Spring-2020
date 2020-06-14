@@ -9,6 +9,7 @@
 #include <time.h>
 #include <list>
 #include<vector>
+#include<tuple>
 // #include<ctime>
 #include"menu.hpp"
 #include"house.hpp"
@@ -38,12 +39,27 @@ class Game{
 
     //global reference to sprites2;
     SDL_Texture* assets2;
+    SDL_Texture* forest_texture;
 
+    SDL_Texture* house_texture ;
+	SDL_Texture* bank_texture ;
+	SDL_Texture* industry_texture ;
+	SDL_Texture* lab_texture;
+	SDL_Texture* man_texture ;
+	SDL_Texture* park_texture ;
+	SDL_Texture* scientist_texture ;
+	SDL_Texture* tree_texture ;
+	SDL_Texture* turbine_texture ;
+	SDL_Texture* vehicle_texture ;
+	SDL_Texture* worker_texture ;
 
     //You may use C++ linked lists, or you can create your own.
 
     // vector <Bird*> birds;
     // vector <Building*> buildings;
+    // vector <Unit *> allobjects;
+    Unit * temp_object = NULL; //object that are not yet been fixed on the screen
+    // vector <Unit*> allobjects;
     vector <Farm*> farms;
     vector <House*> houses;
     // vector <Laboratory*> laboratories;
@@ -52,7 +68,8 @@ class Game{
     // vector <Vehicle*> vehicles;
     // vector <Worker*> workers;
     // vector <Scientist*> scientists;
-    OptionBar * optionBar;
+    
+    OptionBar * optionBar = NULL; //option bar variable
     Menu menu; //menu objects
 
     // Fountain obj = Fountain(assets);
@@ -71,14 +88,19 @@ public:
     void update_parameters();
     bool init();
     bool loadMedia();
-    // void loadMenu();
+    void run();
     void close();
     SDL_Texture* loadTexture( std::string path );
     
     
     // void main_menu(list <SDL_Texture *>);
     void range_OptionBar(int xMouse, int yMouse);
-    void run();
+    void select_object_in_optionbar(int, int); //checks which object is to be created by the option bar!
+    void hover_object_with_cursor(); //hovers the object on screen with the cursors coordintes!
+
+    bool detect_collision(int, int); 
+    //draw
+    void draw_all(SDL_Renderer *);
     
     
 };

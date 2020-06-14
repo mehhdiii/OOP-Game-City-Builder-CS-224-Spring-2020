@@ -201,7 +201,7 @@ bool Game::init()
 		//Create window
 
 
-		gWindow = SDL_CreateWindow( "Green City", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN );
+		gWindow = SDL_CreateWindow( "Green City", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -266,12 +266,32 @@ bool Game::loadMedia()
 		menu.add_sprite(loadTexture(spritename), 1); 
 	}
 
+	//loading option bar:
+	optionBar = new OptionBar(loadTexture("optionbar/OptionBar2.png"));
+
 
 	//loading other sprites
+
 	assets = loadTexture("images/car-front-02.svg");
+
+	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
-	
-    gTexture = loadTexture("images/map.png");
+	forest_texture = loadTexture("images/Farm.png");
+	house_texture = loadTexture("images/House.png");
+	bank_texture = loadTexture("images/Bank.png");
+	industry_texture = loadTexture("images/Industry.png");
+	lab_texture = loadTexture("images/Lab.png");
+	man_texture = loadTexture("images/Man.png");
+	park_texture = loadTexture("images/Park.png");
+	scientist_texture = loadTexture("images/Scientist.png");
+	tree_texture = loadTexture("images/Trees.png");
+	turbine_texture = loadTexture("images/Turbine.png");
+	vehicle_texture = loadTexture("images/Vehicle.png");
+	worker_texture = loadTexture("images/Worker.png");
+
+
+    gTexture = loadTexture("maps/map1.png");
+
 
 	if(gTexture==NULL || gTexture==NULL)
     {
@@ -363,9 +383,133 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 	}
 }
 
-// void Game::main_menu(list <SDL_Texture *> sprites, SDL_Event * ){
-// 	while()
-// }
+void Game::draw_all(SDL_Renderer * gRenderer){
+	SDL_RenderClear(gRenderer); //removes everything from renderer
+
+		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
+		
+		
+		if (optionBar->enabled){
+			optionBar->draw(gRenderer);
+		}
+
+		for( auto i = farms.begin(); i<farms.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		if (temp_object!=NULL){
+			temp_object->draw(gRenderer);
+		}
+
+
+		
+		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
+		// (obj).draw(gRenderer);
+		SDL_RenderPresent(gRenderer); //displays the updated renderer
+}
+
+void Game::select_object_in_optionbar(int xMouse, int yMouse){
+	
+	int object_to_draw = optionBar->detect_selection(xMouse, yMouse); //this variable stores the int for recognizing the object type <1=farm, 2=building, ....fill it up>
+	switch (object_to_draw)
+	{
+	case 0:
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Farm * newfarm = new Farm(forest_texture);
+		newfarm->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newfarm;
+		// farms.push_back(newfarm);
+		break;
+	}
+	// case 1: 
+
+
+}
+
+void Game::hover_object_with_cursor(){
+	if(temp_object!=NULL){
+		int xMouse, yMouse; 
+		SDL_GetMouseState(&xMouse, &yMouse);
+		temp_object->setCoordinates(xMouse, yMouse);
+	}
+}
+
+
+bool Game::detect_collision(int x, int y){
+	// bool Collision = 0;
+		// int startingpoint_of_static_object, endingpoint_of_static_object;
+	// moving object square
+
+	int sp_of_temp_obj_x = temp_object->getx();
+	int sp_of_temp_obj_y = temp_object->gety();
+	int ep_of_temp_obj_x = x+temp_object->getw();
+	int ep_of_temp_obj_y = y + temp_object->geth();
+
+	//static object
+	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
+	
+	bool yChecksp = 0;
+	bool yCheckep = 0;
+	bool xChecksp = 0;
+	bool xCheckep = 0;
+	for(auto i = farms.begin(); i!= farms.end(); i++){
+		sp_of_static_obj_x = (*i)->getx();
+		sp_of_static_obj_y = (*i)->gety();
+		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
+		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
+
+		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
+		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
+		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
+		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
+		cout <<"xs: " << xChecksp <<endl;
+		cout << "xe: "<< xCheckep <<endl;
+		cout <<"ys: " << yChecksp <<endl;
+		cout << "ye: "<< yCheckep <<endl;
+
+		cout <<"temp: xs: " << sp_of_temp_obj_x <<endl;
+		cout << "temp: xe: "<< ep_of_temp_obj_x <<endl;
+		cout <<"temp: ys: " << sp_of_temp_obj_y<<endl;
+		cout << "temp: ye: "<< ep_of_temp_obj_y <<endl;
+		cout <<"static: xs: " << sp_of_static_obj_x <<endl;
+		cout << "static: xe: "<< ep_of_static_obj_x <<endl;
+		cout <<"static: ys: " << sp_of_static_obj_y<<endl;
+		cout << "static: ye: "<< ep_of_static_obj_y <<endl;
+		cout << (*i)->geth() <<endl;
+		// xCheck = 
+		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
+			
+			break;
+		}
+			
+
+		// cout << "width: "<<(*i)->getw() <<endl;
+		// cout << "height: "<<(*i)->geth() <<endl;
+		// cout << "x: " << (*i)->getx() <<endl;
+		// cout << "y: " <<  (*i)->gety()  <<endl;
+		// cout << "Mouse x: " << x << " Mouse y: " << y <<endl;
+		// if (x >= (*i)->getx() && x <=  (*i)->getx()+(*i)->getw() ){
+		// 	xCollision = 1;
+		// }
+		// if(y >= (*i)->gety() && y <=  (*i)->gety()+(*i)->geth() ){
+		// 	yCollision = 1;
+		// }
+		// if(obj->getw() + x >= (*i)->getx() && obj->getw() + x<= (*i)->getw() ){
+		// 	xCollision = 1;
+		// }
+		// if(obj->geth() + x >= (*i)->gety() && obj->geth() + x<= (*i)->geth() ){
+		// 	yCollision = 1;
+		// }
+
+
+	}
+	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
+}
 
 void Game::run( )
 {
@@ -375,22 +519,26 @@ void Game::run( )
 	bool pause = false;
 	bool menuactive = true;
 
+
 	unsigned int lastTime = 0, currentTime = 0;
 	// update_parameters();
 	bool option_bar_flag = false; // option is disabled
 
+
 	//Event handler
 	SDL_Event e;
-
 	//main menu running
-
-	int xMouse, yMouse;
+	// int xMouse, yMouse;
 	bool click; 
 	// while(menuactive){
 	// 	// if (true){
 			
 	// 	currentTime = SDL_GetTicks();
 	// 	cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
+
+
+
+	
 
 	// 	//check for keyboard event
 	// 	while( SDL_PollEvent( &e ) != 0 ){
@@ -425,78 +573,77 @@ void Game::run( )
 	while( !quit )
 	{
 		//play the background music
+
 		currentTime = SDL_GetTicks();
 		cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
-		// houses.push_back(house);
 		
+		if( Mix_PlayingMusic() == 0 )
+		{
+			//Play the music
+			// Mix_PlayMusic( background_music, 1 );
+		}		
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
 		{
 			//User requests quit
-			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
+				
 				quit = true;
+				break;
 			}
 			//user requests pause
-			if (e.type==SDL_KEYDOWN ){
-				if (e.key.keysym.sym == SDLK_ESCAPE){
-					pause = !pause;
-					if(pause){ //pause the music 
-						Mix_PauseMusic();
-					}
-					else{ //play the music
-						Mix_ResumeMusic();
-					}
-				}
+			// if (e.type==SDL_KEYDOWN ){
+			// 	if (e.key.keysym.sym == SDLK_p){
+			// 		pause = !pause;
+			// 		if(pause){ //pause the music 
+			// 			Mix_PauseMusic();
+			// 		}
+			// 		else{ //play the music
+			// 			Mix_ResumeMusic();
+			// 		}
+			// 	}
 
-			}
-
+			// }
+			//checking mouse clicks
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT &&!pause){
-				//this is a good location to add pigeon in linked list.
-				// int xMouse, yMouse;
-				SDL_GetMouseState(&xMouse,&yMouse);
-				// cout<< "X Coordinates : " << xMouse << endl;
-				// cout<< "Y Coordinates : " << yMouse << endl;
-				if (xMouse < 70 && yMouse > 635 && option_bar_flag == false){ // to enable option bar
-					option_bar_flag = true; // option bar is enabled
-
-					// OptionBar *optionBar = new OptionBar(assets2);
-					// optionBar->setCoordinates(xMouse, yMouse);
-					// optionBar->setSize(175/2,  100/2);
-					// optionBars.push_back(optionBar);
-				}
-				else if (xMouse < 70 && yMouse > 635 && option_bar_flag == true){ // to disable option bar
-					option_bar_flag = false; // option bar is disabled
-
-					// we need to remove the option bar from the screen ..
-					delete optionBar;
-					
-				}
-				else{
-					range_OptionBar(xMouse, yMouse);
-
-					Industry * industry_check = new Industry(assets);
-					industry_check->setCoordinates(xMouse, yMouse);
-					industry_check->setSize(175/2,  100/2);
-					industry_check->set_creation_time(currentTime);
-					industries.push_back(industry_check);
-					
-					House * house = new House(assets);
-					house->setCoordinates(xMouse, yMouse);
-					house->setSize(175/2,  100/2);
-					houses.push_back(house);
-
-					Park * park = new Park(assets);
-					park->setCoordinates(xMouse, yMouse);
-					parks.push_back(park);
-
-					Farm * farm = new Farm(assets);
-					farm->setCoordinates(xMouse, yMouse);
-					farms.push_back(farm);
-				}		
 				
+				int xMouse, yMouse;
+				SDL_GetMouseState(&xMouse,&yMouse);
+
+				cout << xMouse << " " << yMouse <<endl;
+				//checking for option bar
+				if (optionBar->enabled){
+					select_object_in_optionbar(xMouse, yMouse);
+					
+				}
+				//toggling option_bar
+				if (xMouse >SCREEN_WIDTH-80 && yMouse >SCREEN_HEIGHT-80  && !optionBar->enabled){ // to enable option bar when clicked at a specific point
+					optionBar->enabled = true; // option bar is enabled
+				}
+				else if (xMouse >SCREEN_WIDTH-80 && yMouse >SCREEN_HEIGHT-80 && optionBar->enabled){ // to disable option bar
+					optionBar->enabled = false; // option bar is disabled
+				}
+
+				//fix the object if the user clicks on the map with the object selected:
+				if(temp_object!=NULL && yMouse < SCREEN_HEIGHT - 300  &&  !detect_collision( xMouse, yMouse)){
+					
+					if (temp_object->name == "farm"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
+						myfarm->setCoordinates(xMouse, yMouse);
+						farms.push_back(myfarm);
+						temp_object = NULL;
+					}
+					//check other objects here!
+				}
+
 			}
+			//checking mouse hovering
+			hover_object_with_cursor();
+
+
 			// if (e.type == SDL_KEYDOWN && !pause){ //handling keyboard events
 			// 	switch (e.key.keysym.sym)
 			// 	{
@@ -516,34 +663,17 @@ void Game::run( )
 			// 		}
 			// 	break;
 				
-			// 	}
+				// }
 
 			// }
 			
 		}
 		if (!pause){
-            SDL_RenderClear(gRenderer); //removes everything from renderer
-            SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
-			
-			for( auto i = farms.begin(); i<farms.end(); i++){
-				(*i)->draw(gRenderer);
-			}
-			for( auto i = industries.begin(); i<industries.end(); i++){
-				(*i)->show_progress();
-			}
 
-			if (option_bar_flag == true){
-				(*optionBar).draw(gRenderer);
-			}
-			// for( auto i = optionBars.begin(); i<optionBars.end(); i++){
-			// 	(*i)->draw(gRenderer);
-			// }
-            // SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
-
-            // (obj).draw(gRenderer);
-            SDL_RenderPresent(gRenderer); //displays the updated renderer
+			// cout << "here" <<endl;
+            draw_all(gRenderer);
 		}
-		SDL_Delay(180);	//causes sdl engine to delay for specified miliseconds
-		
+		SDL_Delay(120);	//causes sdl engine to delay for specified miliseconds
+
 	}
 }

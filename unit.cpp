@@ -10,3 +10,15 @@ void Unit::setSize(int xsiz, int ysiz){
     mover.w = xsiz;
     mover.h = ysiz;
 }
+int Unit::getx(){
+    return mover.x;
+}
+int Unit::gety(){
+    return mover.y;
+}
+int Unit::getw(){
+    return mover.w;
+}
+int Unit::geth(){
+    return mover.h;
+}
