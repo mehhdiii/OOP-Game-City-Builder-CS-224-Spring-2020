@@ -297,14 +297,14 @@ bool Game::loadMedia()
 
 	//loading all music for the game:
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	background_music = Mix_LoadMUS("music/inception.wav");
+	// background_music = Mix_LoadMUS("music/inception.wav");
 	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
 	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	if(background_music ==NULL )
-	{
-		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-		success = false;
-	}
+	// if(background_music ==NULL )
+	// {
+	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+	// 	success = false;
+	// }
 	
 	return success;
 }
