@@ -1,7 +1,7 @@
 #include "farm.hpp"
 
 
-Farm::Farm(SDL_Texture * asset): InAnimate(asset), active_products(15){
+Farm::Farm(SDL_Texture * asset): Building(asset), active_products(15){
     setSize(87.5,  50); 
     name = "farm";
 }

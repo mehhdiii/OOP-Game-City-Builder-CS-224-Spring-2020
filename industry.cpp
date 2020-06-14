@@ -1,4 +1,4 @@
-// #include "industry.hpp"
+#include "industry.hpp"
 
 Industry::Industry(SDL_Texture * asset): Building(asset){}
 

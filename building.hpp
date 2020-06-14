@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "inanimate.hpp"
+#include<iostream>
 #pragma once
 
 class Building: public InAnimate{
