@@ -14,7 +14,5 @@ class Topbar: public Unit{
 
     void draw(SDL_Renderer*);
     void update_bars(int , int, int, int);
-    void add_static_sprite(SDL_Texture*);
-
-
+    // void add_static_sprite(SDL_Texture*);
 };

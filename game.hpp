@@ -12,12 +12,21 @@
 #include<tuple>
 // #include<ctime>
 #include"menu.hpp"
+#include"bird.hpp"
+#include"building.hpp"
 #include"house.hpp"
 #include"park.hpp"
 #include"farm.hpp"
 #include"industry.hpp"
+#include"laboratory.hpp"
 #include"optionBar.hpp"
+#include"park.hpp"
+#include"scientist.hpp"
+#include"solarpanel.hpp"
 #include"topbar.hpp"
+#include"tree.hpp"
+#include"vehicle.hpp"
+#include"worker.hpp"
 
 using namespace std;
 Uint32 SDL_GetTicks(void);
@@ -56,19 +65,19 @@ class Game{
 
     //You may use C++ linked lists, or you can create your own.
 
-    // vector <Bird*> birds;
-    // vector <Building*> buildings;
+    vector <Bird*> birds;
+    vector <Building*> buildings;
     // vector <Unit *> allobjects;
     Unit * temp_object = NULL; //object that are not yet been fixed on the screen
     // vector <Unit*> allobjects;
     vector <Farm*> farms;
     vector <House*> houses;
-    // vector <Laboratory*> laboratories;
+    vector <Laboratory*> laboratories;
     vector <Industry*> industries;
     vector <Park*> parks;
-    // vector <Vehicle*> vehicles;
-    // vector <Worker*> workers;
-    // vector <Scientist*> scientists;
+    vector <Vehicle*> vehicles;
+    vector <Worker*> workers;
+    vector <Scientist*> scientists;
     
     //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
