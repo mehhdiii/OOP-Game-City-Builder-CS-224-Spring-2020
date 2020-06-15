@@ -272,6 +272,7 @@ bool Game::loadMedia()
 	//loading top bar:
 	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
 	//now load the statics sprites on the topbar;
+
 	// for(int i=0; i<4; i++){
 	spritename = "";
 	spritename = "bars/scorebar/Empty.png";
@@ -302,6 +303,7 @@ bool Game::loadMedia()
 		cout << spritename <<endl; 
 		topbar->add_static_sprite(loadTexture(spritename), 3); 
 	}
+
 	// topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
 
 	
@@ -457,6 +459,77 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 	switch (object_to_draw)
 	{
 	case 0:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Industry * newindustry = new Industry(industry_texture);
+		newindustry->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newindustry;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 1:
+		{
+		// if(temp_object!=NULL){
+		// 	// cout << "here" <<endl;
+		// 	delete temp_object;
+		// 	temp_object = NULL;
+		// }
+		// Bank * newobject = new Bank(bank_texture);
+		// newobject->setCoordinates(xMouse+100, yMouse-100);
+		// temp_object = newobject;
+		// // farms.push_back(newfarm);
+		break;
+		}
+
+	case 2:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Laboratory * newlaboratory = new Laboratory(lab_texture);
+		newlaboratory->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newlaboratory;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 3:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		House * newhouse = new House(house_texture);
+		newhouse->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newhouse;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 4:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Park * newpark = new Park(park_texture);
+		newpark->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newpark;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 5:
+		{
 		if(temp_object!=NULL){
 			// cout << "here" <<endl;
 			delete temp_object;
@@ -467,7 +540,49 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 		temp_object = newfarm;
 		// farms.push_back(newfarm);
 		break;
+		}
+
+	case 6:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Tree * newtree = new Tree(tree_texture);
+		newtree->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newtree;
+		// farms.push_back(newfarm);
+		break;
+		}
+
+	case 7:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Vehicle * newvehicle = new Vehicle(vehicle_texture);
+		newvehicle->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newvehicle;
+		// farms.push_back(newfarm);
+		break;
+		}
 	}
+	// case 8:
+	// 	if(temp_object!=NULL){
+	// 		// cout << "here" <<endl;
+	// 		delete temp_object;
+	// 		temp_object = NULL;
+	// 	}
+	// 	Vehicle * newobject = new Vehicle(vehicle_texture);
+	// 	newobject->setCoordinates(xMouse+100, yMouse-100);
+	// 	temp_object = newobject;
+	// 	// farms.push_back(newfarm);
+	// 	break;
+	// }
+	
 	// case 1: 
 
 
@@ -617,7 +732,7 @@ void Game::run( )
 		//play the background music
 
 		currentTime = SDL_GetTicks();
-		cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
+		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
 		
 		if( Mix_PlayingMusic() == 0 )
@@ -654,7 +769,7 @@ void Game::run( )
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 
-				cout << xMouse << " " << yMouse <<endl;
+				// cout << xMouse << " " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);
@@ -679,6 +794,93 @@ void Game::run( )
 						temp_object = NULL;
 					}
 					//check other objects here!
+					else if (temp_object->name == "bird"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Bird * mybird = dynamic_cast<Bird *>(temp_object);
+						mybird->setCoordinates(xMouse, yMouse);
+						birds.push_back(mybird);
+						temp_object = NULL;
+					}
+					
+					else if (temp_object->name == "building"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Building * mybuilding = dynamic_cast<Building *>(temp_object);
+						mybuilding->setCoordinates(xMouse, yMouse);
+						buildings.push_back(mybuilding);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "house"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						House * myhouse = dynamic_cast<House *>(temp_object);
+						myhouse->setCoordinates(xMouse, yMouse);
+						houses.push_back(myhouse);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "industry"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
+						myindustry->setCoordinates(xMouse, yMouse);
+						industries.push_back(myindustry);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "laboratory"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
+						mylaboratory->setCoordinates(xMouse, yMouse);
+						laboratories.push_back(mylaboratory);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "park"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Park * mypark = dynamic_cast<Park *>(temp_object);
+						mypark->setCoordinates(xMouse, yMouse);
+						parks.push_back(mypark);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "scientist"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
+						myscientist->setCoordinates(xMouse, yMouse);
+						scientists.push_back(myscientist);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "solarpanel"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
+						mysolarpanel->setCoordinates(xMouse, yMouse);
+						solarpanels.push_back(mysolarpanel);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "tree"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Tree * mytree = dynamic_cast<Tree *>(temp_object);
+						mytree->setCoordinates(xMouse, yMouse);
+						trees.push_back(mytree);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "vehicle"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
+						myvehicle->setCoordinates(xMouse, yMouse);
+						vehicles.push_back(myvehicle);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "worker"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Worker * myworker = dynamic_cast<Worker *>(temp_object);
+						myworker->setCoordinates(xMouse, yMouse);
+						workers.push_back(myworker);
+						temp_object = NULL;
+					}
 				}
 
 			}

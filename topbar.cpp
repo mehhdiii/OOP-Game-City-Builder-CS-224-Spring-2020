@@ -13,6 +13,7 @@ Topbar::Topbar(SDL_Texture * asset): Unit(asset){
     }
 }
 
+
 void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     // stats_sprite = sprite_texture;
     //pink == 0;
@@ -29,6 +30,7 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     }
     
 }
+
 
 void Topbar::draw(SDL_Renderer * gRenderer){
     

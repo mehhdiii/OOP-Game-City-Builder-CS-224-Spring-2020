@@ -1,7 +1,7 @@
 #include "building.hpp"
 
 Building::Building(SDL_Texture * asset): InAnimate(asset){
-        name = "building";
+    name = "building";
 }
 
 int Building::upgrade(int balance){
