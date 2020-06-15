@@ -26,6 +26,8 @@ class Game{
     //Screen dimension constants
     const int SCREEN_WIDTH = 1360;
     const int SCREEN_HEIGHT = 725;
+    const int OPTIONBAR_CLOSE_BUTTON_WIDTH = 20;
+    const int OPTIONBAR_CLOSE_HEIGHT = 20;
 
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
