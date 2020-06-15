@@ -272,6 +272,38 @@ bool Game::loadMedia()
 	//loading top bar:
 	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
 	//now load the statics sprites on the topbar;
+
+	// for(int i=0; i<4; i++){
+	spritename = "";
+	spritename = "bars/scorebar/Empty.png";
+	cout << spritename <<endl; 
+	topbar->add_static_sprite(loadTexture(spritename), -1); 
+	// }
+	for(int i=0; i<4; i++){
+		spritename = "";
+		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
+		cout << spritename <<endl; 
+		topbar->add_static_sprite(loadTexture(spritename), 0); 
+	}
+	for(int i=0; i<4; i++){
+		spritename = "";
+		spritename = "bars/scorebar/" + to_string(i+1) + "_Gold.png";
+		cout << spritename <<endl; 
+		topbar->add_static_sprite(loadTexture(spritename), 1); 
+	}
+	for(int i=0; i<4; i++){
+		spritename = "";
+		spritename = "bars/scorebar/" + to_string(i+1) + "_Green.png";
+		cout << spritename <<endl; 
+		topbar->add_static_sprite(loadTexture(spritename), 2); 
+	}
+	for(int i=0; i<4; i++){
+		spritename = "";
+		spritename = "bars/scorebar/" + to_string(i+1) + "_Blue.png";
+		cout << spritename <<endl; 
+		topbar->add_static_sprite(loadTexture(spritename), 3); 
+	}
+
 	// topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
 
 	
