@@ -441,6 +441,40 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			(*i)->draw(gRenderer);
 		}
 
+		for( auto i = houses.begin(); i<houses.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = industries.begin(); i<industries.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = parks.begin(); i<parks.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = laboratories.begin(); i<laboratories.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = laboratories.begin(); i<laboratories.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = trees.begin(); i<trees.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
+		for( auto i = vehicles.begin(); i<vehicles.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
 		if (temp_object!=NULL){
 			temp_object->draw(gRenderer);
 		}
