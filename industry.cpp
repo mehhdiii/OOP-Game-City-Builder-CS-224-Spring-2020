@@ -1,6 +1,7 @@
 #include "industry.hpp"
 
 Industry::Industry(SDL_Texture * asset): Building(asset){
+    setSize(80,  0.5625*80); 
     name = "industry";
 }
 
