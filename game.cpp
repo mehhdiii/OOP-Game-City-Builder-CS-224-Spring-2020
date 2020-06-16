@@ -312,7 +312,7 @@ bool Game::loadMedia()
 
 	//loading other sprites
 
-	assets = loadTexture("images/car-front-02.svg");
+	// assets = loadTexture("images/car-front-02.svg");
 
 	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
@@ -356,8 +356,8 @@ bool Game::loadMedia()
 void Game::close()
 {
 	//Free loaded images
-	SDL_DestroyTexture(assets);
-	assets=NULL;
+	// SDL_DestroyTexture(assets);
+	// assets=NULL;
 	SDL_DestroyTexture(gTexture);
 	//free sound:
 	delete optionBar;
@@ -466,6 +466,11 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			(*i)->draw(gRenderer);
 		}
 
+		for( auto i = banks.begin(); i<banks.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
 		for( auto i = trees.begin(); i<trees.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
@@ -508,15 +513,15 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 
 	case 1:
 		{
-		// if(temp_object!=NULL){
-		// 	// cout << "here" <<endl;
-		// 	delete temp_object;
-		// 	temp_object = NULL;
-		// }
-		// Bank * newobject = new Bank(bank_texture);
-		// newobject->setCoordinates(xMouse+100, yMouse-100);
-		// temp_object = newobject;
-		// // farms.push_back(newfarm);
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Bank * newobject = new Bank(bank_texture);
+		newobject->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newobject;
+		// farms.push_back(newfarm);
 		break;
 		}
 
@@ -841,6 +846,14 @@ void Game::run( )
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
 						buildings.push_back(mybuilding);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "bank"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Bank * mybank = dynamic_cast<Bank *>(temp_object);
+						mybank->setCoordinates(xMouse, yMouse);
+						banks.push_back(mybank);
 						temp_object = NULL;
 					}
 

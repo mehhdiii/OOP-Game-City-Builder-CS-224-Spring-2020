@@ -14,6 +14,7 @@
 #include"menu.hpp"
 #include"bird.hpp"
 #include"building.hpp"
+#include"bank.hpp"
 #include"house.hpp"
 #include"park.hpp"
 #include"farm.hpp"
@@ -69,6 +70,7 @@ class Game{
 
     vector <Bird*> birds;
     vector <Building*> buildings;
+    vector <Bank*> banks;
     // vector <Unit *> allobjects;
     Unit * temp_object = NULL; //object that are not yet been fixed on the screen
     // vector <Unit*> allobjects;
