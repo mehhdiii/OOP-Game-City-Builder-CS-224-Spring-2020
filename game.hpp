@@ -26,6 +26,7 @@
 #include"solarpanel.hpp"
 #include"topbar.hpp"
 #include"tree.hpp"
+#include"turbine.hpp"
 #include"vehicle.hpp"
 #include"worker.hpp"
 
@@ -80,6 +81,7 @@ class Game{
     vector <Industry*> industries;
     vector <Park*> parks;
     vector <Tree*> trees;
+    vector <Turbine*> turbines;
     vector <SolarPanel*> solarpanels;
     vector <Vehicle*> vehicles;
     vector <Worker*> workers;

@@ -441,6 +441,11 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			(*i)->draw(gRenderer);
 		}
 
+		for( auto i = banks.begin(); i<banks.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+
 		for( auto i = houses.begin(); i<houses.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
@@ -466,12 +471,12 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			(*i)->draw(gRenderer);
 		}
 
-		for( auto i = banks.begin(); i<banks.end(); i++){
+		for( auto i = trees.begin(); i<trees.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
 		}
 
-		for( auto i = trees.begin(); i<trees.end(); i++){
+		for( auto i = turbines.begin(); i<turbines.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
 		}
@@ -608,19 +613,22 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 		// farms.push_back(newfarm);
 		break;
 		}
+
+	case 8:
+		{
+		if(temp_object!=NULL){
+			// cout << "here" <<endl;
+			delete temp_object;
+			temp_object = NULL;
+		}
+		Turbine * newturbine = new Turbine(turbine_texture);
+		newturbine->setCoordinates(xMouse+100, yMouse-100);
+		temp_object = newturbine;
+		// farms.push_back(newfarm);
+		break;
+		}
 	}
-	// case 8:
-	// 	if(temp_object!=NULL){
-	// 		// cout << "here" <<endl;
-	// 		delete temp_object;
-	// 		temp_object = NULL;
-	// 	}
-	// 	Vehicle * newobject = new Vehicle(vehicle_texture);
-	// 	newobject->setCoordinates(xMouse+100, yMouse-100);
-	// 	temp_object = newobject;
-	// 	// farms.push_back(newfarm);
-	// 	break;
-	// }
+	
 	
 	// case 1: 
 
@@ -910,6 +918,14 @@ void Game::run( )
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
 						trees.push_back(mytree);
+						temp_object = NULL;
+					}
+
+					else if (temp_object->name == "turbine"){
+						cout<< detect_collision( xMouse, yMouse) <<endl;
+						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
+						myturbine->setCoordinates(xMouse, yMouse);
+						turbines.push_back(myturbine);
 						temp_object = NULL;
 					}
 
