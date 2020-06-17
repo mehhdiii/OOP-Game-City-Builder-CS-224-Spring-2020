@@ -312,7 +312,7 @@ bool Game::loadMedia()
 
 	//loading other sprites
 
-	assets = loadTexture("images/car-front-02.svg");
+	// assets = loadTexture("images/car-front-02.svg");
 
 	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
@@ -328,11 +328,18 @@ bool Game::loadMedia()
 	turbine_texture = loadTexture("images/Turbine.png");
 	vehicle_texture = loadTexture("images/Vehicle.png");
 	worker_texture = loadTexture("images/Worker.png");
+	scientist_texture = loadTexture("images/Scientist.png");
 
+	//create scientist object;
+	scientist_obj = new Scientist(scientist_texture);
 
     gTexture = loadTexture("maps/map1.png");
+	map_texture = loadTexture("maps/test_map.png");
 
-
+	if(map_texture!=NULL){
+		map = new Map(map_texture);
+	}
+	
 	if(gTexture==NULL || gTexture==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -427,25 +434,57 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 
 void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
-
-		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
+		map->draw(gRenderer);
+		// SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
 		
 		
-		if (optionBar->enabled){
-			optionBar->draw(gRenderer);
-		}
-		topbar->draw(gRenderer);
+		
 
 		for( auto i = farms.begin(); i<farms.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
 		}
-
+		for( auto i = houses.begin(); i<houses.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = laboratories.begin(); i<laboratories.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = industries.begin(); i<industries.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = parks.begin(); i<parks.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = trees.begin(); i<trees.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = solarpanels.begin(); i<solarpanels.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = vehicles.begin(); i<vehicles.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
+		for( auto i = workers.begin(); i<workers.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
 		if (temp_object!=NULL){
 			temp_object->draw(gRenderer);
 		}
 
 
+		if (optionBar->enabled){
+			optionBar->draw(gRenderer);
+		}
+		topbar->draw(gRenderer);
 		
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
@@ -458,117 +497,117 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 	//0->
 	switch (object_to_draw)
 	{
-	case 0:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Industry * newindustry = new Industry(industry_texture);
-		newindustry->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newindustry;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 0:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Industry * newindustry = new Industry(industry_texture);
+			newindustry->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newindustry;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 1:
-		{
-		// if(temp_object!=NULL){
-		// 	// cout << "here" <<endl;
-		// 	delete temp_object;
-		// 	temp_object = NULL;
-		// }
-		// Bank * newobject = new Bank(bank_texture);
-		// newobject->setCoordinates(xMouse+100, yMouse-100);
-		// temp_object = newobject;
-		// // farms.push_back(newfarm);
-		break;
-		}
+		case 1:
+			{
+			// if(temp_object!=NULL){
+			// 	// cout << "here" <<endl;
+			// 	delete temp_object;
+			// 	temp_object = NULL;
+			// }
+			// Bank * newobject = new Bank(bank_texture);
+			// newobject->setCoordinates(xMouse+100, yMouse-100);
+			// temp_object = newobject;
+			// // farms.push_back(newfarm);
+			break;
+			}
 
-	case 2:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Laboratory * newlaboratory = new Laboratory(lab_texture);
-		newlaboratory->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newlaboratory;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 2:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Laboratory * newlaboratory = new Laboratory(lab_texture);
+			newlaboratory->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newlaboratory;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 3:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		House * newhouse = new House(house_texture);
-		newhouse->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newhouse;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 3:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			House * newhouse = new House(house_texture);
+			newhouse->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newhouse;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 4:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Park * newpark = new Park(park_texture);
-		newpark->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newpark;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 4:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Park * newpark = new Park(park_texture);
+			newpark->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newpark;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 5:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Farm * newfarm = new Farm(forest_texture);
-		newfarm->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newfarm;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 5:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Farm * newfarm = new Farm(forest_texture);
+			newfarm->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newfarm;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 6:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Tree * newtree = new Tree(tree_texture);
-		newtree->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newtree;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 6:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Tree * newtree = new Tree(tree_texture);
+			newtree->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newtree;
+			// farms.push_back(newfarm);
+			break;
+			}
 
-	case 7:
-		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Vehicle * newvehicle = new Vehicle(vehicle_texture);
-		newvehicle->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newvehicle;
-		// farms.push_back(newfarm);
-		break;
-		}
+		case 7:
+			{
+			if(temp_object!=NULL){
+				// cout << "here" <<endl;
+				delete temp_object;
+				temp_object = NULL;
+			}
+			Vehicle * newvehicle = new Vehicle(vehicle_texture);
+			newvehicle->setCoordinates(xMouse+100, yMouse-100);
+			temp_object = newvehicle;
+			// farms.push_back(newfarm);
+			break;
+			}
 	}
 	// case 8:
 	// 	if(temp_object!=NULL){
@@ -668,6 +707,142 @@ bool Game::detect_collision(int x, int y){
 	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
 }
 
+
+
+void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
+	for(auto i = farms.begin(); i!=farms.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+
+	for(auto i = houses.begin(); i!=houses.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = laboratories.begin(); i!=laboratories.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = industries.begin(); i!=industries.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = parks.begin(); i!=parks.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = trees.begin(); i!=trees.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+
+	for(auto i = solarpanels.begin(); i!=solarpanels.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+
+	for(auto i = vehicles.begin(); i!=vehicles.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = workers.begin(); i!=workers.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+
+
+}
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );
@@ -763,6 +938,43 @@ void Game::run( )
 			// 	}
 
 			// }
+			//scrolling the map!:
+			if(e.type == SDL_KEYDOWN){
+				switch (e.key.keysym.sym)
+				{
+				case SDLK_RIGHT:
+						if(map->scrolling_flag(0, 1, 0, 0)){
+							scroll_objects(1, 0, 0, 0); //scroll the object opposite to the map!
+							map->scroll(0, 1, 0, 0);
+						}
+							
+					break;
+				case SDLK_LEFT:
+						if(map->scrolling_flag(1, 0, 0, 0))
+						{
+							scroll_objects(0, 1, 0, 0);
+							map->scroll(1, 0, 0, 0);
+						}
+				case SDLK_UP:
+						cout << "upper pressed" <<endl;
+						if(map->scrolling_flag(0,0,1,0)){
+							scroll_objects(0, 0, 0, 1);
+							map->scroll(0,0,1,0);
+						}
+						
+
+				case SDLK_DOWN:
+						if(map->scrolling_flag(0,0,0,1)){
+							scroll_objects(0, 0, 1, 0);
+							map->scroll(0,0,0,1);
+						}
+						
+				default:
+					break;
+				}
+			}
+
+
 			//checking mouse clicks
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT &&!pause){
 				
@@ -844,9 +1056,11 @@ void Game::run( )
 
 					else if (temp_object->name == "scientist"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
-						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
-						myscientist->setCoordinates(xMouse, yMouse);
-						scientists.push_back(myscientist);
+						scientist_obj->increase_scientist();
+						scientist_obj->show_scientist_count();
+						// Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
+						// myscientist->setCoordinates(xMouse, yMouse);
+						// scientists.push_back(myscientist);
 						temp_object = NULL;
 					}
 
