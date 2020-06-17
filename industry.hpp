@@ -24,6 +24,7 @@ class Industry: public Building{
     public:
 
         Industry(SDL_Texture * );
+        void update_scores(int &, int &);
         int upgrade_industry(int);
         void set_industry_type(std::string,int);
         void shift_industry_focus(std::string,int);     // sochna hy 

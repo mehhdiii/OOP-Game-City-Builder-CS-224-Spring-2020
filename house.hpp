@@ -2,6 +2,7 @@
 #include "building.hpp"
 #include<string>
 #include <vector>
+#include <iostream>
 #pragma once
 
 class House: public Building{
@@ -17,6 +18,7 @@ class House: public Building{
     public:
 
         House(SDL_Texture * );
+        void update_scores(int &, int &);
         int getLocalityGrading();
         void setPeoplecount(int);
         void setPrice(int);

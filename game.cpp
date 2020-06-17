@@ -534,20 +534,20 @@ bool Game::detect_collision(int x, int y){
 		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
 		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
 		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
-		cout <<"xs: " << xChecksp <<endl;
-		cout << "xe: "<< xCheckep <<endl;
-		cout <<"ys: " << yChecksp <<endl;
-		cout << "ye: "<< yCheckep <<endl;
+		// cout <<"xs: " << xChecksp <<endl;
+		// cout << "xe: "<< xCheckep <<endl;
+		// cout <<"ys: " << yChecksp <<endl;
+		// cout << "ye: "<< yCheckep <<endl;
 
-		cout <<"temp: xs: " << sp_of_temp_obj_x <<endl;
-		cout << "temp: xe: "<< ep_of_temp_obj_x <<endl;
-		cout <<"temp: ys: " << sp_of_temp_obj_y<<endl;
-		cout << "temp: ye: "<< ep_of_temp_obj_y <<endl;
-		cout <<"static: xs: " << sp_of_static_obj_x <<endl;
-		cout << "static: xe: "<< ep_of_static_obj_x <<endl;
-		cout <<"static: ys: " << sp_of_static_obj_y<<endl;
-		cout << "static: ye: "<< ep_of_static_obj_y <<endl;
-		cout << (*i)->geth() <<endl;
+		// cout <<"temp: xs: " << sp_of_temp_obj_x <<endl;
+		// cout << "temp: xe: "<< ep_of_temp_obj_x <<endl;
+		// cout <<"temp: ys: " << sp_of_temp_obj_y<<endl;
+		// cout << "temp: ye: "<< ep_of_temp_obj_y <<endl;
+		// cout <<"static: xs: " << sp_of_static_obj_x <<endl;
+		// cout << "static: xe: "<< ep_of_static_obj_x <<endl;
+		// cout <<"static: ys: " << sp_of_static_obj_y<<endl;
+		// cout << "static: ye: "<< ep_of_static_obj_y <<endl;
+		// cout << (*i)->geth() <<endl;
 		// xCheck = 
 		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
 			
@@ -709,158 +709,131 @@ void Game::run( )
 					
 					// make individual class functions to update cash and XP_level
 					// industry and lab chezein bnaein unsy paisay mileingy
+					// industry product ki progress front end py show krni h
 					if (temp_object->name == "farm"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
 						myfarm->setCoordinates(xMouse, yMouse);
+						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
 						farms.push_back(myfarm);
 						temp_object = NULL;
-						main_cash = main_cash -550; // updated the money | deduct the amount of buying a farm i.e. 550.
-
-						XP_level = XP_level + 15; // updated the XP_level | it adds 15 XP to buy a farm i.e. exhaustion to your character.
 					}
 					//check other objects here!
 					else if (temp_object->name == "bird"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bird * mybird = dynamic_cast<Bird *>(temp_object);
 						mybird->setCoordinates(xMouse, yMouse);
+						mybird->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bird
 						birds.push_back(mybird);
 						temp_object = NULL;
-						main_cash = main_cash -50; // updated the money | deduct the amount of buying a bird i.e. 50.
-
-						XP_level = XP_level + 2; // updated the XP_level | it adds 2 XP to buy a bird i.e. exhaustion to your character.
 					}
 					
 					else if (temp_object->name == "building"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
+						mybuilding->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for building
 						buildings.push_back(mybuilding);
 						temp_object = NULL;
-						main_cash = main_cash -1000; // updated the money | deduct the amount of buying a buiding i.e. 1000.
-
-						XP_level = XP_level + 25; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "bank"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bank * mybank = dynamic_cast<Bank *>(temp_object);
 						mybank->setCoordinates(xMouse, yMouse);
+						mybank->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bank
 						banks.push_back(mybank);
 						temp_object = NULL;
-						main_cash = main_cash -800; // updated the money | deduct the amount of buying a buiding i.e. 1000.
-
-						XP_level = XP_level + 12; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "house"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						House * myhouse = dynamic_cast<House *>(temp_object);
 						myhouse->setCoordinates(xMouse, yMouse);
+						myhouse->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for house
 						houses.push_back(myhouse);
 						temp_object = NULL;
-						main_cash = main_cash - 650; // updated the money | deduct the amount of buying a house i.e. 650.
-
-						XP_level = XP_level + 20; // updated the XP_level | it adds 20 XP to buy a house i.e. exhaustion to your character.	
 					}
 
 					else if (temp_object->name == "industry"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
 						myindustry->setCoordinates(xMouse, yMouse);
+						myindustry->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for industryt
 						industries.push_back(myindustry);
 						temp_object = NULL;
-						main_cash = main_cash - 1500; // updated the money | deduct the amount of buying a industry i.e. 1500.
-
-						XP_level = XP_level + 25; // updated the XP_level | it adds 25 XP to buy a industry i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "laboratory"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
 						mylaboratory->setCoordinates(xMouse, yMouse);
+						mylaboratory->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for laboratory
 						laboratories.push_back(mylaboratory);
 						temp_object = NULL;
-						main_cash = main_cash - 1200; // updated the money | deduct the amount of buying a laboratory i.e. 1200.
-
-						XP_level = XP_level + 30; // updated the XP_level | it adds 30 XP to buy a laboratory i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "park"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Park * mypark = dynamic_cast<Park *>(temp_object);
 						mypark->setCoordinates(xMouse, yMouse);
+						mypark->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for park
 						parks.push_back(mypark);
 						temp_object = NULL;
-						main_cash = main_cash - 450; // updated the money | deduct the amount of buying a park i.e. 450.
-
-						XP_level = XP_level + 15; // updated the XP_level | it adds 15 XP to buy a park i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "scientist"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
 						myscientist->setCoordinates(xMouse, yMouse);
+						myscientist->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for scientist
 						scientists.push_back(myscientist);
 						temp_object = NULL;
-						main_cash = main_cash - 250; // updated the money | deduct the amount of buying a scientist i.e. 250.
-
-						XP_level = XP_level + 35; // updated the XP_level | it adds 25 XP to buy a scientist i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "solarpanel"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
 						mysolarpanel->setCoordinates(xMouse, yMouse);
+						mysolarpanel->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for solarpanel
 						solarpanels.push_back(mysolarpanel);
 						temp_object = NULL;
-						main_cash = main_cash -1500; // updated the money | deduct the amount of buying a buiding i.e. 1000.
-
-						XP_level = XP_level + 40; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "tree"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
+						mytree->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for tree
 						trees.push_back(mytree);
 						temp_object = NULL;
-						main_cash = main_cash -500; // updated the money | deduct the amount of buying a buiding i.e. 1000.
-
-						XP_level = XP_level + 30; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "turbine"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
 						myturbine->setCoordinates(xMouse, yMouse);
+						myturbine->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for turbine
 						turbines.push_back(myturbine);
 						temp_object = NULL;
-						main_cash = main_cash -2000; // updated the money | deduct the amount of buying a buiding i.e. 1000.
-
-						XP_level = XP_level + 45; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "vehicle"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
 						myvehicle->setCoordinates(xMouse, yMouse);
+						myvehicle->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for vehicle
 						vehicles.push_back(myvehicle);
 						temp_object = NULL;
-						main_cash = main_cash - 300; // updated the money | deduct the amount of buying a vehicle i.e. 300.
-
-						XP_level = XP_level + 5; // updated the XP_level | it adds 5 XP to buy a vehicle i.e. exhaustion to your character.
 					}
 
 					else if (temp_object->name == "worker"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Worker * myworker = dynamic_cast<Worker *>(temp_object);
 						myworker->setCoordinates(xMouse, yMouse);
+						myworker->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for worker
 						workers.push_back(myworker);
 						temp_object = NULL;
-						main_cash = main_cash - 150; // updated the money | deduct the amount of buying a worker i.e. 150.
-
-						XP_level = XP_level + 20; // updated the XP_level | it adds 30 XP to buy a worker i.e. exhaustion to your character.
 					}
 				}
 

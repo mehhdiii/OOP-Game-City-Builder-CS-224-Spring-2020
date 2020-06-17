@@ -18,6 +18,7 @@ class Farm: public Building{
     public:
 
         Farm(SDL_Texture * );
+        void update_scores(int &, int &);
         void addProduct(std::string, int);
         void set_creation_time(int);
 };

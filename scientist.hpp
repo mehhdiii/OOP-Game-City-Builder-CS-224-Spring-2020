@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "Animate.hpp"
 #include <string>
+#include<iostream>
 #pragma once
 
 class Scientist: public Animate{
@@ -16,6 +17,7 @@ class Scientist: public Animate{
     public:
 
         Scientist(SDL_Texture *);
+        void update_scores(int &, int &);
         int getworkPower();
         void set_associatedLabNo(int);
         void set_associatedLabType(std::string);
