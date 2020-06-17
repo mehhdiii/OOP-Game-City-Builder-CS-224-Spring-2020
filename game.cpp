@@ -955,12 +955,14 @@ void Game::run( )
 							scroll_objects(0, 1, 0, 0);
 							map->scroll(1, 0, 0, 0);
 						}
+					break;
 				case SDLK_UP:
 						cout << "upper pressed" <<endl;
 						if(map->scrolling_flag(0,0,1,0)){
 							scroll_objects(0, 0, 0, 1);
 							map->scroll(0,0,1,0);
 						}
+					break;
 						
 
 				case SDLK_DOWN:
@@ -968,7 +970,7 @@ void Game::run( )
 							scroll_objects(0, 0, 1, 0);
 							map->scroll(0,0,0,1);
 						}
-						
+					break;
 				default:
 					break;
 				}

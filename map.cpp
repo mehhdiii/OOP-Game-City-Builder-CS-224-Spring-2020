@@ -24,16 +24,16 @@ void Map::scroll(bool xL, bool xR, bool yUp, bool yDown){
         src.x-=SCROLL_SPEED;
     }
     if(yUp){
-        std::cout << "hello" <<std::endl;
-        std::cout << (src.y) <<std::endl;
+        // std::cout << "hello" <<std::endl;
+        // std::cout << (src.y) <<std::endl;
         src.y = src.y - SCROLL_SPEED;
-        std::cout << src.y <<std::endl;
+        // std::cout << src.y <<std::endl;
     }
     if(yDown){
-        std::cout << "down: ";
-        std::cout << (src.y) <<std::endl;
+        // std::cout << "down: ";
+        // std::cout << (src.y) <<std::endl;
         src.y+=SCROLL_SPEED;
-        std::cout << (src.y) <<std::endl;
+        // std::cout << (sr/c.y) <<std::endl;
     }
 
 }
