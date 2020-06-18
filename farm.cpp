@@ -2,7 +2,7 @@
 
 
 Farm::Farm(SDL_Texture * asset): Building(asset), active_products(15){
-    setSize(80,  0.5625*80); 
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "farm";
 }
 

@@ -7,7 +7,7 @@
 class Scientist: public Animate{
 
     private:
-
+        int scientist_count;
         int associatedLabNo;
         SDL_Rect Image;
         int intelligence;
@@ -22,4 +22,7 @@ class Scientist: public Animate{
         void set_associatedLabNo(int);
         void set_associatedLabType(std::string);
         void set_creation_time(int);
+
+        void increase_scientist();
+        int show_scientist_count();
 };

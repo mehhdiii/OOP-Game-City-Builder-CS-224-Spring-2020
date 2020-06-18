@@ -8,6 +8,9 @@ class Animate: public Unit{
     private:
 
         int speed;
+    protected:    
+        int OBJECT_WIDHT = 3*80;
+        int OBJECT_HEIGHT =  3* 0.5625*80;
     public:
   
         Animate(SDL_Texture *);
