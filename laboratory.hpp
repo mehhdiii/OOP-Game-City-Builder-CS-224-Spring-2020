@@ -23,6 +23,7 @@ class Laboratory: public Building{
     public:
 
         Laboratory(SDL_Texture * );
+        void update_scores(int &, int &);
         void addScientist();
         void assignWork(std::string, int);
         std::string getTechnology();

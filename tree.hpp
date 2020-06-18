@@ -18,6 +18,7 @@ class Tree: public InAnimate{
     public:
     
         Tree (SDL_Texture *);
+        void update_scores(int &, int &);
         void showOxygenGen();
         void set_creation_time(int);
 };

@@ -2,6 +2,7 @@
 #include "building.hpp"
 #include<string>
 #include <vector>
+#include <iostream>
 #pragma once
 
 class Bank: public Building{
@@ -15,6 +16,7 @@ class Bank: public Building{
     public:
 
         Bank(SDL_Texture * );
+        void update_scores(int &, int &);
         // void setPeoplecount(int);
         // void setPrice(int);
         void set_creation_time(int);

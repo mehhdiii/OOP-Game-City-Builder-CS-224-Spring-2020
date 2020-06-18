@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include"inAnimate.hpp"
 #include<string>
+#include <iostream>
 #include <vector>
 #pragma once
 
@@ -14,6 +15,7 @@ class Turbine: public InAnimate{
     public:
 
         Turbine(SDL_Texture * );
+        void update_scores(int &, int &);
         // void setPeoplecount(int);
         // void setPrice(int);
         void set_creation_time(int);

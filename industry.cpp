@@ -5,6 +5,12 @@ Industry::Industry(SDL_Texture * asset): Building(asset){
     name = "industry";
 }
 
+void Industry::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
+    std::cout << "You have bought a industry costing 1500."<<std::endl;
+    main_cash = main_cash - 1500; // updated the money | deduct the amount of buying a industry i.e. 1500.
+	XP_level = XP_level + 25; // updated the XP_level | it adds 25 XP to buy a industry i.e. exhaustion to your character.
+}
+
 int Industry::upgrade_industry(int balance){
 
     int new_bal = balance-upgrade_cost;

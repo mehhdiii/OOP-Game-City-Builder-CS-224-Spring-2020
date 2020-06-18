@@ -16,6 +16,7 @@ class SolarPanel: public InAnimate{
     public:
     
         SolarPanel(SDL_Texture *);
+        void update_scores(int &, int &);
         void setEnergy(int);
         void show_all_features();
         void set_creation_time(int);

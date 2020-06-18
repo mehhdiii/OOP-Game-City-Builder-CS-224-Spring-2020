@@ -6,6 +6,12 @@ Farm::Farm(SDL_Texture * asset): Building(asset), active_products(15){
     name = "farm";
 }
 
+void Farm::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
+    std::cout << "You have bought a farm costing 550."<<std::endl;
+    main_cash = main_cash -550; // updated the money | deduct the amount of buying a farm i.e. 550.
+	XP_level = XP_level + 15; // updated the XP_level | it adds 15 XP to buy a farm i.e. exhaustion to your character.
+}
+
 void Farm::addProduct(std::string product, int balance){
     //search for the cost of the required upgrade
     int required_balance;
