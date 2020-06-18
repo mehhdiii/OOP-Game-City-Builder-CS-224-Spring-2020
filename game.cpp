@@ -444,6 +444,10 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
 		}
+		for( auto i = banks.begin(); i<banks.end(); i++){
+			// cout << "this caused" <<endl;
+			(*i)->draw(gRenderer);
+		}
 		for( auto i = houses.begin(); i<houses.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
