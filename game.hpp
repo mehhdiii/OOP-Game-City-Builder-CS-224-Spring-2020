@@ -130,7 +130,15 @@ public:
     void scroll_objects(bool, bool, bool, bool);
 
     bool detect_collision(int, int); 
-    // bool helper_detect_collision(int, int, vector<Unit *> * obj); 
+    
+    //draw
+    void draw_all(SDL_Renderer *);
+    
+
+
+
+
+    
     template<typename mytype> //template to store a generic type of object vector for passing into the function
     bool helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
     {
@@ -166,9 +174,7 @@ public:
 }
  
  
- //draw
-    void draw_all(SDL_Renderer *);
-    
+ 
     
 };
 
