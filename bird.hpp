@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "Animate.hpp"
+#include<iostream>
 #pragma once
 
 class Bird: public Animate{
@@ -11,6 +12,7 @@ class Bird: public Animate{
     public:
 
         Bird(SDL_Texture *);
+        void update_scores(int &, int &);
         void setCoordinates(int , int );
         void set_creation_time(int);
 };

@@ -16,6 +16,7 @@ class Building: public InAnimate{
     public:
 
         Building(SDL_Texture *);
+        void update_scores(int &, int &);
         int upgrade(int balance);
         int showStructureLevel();
         void set_creation_time(int);

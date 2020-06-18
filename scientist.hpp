@@ -17,6 +17,7 @@ class Scientist: public Animate{
     public:
 
         Scientist(SDL_Texture *);
+        void update_scores(int &, int &);
         int getworkPower();
         void set_associatedLabNo(int);
         void set_associatedLabType(std::string);

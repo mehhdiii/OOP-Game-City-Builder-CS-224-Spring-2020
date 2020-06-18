@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "animate.hpp"
+#include <iostream>
 #pragma once
 
 class Worker: public Animate{
@@ -13,6 +14,7 @@ class Worker: public Animate{
     public:
 
         Worker(SDL_Texture *);
+        void update_scores(int &, int &);
         void set_work_power(int);
         void deploy();
         void show_all_features();
