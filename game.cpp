@@ -990,10 +990,10 @@ void Game::run( )
 					
 				}
 				//toggling option_bar
-				if (xMouse >SCREEN_WIDTH-80 && yMouse >SCREEN_HEIGHT-80  && !optionBar->enabled){ // to enable option bar when clicked at a specific point
+				if (xMouse >SCREEN_WIDTH-80 && yMouse < 80  && !optionBar->enabled){ // to enable option bar when clicked at a specific point
 					optionBar->enabled = true; // option bar is enabled
 				}
-				else if (xMouse >SCREEN_WIDTH-80 && yMouse >SCREEN_HEIGHT-80 && optionBar->enabled){ // to disable option bar
+				else if (xMouse >SCREEN_WIDTH-80 && yMouse < 80 && optionBar->enabled){ // to disable option bar
 					optionBar->enabled = false; // option bar is disabled
 				}
 

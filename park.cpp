@@ -1,7 +1,7 @@
 #include "park.hpp"
 
 Park::Park(SDL_Texture * asset): InAnimate(asset){
-    setSize(80,  0.5625*80); 
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "park";
 }
 

@@ -2,7 +2,7 @@
 
 
 Laboratory::Laboratory(SDL_Texture * asset): Building(asset){
-    setSize(80,  0.5625*80); 
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "laboratory";
 }
 

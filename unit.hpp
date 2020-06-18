@@ -14,6 +14,7 @@ class Unit{
         SDL_Texture* assets; //picture object
         SDL_Rect src; //object containing the coordinates to render from assets
         SDL_Rect mover = {0,0,50,50}; //size of the object to draw on screen
+        
 
     public:
        
