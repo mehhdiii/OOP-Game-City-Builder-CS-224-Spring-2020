@@ -6,7 +6,7 @@
 using namespace std;
 #include<list>
 
-int main_cash = 10000; // dollars
+// int main_cash = 10000; // dollars
 int electricity = 250; // MegaWatts
 int XP_level = 0;
 int P_level = 1; // first level
@@ -44,6 +44,7 @@ void Game::update_parameters(){
 
 bool Game::init()
 {
+	
 	//Initialization flag
 	bool success = true;
 
@@ -288,11 +289,12 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 	}
 }
 
+
+
 void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
 
-		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
-		
+		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer		
 		
 		if (optionBar->enabled){
 			optionBar->draw(gRenderer);
@@ -874,6 +876,7 @@ void Game::run( )
 		SDL_Delay(120);	//causes sdl engine to delay for specified miliseconds
 
 	}
+	cout<< "Total number of laboratories in the city : "<< laboratories.size()<<endl;
 	cout<<"END"<<endl;
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;

@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -50,6 +51,7 @@ class Game{
     SDL_Texture* gTexture = NULL;
     //global reference to sprites;
     SDL_Texture* assets;
+
 
     //global reference to sprites2;
     SDL_Texture* assets2;
@@ -101,7 +103,7 @@ class Game{
     // Mix_Chunk *bird2 = NULL;
 // protected:
 
-    // int main_cash;
+    int main_cash = 10000;
     
     
 public:
