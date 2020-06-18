@@ -512,76 +512,59 @@ void Game::hover_object_with_cursor(){
 	}
 }
 
+// bool Game::helper_detect_collision(int x, int y, vector<Unit *> * obj){
+// 	int sp_of_temp_obj_x = temp_object->getx();
+// 	int sp_of_temp_obj_y = temp_object->gety();
+// 	int ep_of_temp_obj_x = x+temp_object->getw();
+// 	int ep_of_temp_obj_y = y + temp_object->geth();
+
+// 	//static object
+// 	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
+	
+// 	bool yChecksp = 0;
+// 	bool yCheckep = 0;
+// 	bool xChecksp = 0;
+// 	bool xCheckep = 0;
+// 	for(auto i = (*obj).begin(); i!= (*obj).end(); i++){
+// 		sp_of_static_obj_x = (*i)->getx();
+// 		sp_of_static_obj_y = (*i)->gety();
+// 		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
+// 		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
+
+// 		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
+// 		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
+// 		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
+// 		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
+ 
+// 		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
+			
+// 			break;
+// 		}
+// 	}
+// 	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
+// }
+
 
 bool Game::detect_collision(int x, int y){
 	// bool Collision = 0;
 		// int startingpoint_of_static_object, endingpoint_of_static_object;
 	// moving object square
 
-	int sp_of_temp_obj_x = temp_object->getx();
-	int sp_of_temp_obj_y = temp_object->gety();
-	int ep_of_temp_obj_x = x+temp_object->getw();
-	int ep_of_temp_obj_y = y + temp_object->geth();
+	bool f1 = helper_detect_collision <Farm>(x, y, farms);
+	bool f2 = helper_detect_collision <Bank>(x,y, banks);
+	bool f3 = helper_detect_collision <House>(x,y,houses);
+	bool f4 = helper_detect_collision <Industry>(x,y, industries);
+	bool f5 = helper_detect_collision <Laboratory>(x,y, laboratories);
+	bool f6 = helper_detect_collision <Park>(x,y, parks);
+	bool f7 = helper_detect_collision <SolarPanel>(x,y, solarpanels);
+	bool f8 = helper_detect_collision <Tree>(x,y, trees);
+	bool f9 = helper_detect_collision <Turbine>(x,y, turbines);
+	bool f10 = helper_detect_collision <Vehicle>(x,y, vehicles);
+	cout << f1 << f2<<f3<<f4<<f5<<f6<<f7<<f8<<f9<<f10 <<endl;
+	// helper_detect_collision(x,y, workers);
+	return (f1||f2||f3||f4||f5||f6||f7||f8||f9||f10);
 
-	//static object
-	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
 	
-	bool yChecksp = 0;
-	bool yCheckep = 0;
-	bool xChecksp = 0;
-	bool xCheckep = 0;
-	for(auto i = farms.begin(); i!= farms.end(); i++){
-		sp_of_static_obj_x = (*i)->getx();
-		sp_of_static_obj_y = (*i)->gety();
-		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
-		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
-
-		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
-		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
-		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
-		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
-		// cout <<"xs: " << xChecksp <<endl;
-		// cout << "xe: "<< xCheckep <<endl;
-		// cout <<"ys: " << yChecksp <<endl;
-		// cout << "ye: "<< yCheckep <<endl;
-
-		// cout <<"temp: xs: " << sp_of_temp_obj_x <<endl;
-		// cout << "temp: xe: "<< ep_of_temp_obj_x <<endl;
-		// cout <<"temp: ys: " << sp_of_temp_obj_y<<endl;
-		// cout << "temp: ye: "<< ep_of_temp_obj_y <<endl;
-		// cout <<"static: xs: " << sp_of_static_obj_x <<endl;
-		// cout << "static: xe: "<< ep_of_static_obj_x <<endl;
-		// cout <<"static: ys: " << sp_of_static_obj_y<<endl;
-		// cout << "static: ye: "<< ep_of_static_obj_y <<endl;
-		// cout << (*i)->geth() <<endl;
-		// xCheck = 
-		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
-			
-			break;
-		}
-			
-
-		// cout << "width: "<<(*i)->getw() <<endl;
-		// cout << "height: "<<(*i)->geth() <<endl;
-		// cout << "x: " << (*i)->getx() <<endl;
-		// cout << "y: " <<  (*i)->gety()  <<endl;
-		// cout << "Mouse x: " << x << " Mouse y: " << y <<endl;
-		// if (x >= (*i)->getx() && x <=  (*i)->getx()+(*i)->getw() ){
-		// 	xCollision = 1;
-		// }
-		// if(y >= (*i)->gety() && y <=  (*i)->gety()+(*i)->geth() ){
-		// 	yCollision = 1;
-		// }
-		// if(obj->getw() + x >= (*i)->getx() && obj->getw() + x<= (*i)->getw() ){
-		// 	xCollision = 1;
-		// }
-		// if(obj->geth() + x >= (*i)->gety() && obj->geth() + x<= (*i)->geth() ){
-		// 	yCollision = 1;
-		// }
-
-
-	}
-	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
 }
 
 

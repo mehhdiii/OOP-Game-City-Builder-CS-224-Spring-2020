@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include <SDL_ttf.h>
+// #include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -35,6 +35,7 @@
 
 using namespace std;
 Uint32 SDL_GetTicks(void);
+
 
 class Game{
     //Screen dimension constants
@@ -89,7 +90,7 @@ class Game{
     vector <SolarPanel*> solarpanels;
     vector <Vehicle*> vehicles;
     vector <Worker*> workers;
-    // vector <Scientist*> scientists;
+    vector <Scientist*> scientists;
     Scientist * scientist_obj = NULL;
 
     //menus and bars:
@@ -129,7 +130,43 @@ public:
     void scroll_objects(bool, bool, bool, bool);
 
     bool detect_collision(int, int); 
-    //draw
+    // bool helper_detect_collision(int, int, vector<Unit *> * obj); 
+    template<typename mytype> //template to store a generic type of object vector for passing into the function
+    bool helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
+    {
+	int sp_of_temp_obj_x = temp_object->getx();
+	int sp_of_temp_obj_y = temp_object->gety();
+	int ep_of_temp_obj_x = x+temp_object->getw();
+	int ep_of_temp_obj_y = y + temp_object->geth();
+
+	//static object
+	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
+	
+	bool yChecksp = 0;
+	bool yCheckep = 0;
+	bool xChecksp = 0;
+	bool xCheckep = 0;
+	for(auto i = obj.begin(); i!= obj.end(); i++){
+		sp_of_static_obj_x = (*i)->getx();
+		sp_of_static_obj_y = (*i)->gety();
+		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
+		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
+
+		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
+		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
+		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
+		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
+ 
+		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
+			
+			break;
+		}
+	}
+	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
+}
+ 
+ 
+ //draw
     void draw_all(SDL_Renderer *);
     
     
