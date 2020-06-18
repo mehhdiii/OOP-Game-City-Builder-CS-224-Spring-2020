@@ -1,6 +1,7 @@
 #include "building.hpp"
 
 Building::Building(SDL_Texture * asset): InAnimate(asset){
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "building";
 }
 

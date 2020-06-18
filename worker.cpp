@@ -1,7 +1,7 @@
 #include "worker.hpp"
 
 Worker::Worker(SDL_Texture * asset): Animate(asset){
-    setSize(175/2,  100/2); 
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "worker";
 }
 

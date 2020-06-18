@@ -1,7 +1,7 @@
 #include "solarpanel.hpp"
 
 SolarPanel::SolarPanel(SDL_Texture * asset): InAnimate(asset){
-     setSize(175/2,  100/2);
+     setSize(80,  0.5625*80); 
      name = "solarpanel";
 }
 

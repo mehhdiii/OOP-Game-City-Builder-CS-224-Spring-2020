@@ -1,7 +1,7 @@
 #include"house.hpp"
 
 House::House(SDL_Texture * asset): Building(asset) {
-    setSize(175/2,  100/2);
+    setSize(OBJECT_WIDHT, OBJECT_HEIGHT); 
     name = "house";
 }
 
