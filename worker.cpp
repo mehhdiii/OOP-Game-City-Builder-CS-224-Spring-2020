@@ -8,7 +8,7 @@ Worker::Worker(SDL_Texture * asset): Animate(asset){
 void Worker::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
     std::cout << "You have bought a worker costing 150."<<std::endl;
     main_cash = main_cash - 150; // updated the money | deduct the amount of buying a worker i.e. 150.
-	XP_level = XP_level + 20; // updated the XP_level | it adds 30 XP to buy a worker i.e. exhaustion to your character.
+	XP_level = XP_level + 10; // updated the XP_level | it adds 30 XP to buy a worker i.e. exhaustion to your character.
 }
 
 void Worker::set_work_power(int input){

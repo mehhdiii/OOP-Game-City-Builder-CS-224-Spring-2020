@@ -9,7 +9,7 @@ Scientist::Scientist(SDL_Texture * asset): Animate(asset){
 void Scientist::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
     std::cout << "You have bought a scientist costing 250."<<std::endl;
     main_cash = main_cash - 250; // updated the money | deduct the amount of buying a scientist i.e. 250.
-	XP_level = XP_level + 35; // updated the XP_level | it adds 25 XP to buy a scientist i.e. exhaustion to your character.
+	XP_level = XP_level + 30; // updated the XP_level | it adds 25 XP to buy a scientist i.e. exhaustion to your character.
 }
 
 int Scientist::getworkPower(){

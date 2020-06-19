@@ -11,12 +11,12 @@ void Building::update_scores(int & main_cash, int & XP_level){  // updates the v
 	XP_level = XP_level + 25; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 }
 
-int Building::upgrade(int balance){
-
-    int new_bal = balance-upgrade_cost;
+int Building::upgrade_building(int & main_cash){
+    main_cash = main_cash-upgrade_cost;
     upgrade_cost = upgrade_cost*2-upgrade_cost/4;
-    return new_bal;
+    return main_cash;
 }
+
 int Building::showStructureLevel(){
     return structure_level;
 }

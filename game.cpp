@@ -6,10 +6,6 @@
 using namespace std;
 #include<list>
 
-// int main_cash = 10000; // dollars
-int electricity = 250; // MegaWatts
-int XP_level = 0;
-int P_level = 1; // first level
 
 void Game::update_parameters(){
 	// Objects : 1. birds - 2. building - 3. farm - 4. house - 5. laboratory - 6. industry - 7. park - 8. vehicle 
@@ -368,128 +364,175 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 	switch (object_to_draw)
 	{
 		case 0:
+
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			Industry * newindustry = new Industry(industry_texture);
-			newindustry->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newindustry;
-			// farms.push_back(newfarm);
+				if (main_cash >= 2500){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					Industry * newindustry = new Industry(industry_texture);
+					newindustry->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newindustry;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy an industry."<<endl;
+				}
 			break;
 			}
+			
 
 	case 1:
 		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Bank * newobject = new Bank(bank_texture);
-		newobject->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newobject;
-		// farms.push_back(newfarm);
+			if (main_cash >= 1500){
+				if(temp_object!=NULL){
+					// cout << "here" <<endl;
+					delete temp_object;
+					temp_object = NULL;
+				}
+				Bank * newobject = new Bank(bank_texture);
+				newobject->setCoordinates(xMouse+100, yMouse-100);
+				temp_object = newobject;
+				// farms.push_back(newfarm);
+			}
+			else{
+				cout<< "You do not have enough cash to buy a bank."<<endl;
+			}
 		break;
 		}
 
 		case 2:
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			Laboratory * newlaboratory = new Laboratory(lab_texture);
-			newlaboratory->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newlaboratory;
-			// farms.push_back(newfarm);
+				if (main_cash>=2000){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					Laboratory * newlaboratory = new Laboratory(lab_texture);
+					newlaboratory->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newlaboratory;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy a laboratory."<<endl;
+				}
 			break;
 			}
 
 		case 3:
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			House * newhouse = new House(house_texture);
-			newhouse->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newhouse;
-			// farms.push_back(newfarm);
+				if (main_cash>=650){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					House * newhouse = new House(house_texture);
+					newhouse->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newhouse;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy a house."<<endl;
+				}
 			break;
 			}
 
 		case 4:
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			Park * newpark = new Park(park_texture);
-			newpark->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newpark;
-			// farms.push_back(newfarm);
+				if (main_cash>=600){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					Park * newpark = new Park(park_texture);
+					newpark->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newpark;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy a park."<<endl;
+				}
 			break;
 			}
 
 		case 5:
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			Farm * newfarm = new Farm(forest_texture);
-			newfarm->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newfarm;
-			// farms.push_back(newfarm);
+				if (main_cash>=550){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					Farm * newfarm = new Farm(forest_texture);
+					newfarm->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newfarm;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy a farm."<<endl;
+				}
 			break;
 			}
 
 		case 6:
 			{
-			if(temp_object!=NULL){
-				// cout << "here" <<endl;
-				delete temp_object;
-				temp_object = NULL;
-			}
-			Tree * newtree = new Tree(tree_texture);
-			newtree->setCoordinates(xMouse+100, yMouse-100);
-			temp_object = newtree;
-			// farms.push_back(newfarm);
+				if (main_cash>=500){
+					if(temp_object!=NULL){
+						// cout << "here" <<endl;
+						delete temp_object;
+						temp_object = NULL;
+					}
+					Tree * newtree = new Tree(tree_texture);
+					newtree->setCoordinates(xMouse+100, yMouse-100);
+					temp_object = newtree;
+					// farms.push_back(newfarm);
+				}
+				else{
+					cout<< "You do not have enough cash to buy a tree."<<endl;
+				}
 			break;
 			}
 
 	case 7:
 		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Vehicle * newvehicle = new Vehicle(vehicle_texture);
-		newvehicle->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newvehicle;
-		// farms.push_back(newfarm);
+			if (main_cash>=300){
+				if(temp_object!=NULL){
+					// cout << "here" <<endl;
+					delete temp_object;
+					temp_object = NULL;
+				}
+				Vehicle * newvehicle = new Vehicle(vehicle_texture);
+				newvehicle->setCoordinates(xMouse+100, yMouse-100);
+				temp_object = newvehicle;
+				// farms.push_back(newfarm);
+			}
+			else{
+				cout<< "You do not have enough cash to buy a vehicle."<<endl;
+			}
 		break;
 		}
 
 	case 8:
 		{
-		if(temp_object!=NULL){
-			// cout << "here" <<endl;
-			delete temp_object;
-			temp_object = NULL;
-		}
-		Turbine * newturbine = new Turbine(turbine_texture);
-		newturbine->setCoordinates(xMouse+100, yMouse-100);
-		temp_object = newturbine;
-		// farms.push_back(newfarm);
+			if (main_cash>=2500){
+				if(temp_object!=NULL){
+					// cout << "here" <<endl;
+					delete temp_object;
+					temp_object = NULL;
+				}
+				Turbine * newturbine = new Turbine(turbine_texture);
+				newturbine->setCoordinates(xMouse+100, yMouse-100);
+				temp_object = newturbine;
+				// farms.push_back(newfarm);
+			}
+			else{
+				cout<< "You do not have enough cash to buy a turbine."<<endl;
+			}
 		break;
 		}
 	}
@@ -783,7 +826,7 @@ void Game::run( )
 	{
 		//play the background music
 
-		currentTime = SDL_GetTicks();
+		currentTime = SDL_GetTicks()/1000; //time in seconds
 		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
 		
@@ -796,11 +839,12 @@ void Game::run( )
 		while( SDL_PollEvent( &e ) != 0 )
 		{
 			// updating scores
-			if (XP_level/150 >= 1){
-				XP_level -= 150;
+			if (XP_level/200 >= 1){
+				XP_level -= 200;
 				P_level += 1;
-				main_cash += 10000;
-				cout<<"Welcome to level "<<P_level<<" !"<<endl;
+				main_cash += 5000;
+				cout<<"Congratulations you are promoted to the next level. Level "<<P_level << " ."<<endl;
+				cout << "You also receive a cash bonus of 5000."<< endl;
 			}
 			//User requests quit
 			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
@@ -892,14 +936,16 @@ void Game::run( )
 						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
 						myfarm->setCoordinates(xMouse, yMouse);
 						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
+						myfarm->set_creation_time(currentTime);
 						farms.push_back(myfarm);
-						temp_object = NULL;
+						temp_object = NULL;	
 					}
 					//check other objects here!
 					else if (temp_object->name == "bird"){
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bird * mybird = dynamic_cast<Bird *>(temp_object);
 						mybird->setCoordinates(xMouse, yMouse);
+						mybird->set_creation_time(currentTime);
 						mybird->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bird
 						birds.push_back(mybird);
 						temp_object = NULL;
@@ -909,6 +955,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
+						mybuilding->set_creation_time(currentTime);
 						mybuilding->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for building
 						buildings.push_back(mybuilding);
 						temp_object = NULL;
@@ -918,6 +965,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bank * mybank = dynamic_cast<Bank *>(temp_object);
 						mybank->setCoordinates(xMouse, yMouse);
+						mybank->set_creation_time(currentTime);
 						mybank->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bank
 						banks.push_back(mybank);
 						temp_object = NULL;
@@ -927,6 +975,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						House * myhouse = dynamic_cast<House *>(temp_object);
 						myhouse->setCoordinates(xMouse, yMouse);
+						myhouse->set_creation_time(currentTime);
 						myhouse->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for house
 						houses.push_back(myhouse);
 						temp_object = NULL;
@@ -936,6 +985,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
 						myindustry->setCoordinates(xMouse, yMouse);
+						myindustry->set_creation_time(currentTime);
 						myindustry->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for industryt
 						industries.push_back(myindustry);
 						temp_object = NULL;
@@ -945,6 +995,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
 						mylaboratory->setCoordinates(xMouse, yMouse);
+						mylaboratory->set_creation_time(currentTime);
 						mylaboratory->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for laboratory
 						laboratories.push_back(mylaboratory);
 						temp_object = NULL;
@@ -954,6 +1005,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Park * mypark = dynamic_cast<Park *>(temp_object);
 						mypark->setCoordinates(xMouse, yMouse);
+						mypark->set_creation_time(currentTime);
 						mypark->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for park
 						parks.push_back(mypark);
 						temp_object = NULL;
@@ -966,6 +1018,7 @@ void Game::run( )
 						myscientist->setCoordinates(xMouse, yMouse);
 						myscientist->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for scientist
 						scientists.push_back(myscientist);
+						myscientist->set_creation_time(currentTime);
 						scientist_obj->increase_scientist();
 						scientist_obj->show_scientist_count();
 						temp_object = NULL;
@@ -975,6 +1028,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
 						mysolarpanel->setCoordinates(xMouse, yMouse);
+						mysolarpanel->set_creation_time(currentTime);
 						mysolarpanel->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for solarpanel
 						solarpanels.push_back(mysolarpanel);
 						temp_object = NULL;
@@ -984,6 +1038,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
+						mytree->set_creation_time(currentTime);
 						mytree->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for tree
 						trees.push_back(mytree);
 						temp_object = NULL;
@@ -993,6 +1048,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
 						myturbine->setCoordinates(xMouse, yMouse);
+						myturbine->set_creation_time(currentTime);
 						myturbine->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for turbine
 						turbines.push_back(myturbine);
 						temp_object = NULL;
@@ -1002,6 +1058,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
 						myvehicle->setCoordinates(xMouse, yMouse);
+						myvehicle->set_creation_time(currentTime);
 						myvehicle->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for vehicle
 						vehicles.push_back(myvehicle);
 						temp_object = NULL;
@@ -1011,6 +1068,7 @@ void Game::run( )
 						cout<< detect_collision( xMouse, yMouse) <<endl;
 						Worker * myworker = dynamic_cast<Worker *>(temp_object);
 						myworker->setCoordinates(xMouse, yMouse);
+						myworker->set_creation_time(currentTime); 
 						myworker->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for worker
 						workers.push_back(myworker);
 						temp_object = NULL;

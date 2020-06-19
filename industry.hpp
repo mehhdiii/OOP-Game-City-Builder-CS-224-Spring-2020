@@ -14,7 +14,7 @@ class Industry: public Building{
         int totalEnergyConsumption;
         int greenEnergyDependence;
         int fossilFeulDependence;
-        int upgrade_cost;
+        int upgrade_cost = 250;
         float creation_time;
         float progress;
         
@@ -25,7 +25,7 @@ class Industry: public Building{
 
         Industry(SDL_Texture * );
         void update_scores(int &, int &);
-        int upgrade_industry(int);
+        int upgrade_industry(int & );
         void set_industry_type(std::string,int);
         void shift_industry_focus(std::string,int);     // sochna hy 
         void set_energy_consumption(int);
@@ -33,6 +33,7 @@ class Industry: public Building{
         void set_fossilFuel_dependency(int);
         int showStructureLevel();
         void show_all_features();
-        void show_progress();
+        void get_progress();
+        int get_profit();
         void set_creation_time(int);
 };

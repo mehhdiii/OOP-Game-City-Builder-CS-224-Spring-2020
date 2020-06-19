@@ -7,9 +7,16 @@ Laboratory::Laboratory(SDL_Texture * asset): Building(asset){
 }
 
 void Laboratory::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
-    std::cout << "You have bought a laboratory costing 1200."<<std::endl;
-    main_cash = main_cash - 1200; // updated the money | deduct the amount of buying a laboratory i.e. 1200.
-	XP_level = XP_level + 30; // updated the XP_level | it adds 30 XP to buy a laboratory i.e. exhaustion to your character.
+    std::cout << "You have bought a laboratory costing 2000."<<std::endl;
+    main_cash = main_cash - 2000; // updated the money | deduct the amount of buying a laboratory i.e. 1200.
+	XP_level = XP_level + 35; // updated the XP_level | it adds 30 XP to buy a laboratory i.e. exhaustion to your character.
+}
+
+int Laboratory::upgrade_laboratory(int & main_cash){
+
+    main_cash = main_cash-upgrade_cost;
+    upgrade_cost = upgrade_cost*2-upgrade_cost/4;
+    return main_cash;
 }
 
 void Laboratory::addScientist(){
@@ -56,15 +63,15 @@ std::string Laboratory::getTechnology(){
     return currentTask;
 }
 
-int Laboratory::getProgress(){
-    return progress;
-}
+// int Laboratory::getProgress(){
+//     return progress;
+// }
 
 void Laboratory::set_creation_time(int c_t){
     creation_time = c_t/1000; //creation time in seconds
 }
 
-void Laboratory::show_progress(){
+void Laboratory::get_progress(){
     float current_time = SDL_GetTicks()/1000; // current time in seconds
     int required_time = 120; // the time required for a work to be completed | 2 minutes
     progress = ((current_time-creation_time)/required_time)*100; // percentage of progress i.e. how much time-wise work should be completed.
@@ -76,8 +83,16 @@ void Laboratory::show_progress(){
     if (progress >= 100){
         std::cout << "Your technology is ready! " << std::endl; 
         creation_time = SDL_GetTicks()/1000;    // resetting the creation time to current time in order start working on the next product.
+        // return progress;
     }
     else{
         std::cout << "Your technology is still in progress " << progress << " %." << std::endl; 
     }
+}
+
+int Laboratory::get_profit(){
+    int profit = (progress/100) * 350 ; // each product earns you 250 cash
+    progress = 0;
+    std::cout << "Profit is " << profit << std::endl;
+    return profit;
 }

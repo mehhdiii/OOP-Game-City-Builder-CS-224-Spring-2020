@@ -89,7 +89,7 @@ class Game{
     vector <SolarPanel*> solarpanels;
     vector <Vehicle*> vehicles;
     vector <Worker*> workers;
-    // vector <Scientist*> scientists;
+    vector <Scientist*> scientists;
     Scientist * scientist_obj = NULL;
 
     //menus and bars:
@@ -106,10 +106,13 @@ class Game{
     Mix_Music *background_music = NULL; //plays in the background
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
-// protected:
 
+    // scores for the top bar
     int main_cash = 10000;
-    
+    int green_energy = 0; // MegaWatts
+    int XP_level = 0;
+    int P_level = 1; // first level
+    int oxygen_level = 21; // percentage of oxygen level in the city.. upper bound is 21 and lower bound 14 or lower.    
     
 public:
 

@@ -13,9 +13,9 @@ void OptionBar::draw(SDL_Renderer * gRenderer){
 }
 
 int OptionBar::detect_selection( int x, int y){
-    std::cout << " In option bar " << std::endl;
+    // std::cout << " In option bar " << std::endl;
     y = y  - (SCREEN_HEIGHT-250);
-    std::cout << "x: "<< x << " y: "<< y << std::endl;
+    // std::cout << "x: "<< x << " y: "<< y << std::endl;
     if(x >19 && x <85 && y> 56 && y<139){   // industry
         std::cout<<"Industry" << std::endl;
         return 0;
