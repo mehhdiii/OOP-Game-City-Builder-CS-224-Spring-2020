@@ -7,8 +7,8 @@ Laboratory::Laboratory(SDL_Texture * asset): Building(asset){
 }
 
 void Laboratory::update_scores(int & main_cash, int & XP_level){  // updates the values of cash and XP_level
-    std::cout << "You have bought a laboratory costing 2000."<<std::endl;
-    main_cash = main_cash - 2000; // updated the money | deduct the amount of buying a laboratory i.e. 1200.
+    std::cout << "You have bought a laboratory costing 1900."<<std::endl;
+    main_cash = main_cash - 1900; // updated the money | deduct the amount of buying a laboratory i.e. 1200.
 	XP_level = XP_level + 35; // updated the XP_level | it adds 30 XP to buy a laboratory i.e. exhaustion to your character.
 }
 
