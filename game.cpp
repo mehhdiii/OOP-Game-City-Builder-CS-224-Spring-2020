@@ -104,76 +104,198 @@ bool Game::init()
 	return success;
 }
 
+bool Game::loadMenu(){
+	bool success = true;
+	int menu_sprite_range = 6;
+	string spritename;
+	SDL_Texture * tex = NULL;
+	//loading mainmenu
+	for(int i=1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Main_Menu_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if (tex!=NULL){
+			menu->add_sprite(tex, 0); 
+		}
+		else{
+			success = false;
+		}
+		
+	}
+	//loading map menu
+	for(int i=1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Map_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if(tex!= NULL){
+			menu->add_sprite(tex, 1); 
+		}
+		else{
+			success = false;
+		}
+		
+	}
+	menu_sprite_range = 4;
+	for(int i =1; i<=menu_sprite_range;i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Player_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 2); 
+		}
+		else{
+			cout <<"failed to load texture" <<endl;
+			success = false;
+		}
+		
+	}
+	menu_sprite_range = 2;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/credits_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 3);
+		}
+		else{
+			success= false;
+		}
+	}
+	menu_sprite_range = 4;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/settings_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 4);
+		}
+		else{
+			success= false;
+		}
+	}
+	
+	menu_sprite_range = 2;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/back_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 4);
+		}
+		else{
+			success= false;
+		}
+	}	
+	
+	return success;
+}
+
 bool Game::loadMedia()
 
 {
 	//Loading success flag
 	bool success = true;
-	
+	SDL_Texture * tex = NULL;
+
 	//loading menu
 	//creating  menu object:
 	
-	int menu_sprite_range = 6;
-	string spritename;
-	//loading mainmenu
-	for(int i=1; i<menu_sprite_range; i++){
-		spritename = "";
-		spritename = "mainmenu/Main_Menu_" + to_string(i) + ".png";
-		cout << spritename <<endl; 
-		menu.add_sprite(loadTexture(spritename), 0); 
-	}
-	//loading map menu
-	for(int i=1; i<menu_sprite_range; i++){
-		spritename = "";
-		spritename = "mainmenu/Select_Map_" + to_string(i) + ".png";
-		cout << spritename <<endl; 
-		menu.add_sprite(loadTexture(spritename), 1); 
-	}
-	menu_sprite_range = 4;
-	for(int i =1; i<menu_sprite_range;i++){
-		spritename = "";
-		spritename = "mainmenu/Select_Player_" + to_string(i) + ".png";
-		cout << spritename <<endl; 
-		menu.add_sprite(loadTexture(spritename), 2); 
-	}
-	menu.add_sprite(loadTexture("mainmenu/credits.png"), 3);
-
+	
 	//loading option bar:
-	optionBar = new OptionBar(loadTexture("bars/Shop.png"));
+	tex = loadTexture("bars/Shop.png");
+	if(tex!=NULL){
+		optionBar = new OptionBar(tex);
+	}
+	else{
+		printf("Unable to load texture");
+		success= false;
+	}
+	
 
 	//loading top bar:
-	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
+	tex = loadTexture("bars/Top_Menu.png");
+	if(tex!=NULL){
+		topbar = new Topbar(tex); //main top bar sprite
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 	//now load the statics sprites on the topbar;
 
 	// for(int i=0; i<4; i++){
-	spritename = "";
+	string spritename = "";
 	spritename = "bars/scorebar/Empty.png";
 	cout << spritename <<endl; 
-	topbar->add_static_sprite(loadTexture(spritename), -1); 
+	tex = loadTexture(spritename);
+	if(tex!=NULL){
+		topbar->add_static_sprite(tex, -1); 
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 	// }
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 0); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 0); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Gold.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 1); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 1); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Green.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 2); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 2); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Blue.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 3); 
+		tex = loadTexture(spritename);
+		if(tex != NULL){
+			topbar->add_static_sprite(tex, 3);
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		 
 	}
 
 	// topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
@@ -188,6 +310,7 @@ bool Game::loadMedia()
 
 	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
+	
 	forest_texture = loadTexture("images/Farm.png");
 	house_texture = loadTexture("images/House.png");
 	bank_texture = loadTexture("images/Bank.png");
@@ -200,10 +323,22 @@ bool Game::loadMedia()
 	turbine_texture = loadTexture("images/Turbine.png");
 	vehicle_texture = loadTexture("images/Vehicle.png");
 	worker_texture = loadTexture("images/Worker.png");
+	if(forest_texture==NULL||house_texture==NULL||bank_texture==NULL||industry_texture==NULL||lab_texture==NULL||man_texture==NULL||park_texture==NULL||scientist_texture==NULL||tree_texture==NULL||turbine_texture==NULL||vehicle_texture==NULL||worker_texture==NULL){
+		success = false;
+		printf("Unable to load texture");
+	}
+
 	scientist_texture = loadTexture("images/Scientist.png");
 
 	//create scientist object;
-	scientist_obj = new Scientist(scientist_texture);
+	if(scientist_texture!=NULL){
+		scientist_obj = new Scientist(scientist_texture);
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 
     gTexture = loadTexture("maps/map1.png");
 	map_texture = loadTexture("maps/test_map.png");
@@ -211,12 +346,16 @@ bool Game::loadMedia()
 	if(map_texture!=NULL){
 		map = new Map(map_texture);
 	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
 	
-	if(gTexture==NULL || gTexture==NULL)
-    {
-        printf("Unable to run due to error: %s\n",SDL_GetError());
-        success =false;
-    }
+	// if(gTexture==NULL || gTexture==NULL)
+    // {
+    //     printf("Unable to run due to error: %s\n",SDL_GetError());
+    //     success =false;
+    // }
 
 	//loading all music for the game:
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
@@ -715,9 +854,9 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 void Game::run_menu(){
 
 	bool click; 
-	bool menuactive = true;
+	
 	SDL_Event e;
-	while(menuactive){
+	while(menu->menuactive){
 		// if (true){
 		
 		// currentTime = SDL_GetTicks();
@@ -734,9 +873,9 @@ void Game::run_menu(){
 			// 	//Play the music
 			// 	// Mix_PlayMusic( background_music, 1 );
 			// }
-			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
-				menuactive = false;
+				menu->menuactive = false;
 				break;
 			}
 			int xMouse, yMouse;
@@ -749,14 +888,20 @@ void Game::run_menu(){
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
 				click =1;
 			}
-			cout << gRenderer <<endl;
-			menu.refresh(gRenderer, xMouse, yMouse, click);
+			// cout << gRenderer <<endl;
+			menu->refresh(gRenderer, xMouse, yMouse, click);
 			
 			SDL_RenderPresent(gRenderer);
 			click =0;
 
 		}
 	}
+}
+void Game::close_menu(){
+	
+	
+	delete menu;
+
 }
 
 void Game::run( )
@@ -779,7 +924,7 @@ void Game::run( )
 
 	//Event handler
 	SDL_Event e;
-	//main menu running
+
 	
 
 	cout << "quit " <<quit <<endl;

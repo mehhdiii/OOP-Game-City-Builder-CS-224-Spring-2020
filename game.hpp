@@ -95,7 +95,7 @@ class Game{
 
     //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
-    Menu menu; //menu objects
+    Menu * menu = new Menu(); //menu objects
     Topbar * topbar = NULL; 
     Map * map = NULL;
     // Fountain obj = Fountain(assets);
@@ -116,8 +116,10 @@ public:
 
     void update_parameters();
     bool init();
+    bool loadMenu();
     bool loadMedia();
     void run_menu();
+    void close_menu();
     void run();
     void close();
     SDL_Texture* loadTexture( std::string path );
