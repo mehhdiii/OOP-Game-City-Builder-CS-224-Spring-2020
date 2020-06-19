@@ -29,6 +29,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
     switch (current_screen)
     {
         case 0:
+        {
         if(xMouse > 545 && xMouse < 810 && yMouse > 315 && yMouse <380){ //first
             SDL_RenderCopy(gRenderer, (menu_sprites[0])[1], NULL, NULL);//Draws background to renderer
         }
@@ -49,11 +50,28 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
         }
         
         break;
-    
+        }
         case 1:
-        SDL_RenderCopy(gRenderer, (menu_sprites[1])[0], NULL, NULL);
+        {
+        if(xMouse>77 && xMouse <77+map_selection_box_width && yMouse >301 && yMouse <301+map_selection_box_height){
+            SDL_RenderCopy(gRenderer, (menu_sprites[1])[1], NULL, NULL);
+        }
+        else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >301 && yMouse <301+map_selection_box_height){
+            SDL_RenderCopy(gRenderer, (menu_sprites[1])[2], NULL, NULL);
+        }
+        else if(xMouse>704 && xMouse <704+map_selection_box_width && yMouse >301 && yMouse <301+map_selection_box_height){
+            SDL_RenderCopy(gRenderer, (menu_sprites[1])[3], NULL, NULL);
+        }
+        else if(xMouse>1018 && xMouse <1018+map_selection_box_width && yMouse >301 && yMouse <301+map_selection_box_height){
+            SDL_RenderCopy(gRenderer, (menu_sprites[1])[4], NULL, NULL);
+        }
+        else{
+            SDL_RenderCopy(gRenderer, (menu_sprites[1])[0], NULL, NULL);
+        }
+        
 
         break;
+        }
     }
     
 

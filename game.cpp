@@ -129,6 +129,14 @@ bool Game::loadMedia()
 		cout << spritename <<endl; 
 		menu.add_sprite(loadTexture(spritename), 1); 
 	}
+	menu_sprite_range = 4;
+	for(int i =1; i<menu_sprite_range;i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Player_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		menu.add_sprite(loadTexture(spritename), 2); 
+	}
+	menu.add_sprite(loadTexture("mainmenu/credits.png"), 3);
 
 	//loading option bar:
 	optionBar = new OptionBar(loadTexture("bars/Shop.png"));
@@ -302,7 +310,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
 
 
-		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer		
+			
 
 		map->draw(gRenderer);
 		// SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
@@ -703,13 +711,61 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 
 }
 
+
+void Game::run_menu(){
+
+	bool click; 
+	bool menuactive = true;
+	SDL_Event e;
+	while(menuactive){
+		// if (true){
+		
+		// currentTime = SDL_GetTicks();
+		// cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
+
+
+
+	
+
+		//check for keyboard event
+		while( SDL_PollEvent( &e ) != 0 ){
+			// if( Mix_PlayingMusic() == 0 )
+			// {
+			// 	//Play the music
+			// 	// Mix_PlayMusic( background_music, 1 );
+			// }
+			if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				menuactive = false;
+				break;
+			}
+			int xMouse, yMouse;
+			SDL_GetMouseState(&xMouse,&yMouse);
+			cout << "xMouse: " << xMouse <<endl;
+			cout << "yMouse: " << yMouse <<endl;
+
+			SDL_RenderClear(gRenderer); //removes everything from renderer
+			
+			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
+				click =1;
+			}
+			cout << gRenderer <<endl;
+			menu.refresh(gRenderer, xMouse, yMouse, click);
+			
+			SDL_RenderPresent(gRenderer);
+			click =0;
+
+		}
+	}
+}
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );
 	//Main loop flag
 	bool quit = false;
 	bool pause = false;
-	bool menuactive = true;
+	
 
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;
@@ -724,47 +780,9 @@ void Game::run( )
 	//Event handler
 	SDL_Event e;
 	//main menu running
-	// int xMouse, yMouse;
-	bool click; 
-	// while(menuactive){
-	// 	// if (true){
-			
-	// 	currentTime = SDL_GetTicks();
-	// 	cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
-
-
-
 	
 
-	// 	//check for keyboard event
-	// 	while( SDL_PollEvent( &e ) != 0 ){
-	// 		if( Mix_PlayingMusic() == 0 )
-	// 		{
-	// 			//Play the music
-	// 			Mix_PlayMusic( background_music, 1 );
-	// 		}
-	// 		if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
-	// 		{
-	// 			menuactive = false;
-	// 			break;
-	// 		}
-			
-	// 		SDL_GetMouseState(&xMouse,&yMouse);
-	// 		// cout << "xMouse: " << xMouse <<endl;
-	// 		// cout << "yMouse: " << yMouse <<endl;
-
-	// 		SDL_RenderClear(gRenderer); //removes everything from renderer
-			
-	// 		if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
-	// 			click =1;
-	// 		}
-	// 		menu.refresh(gRenderer, xMouse, yMouse, click);
-	// 		SDL_RenderPresent(gRenderer);
-	// 		click =0;
-
-	// 	}
-	// }
-
+	cout << "quit " <<quit <<endl;
 	//While application is running
 	while( !quit )
 	{
@@ -828,7 +846,7 @@ void Game::run( )
 						}
 					break;
 				case SDLK_UP:
-						cout << "upper pressed" <<endl;
+						// cout << "upper pressed" <<endl;
 						if(map->scrolling_flag(0,0,1,0)){
 							scroll_objects(0, 0, 0, 1);
 							map->scroll(0,0,1,0);
@@ -875,7 +893,7 @@ void Game::run( )
 					// industry and lab chezein bnaein unsy paisay mileingy
 					// industry product ki progress front end py show krni h
 					if (temp_object->name == "farm"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
 						myfarm->setCoordinates(xMouse, yMouse);
 						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
@@ -884,7 +902,7 @@ void Game::run( )
 					}
 					//check other objects here!
 					else if (temp_object->name == "bird"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bird * mybird = dynamic_cast<Bird *>(temp_object);
 						mybird->setCoordinates(xMouse, yMouse);
 						mybird->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bird
@@ -893,7 +911,7 @@ void Game::run( )
 					}
 					
 					else if (temp_object->name == "building"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
 						mybuilding->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for building
@@ -902,7 +920,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "bank"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bank * mybank = dynamic_cast<Bank *>(temp_object);
 						mybank->setCoordinates(xMouse, yMouse);
 						mybank->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bank
@@ -911,7 +929,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "house"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						House * myhouse = dynamic_cast<House *>(temp_object);
 						myhouse->setCoordinates(xMouse, yMouse);
 						myhouse->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for house
@@ -920,7 +938,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "industry"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
 						myindustry->setCoordinates(xMouse, yMouse);
 						myindustry->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for industryt
@@ -929,7 +947,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "laboratory"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
 						mylaboratory->setCoordinates(xMouse, yMouse);
 						mylaboratory->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for laboratory
@@ -938,7 +956,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "park"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Park * mypark = dynamic_cast<Park *>(temp_object);
 						mypark->setCoordinates(xMouse, yMouse);
 						mypark->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for park
@@ -947,7 +965,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "scientist"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 
 						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
 						myscientist->setCoordinates(xMouse, yMouse);
@@ -959,7 +977,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "solarpanel"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
 						mysolarpanel->setCoordinates(xMouse, yMouse);
 						mysolarpanel->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for solarpanel
@@ -968,7 +986,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "tree"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
 						mytree->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for tree
@@ -977,7 +995,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "turbine"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
 						myturbine->setCoordinates(xMouse, yMouse);
 						myturbine->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for turbine
@@ -986,7 +1004,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "vehicle"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
 						myvehicle->setCoordinates(xMouse, yMouse);
 						myvehicle->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for vehicle
@@ -995,7 +1013,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "worker"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Worker * myworker = dynamic_cast<Worker *>(temp_object);
 						myworker->setCoordinates(xMouse, yMouse);
 						myworker->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for worker
@@ -1041,9 +1059,9 @@ void Game::run( )
 		SDL_Delay(120);	//causes sdl engine to delay for specified miliseconds
 
 	}
-	cout<< "Total number of laboratories in the city : "<< laboratories.size()<<endl;
-	cout<<"END"<<endl;
-	cout<<"Main Cash : "<<main_cash<<endl;
-	cout<<"XP_level : "<<XP_level<<endl;
-	cout<<"Player level : "<<P_level<<endl;
+	// cout<< "Total number of laboratories in the city : "<< laboratories.size()<<endl;
+	// cout<<"END"<<endl;
+	// cout<<"Main Cash : "<<main_cash<<endl;
+	// cout<<"XP_level : "<<XP_level<<endl;
+	// cout<<"Player level : "<<P_level<<endl;
 }

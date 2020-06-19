@@ -117,10 +117,14 @@ public:
     void update_parameters();
     bool init();
     bool loadMedia();
+    void run_menu();
     void run();
     void close();
     SDL_Texture* loadTexture( std::string path );
-    
+    //draw menu:
+    void draw_menu(SDL_Renderer*);
+
+
     
     // void main_menu(list <SDL_Texture *>);
     void range_OptionBar(int xMouse, int yMouse);

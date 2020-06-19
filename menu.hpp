@@ -8,6 +8,8 @@
 class Menu{     
     
     private:
+    const int map_selection_box_width = 356-77;
+    const int map_selection_box_height = 646 - 301;
 
     std::vector <std::vector <SDL_Texture*>> menu_sprites;
     std::vector <std::vector <std::vector < int >>> coordinates_screen;
