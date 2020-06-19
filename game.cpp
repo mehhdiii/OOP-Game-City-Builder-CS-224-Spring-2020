@@ -354,8 +354,8 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		if (optionBar->enabled){
 			optionBar->draw(gRenderer);
 		}
-		topbar->draw(gRenderer);
-		
+		// topbar->draw(gRenderer);
+		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level);
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
 		SDL_RenderPresent(gRenderer); //displays the updated renderer

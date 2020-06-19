@@ -16,10 +16,10 @@ Topbar::Topbar(SDL_Texture * asset): Unit(asset){
 
 void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     // stats_sprite = sprite_texture;
-    //pink == 0;
-    //gold ==1;
-    //green==2;
-    //blue==4;
+    //pink == 0;    // xp_level
+    //gold ==1;     // cash
+    //green==2;     // green energy
+    //blue==4;      // oxygen level
     if(sprite_color == -1){
         for(int i=0; i<4; i++){
             stats_sprite[i].push_back(sprite_texture);
@@ -32,18 +32,127 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
 }
 
 
-void Topbar::draw(SDL_Renderer * gRenderer){
-    
+void Topbar::draw(SDL_Renderer * gRenderer){ //, int & main_cash, int & XP_level
+    int top_cash = 30000;
+    int top_xp_level = 800; 
+    int main_cash = 10000;
+    int cash_percent = ( main_cash / top_cash ) * 100;
     SDL_RenderCopy(gRenderer, assets, NULL,  &mover);
 
-    SDL_RenderCopy(gRenderer, stats_sprite[0][2], NULL, &cash_mover);
+    if (cash_percent >= 0 && cash_percent < 20){
+        SDL_RenderCopy(gRenderer, stats_sprite[0][0], NULL, &cash_mover);
+    }
+    else if (cash_percent >= 20 && cash_percent < 40){
+        SDL_RenderCopy(gRenderer, stats_sprite[0][1], NULL, &cash_mover);
+    }
+    else if (cash_percent >= 40 && cash_percent < 60){
+        SDL_RenderCopy(gRenderer, stats_sprite[0][2], NULL, &cash_mover);
+    }
+    else if (cash_percent >= 60 && cash_percent < 80){
+        SDL_RenderCopy(gRenderer, stats_sprite[0][3], NULL, &cash_mover);
+    }
+    else if (cash_percent >= 80 && cash_percent < 100){
+        SDL_RenderCopy(gRenderer, stats_sprite[0][4], NULL, &cash_mover);
+    }
 
-    SDL_RenderCopy(gRenderer, stats_sprite[1][1], NULL, &greenenergy_mover);
+    SDL_RenderCopy(gRenderer, stats_sprite[1][4], NULL, &greenenergy_mover);
 
     SDL_RenderCopy(gRenderer, stats_sprite[2][2], NULL, &xplevel_mover);
 
     SDL_RenderCopy(gRenderer, stats_sprite[3][3], NULL, &oxygenlevel_mover);
 }
+
+void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_level, int & P_level){
+    float top_cash = 10000.0;
+    float top_xp_level = 250.0;
+    float top_p_level = 4.0;
+    float cash_percent = ( main_cash / top_cash ) * 100;
+    float xp_percent = ( XP_level / top_xp_level ) * 100;
+    float p_percent = (P_level / top_p_level) * 100;
+
+    std::cout << "main cash : " << main_cash << std::endl;
+    std::cout << "cash percent : " << cash_percent << std::endl;
+    std::cout << " XP level  : " << XP_level << std::endl;
+    std::cout << "xp percent : " << xp_percent << std::endl;
+    std::cout << " P level  : " << P_level << std::endl;
+    std::cout << "p percent : " << p_percent << std::endl;
+
+    SDL_RenderCopy(gRenderer, assets, NULL,  &mover);
+
+    // SDL_RenderCopy(gRenderer, stats_sprite[0][3], NULL, &greenenergy_mover); // xp_level
+    // xp level - pink
+    if (xp_percent >= 0.0 && xp_percent < 20.0){
+        std::cout << " pink 0 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[0][0], NULL, &cash_mover);
+    }
+    else if (xp_percent >= 20.0 && xp_percent < 40.0){
+        std::cout << " pink 0.25 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[0][1], NULL, &cash_mover);
+    }
+    else if (xp_percent >= 40.0 && xp_percent < 60.0){
+        std::cout << " pink 0.5 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[0][2], NULL, &cash_mover);
+    }
+    else if (xp_percent >= 60.0 && xp_percent < 80.0){
+        std::cout << " pink 0.75 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[0][3], NULL, &cash_mover);
+    }
+    else if (xp_percent >= 80.0 && xp_percent <= 100.0){
+        std::cout << " pink 1 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[0][4], NULL, &cash_mover);
+    }
+
+    //gold - cash
+    if (cash_percent >= 0.0 && cash_percent < 20.0){
+        std::cout << " gold 0 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[1][0], NULL, &greenenergy_mover);
+    }
+    else if (cash_percent >= 20.0 && cash_percent < 40.0){
+        std::cout << " gold 0.25 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[1][1], NULL, &greenenergy_mover);
+    }
+    else if (cash_percent >= 40.0 && cash_percent < 60.0){
+        std::cout << " gold 0.5 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[1][2], NULL, &greenenergy_mover);
+    }
+    else if (cash_percent >= 60.0 && cash_percent < 80.0){
+        std::cout << " gold 0.75 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[1][3], NULL, &greenenergy_mover);
+    }
+    else if (cash_percent >= 80.0 && cash_percent <= 100.0){
+        std::cout << " gold 1 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[1][4], NULL, &greenenergy_mover);
+    }
+
+    // SDL_RenderCopy(gRenderer, stats_sprite[0][1], NULL, &cash_mover);  // xp level
+
+    // SDL_RenderCopy(gRenderer, stats_sprite[1][2], NULL, &greenenergy_mover); // cash 
+
+    SDL_RenderCopy(gRenderer, stats_sprite[2][3], NULL, &xplevel_mover);//greenenergy
+
+    //blue - player level
+    if (p_percent >= 0.0 && p_percent < 20.0){
+        std::cout << " gold 0 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[3][0], NULL, &oxygenlevel_mover); //oxygen level
+    }
+    else if (p_percent >= 20.0 && p_percent < 40.0){
+        std::cout << " gold 0.25 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[3][1], NULL, &oxygenlevel_mover); //oxygen level
+    }
+    else if (p_percent >= 40.0 && p_percent < 60.0){
+        std::cout << " gold 0.5 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[3][2], NULL, &oxygenlevel_mover); //oxygen level
+    }
+    else if (p_percent >= 60.0 && p_percent < 80.0){
+        std::cout << " gold 0.75 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[3][3], NULL, &oxygenlevel_mover); //oxygen level
+    }
+    else if (p_percent >= 80.0 && p_percent <= 100.0){
+        std::cout << " gold 1 " << std::endl;
+        SDL_RenderCopy(gRenderer, stats_sprite[3][4], NULL, &oxygenlevel_mover); //oxygen level
+    }
+}
+
 void Topbar::setRect(){
     int width = 103;
     int height = 32;
