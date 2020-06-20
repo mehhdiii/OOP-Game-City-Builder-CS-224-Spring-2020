@@ -493,6 +493,9 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
 		}
+		for(auto i = turbines.begin(); i<turbines.end(); i++){
+			(*i)->draw(gRenderer);
+		}
 		if (temp_object!=NULL){
 			temp_object->draw(gRenderer);
 		}
@@ -889,6 +892,34 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
+	for(auto i = banks.begin(); i!=banks.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
+	for(auto i = turbines.begin(); i!=turbines.end(); i++){
+		if (xL){
+			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+		}
+		else if (xR){
+			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+		}
+		else if (yU){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+		}
+		else if (yD){
+			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+		}
+	}
 
 
 }
@@ -1226,6 +1257,15 @@ void Game::run( )
 						myworker->set_creation_time(currentTime); 
 						myworker->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for worker
 						workers.push_back(myworker);
+						temp_object = NULL;
+					}
+					else if (temp_object->name == "turbine"){
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
+						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
+						myturbine->setCoordinates(xMouse, yMouse);
+						myturbine->set_creation_time(currentTime); 
+						myturbine->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for worker
+						turbines.push_back(myturbine);
 						temp_object = NULL;
 					}
 				}
