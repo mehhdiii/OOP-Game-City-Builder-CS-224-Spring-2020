@@ -1,4 +1,5 @@
 #pragma once
+#include<cmath>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
@@ -11,6 +12,7 @@
 #include <list>
 #include<vector>
 #include<tuple>
+#include<algorithm>
 // #include<ctime>
 #include"menu.hpp"
 #include"bird.hpp"
@@ -77,7 +79,7 @@ class Game{
     vector <Bird*> birds;
     vector <Building*> buildings;
     vector <Bank*> banks;
-    // vector <Unit *> allobjects;
+    vector <Unit *> all_objects;
     Unit * temp_object = NULL; //object that are not yet been fixed on the screen
     // vector <Unit*> allobjects;
     vector <Farm*> farms;
@@ -115,6 +117,22 @@ class Game{
     int P_level = 1; // first level
     int oxygen_level = 21; // percentage of oxygen level in the city.. upper bound is 21 and lower bound 14 or lower.    
     
+    template<typename T>
+    struct sortbyC{
+		 bool operator() (const T &L,const T &R) const
+            { 
+             return (L->gety() < R->gety()); 
+            }
+	};
+    template<typename Mytype>
+    void Coordinate_sorting(vector<Mytype>&);
+    
+    
+    // struct sortbyYcoordinate
+    // {
+    //     bool operator() const (MyClass const & L, MyClass const & R) { return L.x < R.x; }
+    // };
+    
 public:
 
     void update_parameters();
@@ -150,38 +168,8 @@ public:
 
     
     template<typename mytype> //template to store a generic type of object vector for passing into the function
-    bool helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
-    {
-	int sp_of_temp_obj_x = temp_object->getx();
-	int sp_of_temp_obj_y = temp_object->gety();
-	int ep_of_temp_obj_x = x+temp_object->getw();
-	int ep_of_temp_obj_y = y + temp_object->geth();
-
-	//static object
-	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
-	
-	bool yChecksp = 0;
-	bool yCheckep = 0;
-	bool xChecksp = 0;
-	bool xCheckep = 0;
-	for(auto i = obj.begin(); i!= obj.end(); i++){
-		sp_of_static_obj_x = (*i)->getx();
-		sp_of_static_obj_y = (*i)->gety();
-		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
-		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
-
-		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
-		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
-		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
-		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
- 
-		if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
-			
-			break;
-		}
-	}
-	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
-}
+    bool helper_detect_collision(int x, int y, vector<mytype*> obj); //helper function for detect collision using template
+    
  
  
  
