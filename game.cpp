@@ -462,10 +462,11 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		// 	// cout << "this caused" <<endl;
 		// 	(*i)->draw(gRenderer);
 		// }
-		// for( auto i = industries.begin(); i<industries.end(); i++){
-		// 	// cout << "this caused" <<endl;
-		// 	(*i)->draw(gRenderer);
-		// }
+		for( auto i = industries.begin(); i<industries.end(); i++){
+			// cout << "this caused" <<endl;
+			// (*i)->draw(gRenderer);
+			green_energy += (*i)->get_green_energy();
+		}
 		// for( auto i = parks.begin(); i<parks.end(); i++){
 		// 	// cout << "this caused" <<endl;
 		// 	(*i)->draw(gRenderer);
