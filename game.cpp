@@ -24,16 +24,16 @@ void Game::update_parameters(){
   		/* generate secret number between 1 and 10: */
   		input_from_user = rand() % 10 + 1;
 
-		cout<< "User has given input "<<input_from_user<<endl;
+		// cout<< "User has given input "<<input_from_user<<endl;
 		if (XP_level/200 >= 1){
 			XP_level -= 200;
 			P_level += 1;
 			main_cash += 10000;
-			cout<<"Welcome to level "<<P_level<<" !"<<endl;
+			// cout<<"Welcome to level "<<P_level<<" !"<<endl;
 		}
-		cout<<"Main Cash : "<<main_cash<<endl;
-		cout<<"XP_level : "<<XP_level<<endl;
-		cout<<"Player level : "<<P_level<<endl;
+		// cout<<"Main Cash : "<<main_cash<<endl;
+		// cout<<"XP_level : "<<XP_level<<endl;
+		// cout<<"Player level : "<<P_level<<endl;
 	}
 
 }
@@ -701,7 +701,7 @@ void Game::hover_object_with_cursor(){
 	if(temp_object!=NULL){
 		int xMouse, yMouse; 
 		SDL_GetMouseState(&xMouse, &yMouse);
-		temp_object->setCoordinates(xMouse, yMouse);
+		temp_object->setCoordinates(xMouse - (temp_object->getw())/2, yMouse - (temp_object->geth())/2); //centralizing the hovering operation as unit does not include the overridden centralizing setCoordinate function of inAnimate
 	}
 }
 
@@ -736,6 +736,53 @@ void Game::hover_object_with_cursor(){
 // 	}
 // 	return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
 // }
+template<typename mytype> //template to store a generic type of object vector for passing into the function
+bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
+    {
+	
+	int sp_of_temp_obj_x = temp_object->getx();
+	int sp_of_temp_obj_y = temp_object->gety();
+	int ep_of_temp_obj_x = x+temp_object->getw();
+	int ep_of_temp_obj_y = y + temp_object->geth();
+    int min_distance_for_collision;
+	//static object
+	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
+	
+	bool yChecksp = 0;
+	bool yCheckep = 0;
+	bool xChecksp = 0;
+	bool xCheckep = 0;
+    
+	for(auto i = obj.begin(); i!= obj.end(); i++){
+        // min_distance_for_collision = sqrt(pow( (temp_object->getw() ), 2 ) + pow((temp_object->geth()), 2))/2 + sqrt(pow( ((*i)->getw() ), 2 ) + pow(((*i)->geth()), 2))/2;
+		min_distance_for_collision = temp_object->getw()/4 + (*i)->getw()/4;
+		sp_of_static_obj_x = (*i)->getx();
+		sp_of_static_obj_y = (*i)->gety();
+		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
+		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
+
+		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
+		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
+		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
+		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
+
+		// if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
+			
+		// 	break;
+		// }
+        int distance = sqrt(pow((sp_of_static_obj_x +temp_object->getw()/2 - ((sp_of_temp_obj_x)+ (*i)->getw()/2)),2) + pow((sp_of_static_obj_y+temp_object->geth()/2  - (sp_of_temp_obj_y +(*i)->geth()/2)), 2));
+        //new test logic of distance formula
+        //checking the distance:
+        if (distance < min_distance_for_collision){
+            return 1;
+        }
+
+        
+
+    }
+	// return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
+	return 0; 
+}
 
 
 bool Game::detect_collision(int x, int y){
@@ -765,159 +812,159 @@ bool Game::detect_collision(int x, int y){
 void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 	for(auto i = farms.begin(); i!=farms.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 
 	for(auto i = houses.begin(); i!=houses.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 	for(auto i = laboratories.begin(); i!=laboratories.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 	for(auto i = industries.begin(); i!=industries.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 	for(auto i = parks.begin(); i!=parks.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 	for(auto i = trees.begin(); i!=trees.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 
 	for(auto i = solarpanels.begin(); i!=solarpanels.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 
 	for(auto i = vehicles.begin(); i!=vehicles.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
-	for(auto i = workers.begin(); i!=workers.end(); i++){
-		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
-		}
-		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
-		}
-		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
-		}
-		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
-		}
-	}
+	// for(auto i = workers.begin(); i!=workers.end(); i++){
+	// 	if (xL){
+	// 		(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+	// 	}
+	// 	else if (xR){
+	// 		(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+	// 	}
+	// 	else if (yU){
+	// 		(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+	// 	}
+	// 	else if (yD){
+	// 		(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+	// 	}
+	// }
 	for(auto i = banks.begin(); i!=banks.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 	for(auto i = turbines.begin(); i!=turbines.end(); i++){
 		if (xL){
-			(*i)->setCoordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()-SCROLL_SPEED, (*i)->gety());
 		}
 		else if (xR){
-			(*i)->setCoordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
+			(*i)->refresh_coordinates((*i)->getx()+SCROLL_SPEED, (*i)->gety());
 		}
 		else if (yU){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() -SCROLL_SPEED);
 		}
 		else if (yD){
-			(*i)->setCoordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
+			(*i)->refresh_coordinates((*i)->getx(), (*i)->gety() +SCROLL_SPEED);
 		}
 	}
 
@@ -954,8 +1001,8 @@ void Game::run_menu(){
 			}
 			int xMouse, yMouse;
 			SDL_GetMouseState(&xMouse,&yMouse);
-			cout << "xMouse: " << xMouse <<endl;
-			cout << "yMouse: " << yMouse <<endl;
+			// cout << "xMouse: " << xMouse <<endl;
+			// cout << "yMouse: " << yMouse <<endl;
 
 			SDL_RenderClear(gRenderer); //removes everything from renderer
 			

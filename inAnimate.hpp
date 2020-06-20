@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "unit.hpp"
-
+#include<iostream>
 #pragma once
 
 class InAnimate: public Unit{
@@ -17,4 +17,7 @@ class InAnimate: public Unit{
         
         InAnimate(SDL_Texture *);
         void draw(SDL_Renderer *);
+        void setCoordinates(int, int); //overriding the default setCoordinates to centralize the object coordinates
+        void refresh_coordinates(int, int); //refreshes the position of the static object
+
 };
