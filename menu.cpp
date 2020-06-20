@@ -113,14 +113,31 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
             
         }
         case 4:{
-            
-            SDL_RenderCopy(gRenderer, (menu_sprites[4])[0], NULL, NULL);
+            //checking for muted sprites
+            if(bg_muted || sfx_muted){
+                if(bg_muted && sfx_muted){
+                    SDL_RenderCopy(gRenderer, (menu_sprites[4])[3], NULL, NULL);
+                }
+                else if (bg_muted){
+                    SDL_RenderCopy(gRenderer, (menu_sprites[4])[1], NULL, NULL);
+                }
+                else if (sfx_muted){
+                    SDL_RenderCopy(gRenderer, (menu_sprites[4])[2], NULL, NULL);
+                }      
+            }
+            else{
+                SDL_RenderCopy(gRenderer, (menu_sprites[4])[0], NULL, NULL);
+            }
+
+            //rendering the back button
             if(xMouse >1192 && yMouse >638){
                 SDL_RenderCopy(gRenderer, (menu_sprites[4])[5], NULL, &back_button_mover );
             }
             else{
                 SDL_RenderCopy(gRenderer, (menu_sprites[4])[4], NULL, &back_button_mover );
             }
+            break;
+
             
         }
         
@@ -182,10 +199,27 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
                 }
                 break;
             }
-            case 4:{
+            case 4:{//settings
                 if(xMouse >1192 && yMouse >638){
                     current_screen = 0;
                 }
+                else if (xMouse > 562 && yMouse > 323 && xMouse < 562 + mute_selection_box_w && yMouse < 323+mute_selection_box_h ){
+                    if(bg_muted){
+                        bg_muted = 0;
+                    }
+                    else{
+                        bg_muted = 1;
+                    }
+                }
+                else if(xMouse > 562 && yMouse > 420 && xMouse < 562 + mute_selection_box_w && yMouse < 420+mute_selection_box_h ){
+                    if(sfx_muted){
+                        sfx_muted = 0;
+                    }
+                    else{
+                        sfx_muted = 1;
+                    }
+                }
+                break;   
             }
 
         }

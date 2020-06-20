@@ -44,7 +44,7 @@ class Game{
     const int OPTIONBAR_CLOSE_BUTTON_WIDTH = 20;
     const int OPTIONBAR_CLOSE_HEIGHT = 20;
     const int SCROLL_SPEED = 50;
-
+    
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
 
@@ -120,6 +120,7 @@ public:
     bool loadMedia();
     void run_menu();
     void close_menu();
+    bool exit_from_menu();
     void run();
     void close();
     SDL_Texture* loadTexture( std::string path );

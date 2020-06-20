@@ -904,6 +904,11 @@ void Game::close_menu(){
 
 }
 
+bool Game::exit_from_menu(){
+	cout << "exit pressed: " << menu->quit_game() <<endl;
+	return menu->quit_game();
+}
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );

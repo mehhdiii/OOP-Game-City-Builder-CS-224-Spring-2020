@@ -41,15 +41,16 @@ int main(int argc, char *argv[]){
     }
     game.run_menu(); //run the menu of the game!
     
-    game.close_menu();
+    // game.close_menu();
     
-    // Load media
-    if( !game.loadMedia() ){ //load all media
-        printf( "Failed to load media!\n" );
-        return 0;
+    if(!game.exit_from_menu()){ //check if user pressed exit from menu!
+        // Load media
+        if( !game.loadMedia() ){ //load all media
+            printf( "Failed to load media!\n" );
+            return 0;
+        }
+        game.run(); //run the main game loop
     }
-    game.run(); //run the main game loop
-    cout << "here" <<endl;
     
     game.close(); //destroy all sdl objects and close game
 
