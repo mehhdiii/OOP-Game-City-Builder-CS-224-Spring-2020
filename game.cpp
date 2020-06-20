@@ -431,16 +431,18 @@ void Game::Coordinate_sorting(vector<Mytype> &vec){
 void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
 
-
+		green_energy = 0;
 			
 
 		map->draw(gRenderer);
 		// SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
 		
 	
+
 		//sort all objects wrt their y coordines using the template coordinatesorting
 		Coordinate_sorting(all_objects);
 		for(auto i = all_objects.begin(); i!=all_objects.end(); i++){
+
 			(*i)->draw(gRenderer);
 		}
 
@@ -496,7 +498,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			optionBar->draw(gRenderer);
 		}
 		// topbar->draw(gRenderer);
-		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level);
+		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level, green_energy);
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
 		SDL_RenderPresent(gRenderer); //displays the updated renderer

@@ -12,11 +12,19 @@ void Industry::update_scores(int & main_cash, int & XP_level){  // updates the v
     XP_level = XP_level + 25; // updated the XP_level | it adds 25 XP to buy a industry i.e. exhaustion to your character.
 }
 
-int Industry::upgrade_industry(int & main_cash){
+void Industry::upgrade_industry(int & main_cash, int & XP_level){ 
+    if (upgrade_count <= 5){
+        upgrade_count +=1;
+        main_cash = main_cash-upgrade_cost;
+        upgrade_cost = upgrade_cost*2-upgrade_cost/4;
+        XP_level += 5 + upgrade_count;
+        subjective_green_energy += 2*upgrade_count;
+        product_selling_profit += 20*upgrade_count;
+    }
+}
 
-    main_cash = main_cash-upgrade_cost;
-    upgrade_cost = upgrade_cost*2-upgrade_cost/4;
-    return main_cash;
+int Industry::get_green_energy(){
+    return subjective_green_energy;
 }
 
 void Industry::set_industry_type(std::string assignment_type, int balance){
@@ -58,30 +66,26 @@ void Industry::show_all_features(){
     std::cout << "Fossil Fuel Dependency : " << fossilFeulDependence << std::endl;
 }
 
-void Industry::get_progress(){
+float Industry::collect_rewards(){
     float current_time = SDL_GetTicks()/1000; // current time in seconds
     int required_time = 300; // the time required for a work to be completed | 5 minutes 
     progress = ((current_time-creation_time)/required_time)*100; // percentage of progress i.e. how much time-wise work should be completed.
-    // std::cout << "Progress " << progress << std::endl;
+    // std::cout << "Progress " << progress << std::endl;//131 .. 1.31 * 250
     // std::cout << "Creation time " << creation_time << " seconds" << std::endl;
     // std::cout << "Current time " << current_time << " seconds" << std::endl;
     // std::cout << " current_time - creation_time " << current_time - creation_time << std::endl;
     // std::cout << "Required time " << required_time << " seconds" << std::endl;    
     if (progress >= 100){
+        float profit = (progress/100) * product_selling_profit;
         std::cout << "Your product is ready! " << std::endl; 
         creation_time = SDL_GetTicks()/1000;    // resetting the creation time to current time in order start working on the next product.
-        // return progress;    
+        progress = 0;
+        return profit;    
     }
     else{
         std::cout << "Your product is still in progress " << progress << " %." << std::endl; 
+        return -1.0;
     }
-}
-
-int Industry::get_profit(){
-    int profit = (progress/100) * 250 ; // each product earns you 250 cash
-    progress = 0;
-    std::cout << "Profit is " << profit << std::endl;
-    return profit;
 }
 
 void Industry::set_creation_time(int c_t){

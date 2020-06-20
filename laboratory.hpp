@@ -16,6 +16,8 @@ class Laboratory: public Building{
         int labNo;                  // to number the labs created
         float creation_time;
         int upgrade_cost = 300;
+        int upgrade_count = 0;
+        int technology_selling_profit = 150;
         
         std::string labType;        // states the type of the lab.. energy research, bio-research, tech-update etc
         std::vector <std::string> tech_list; //different technologies, all locked initially. the user has to spend money to unlock working on respective tech.
@@ -25,13 +27,10 @@ class Laboratory: public Building{
 
         Laboratory(SDL_Texture * );
         void update_scores(int &, int &);
-        int upgrade_laboratory(int & );
+        void upgrade_laboratory(int & , int & , int &);
         void addScientist();
         void assignWork(std::string, int);
         std::string getTechnology();
-        // int getProgress();
         void set_creation_time(int);
-        // void show_progress();
-        void get_progress();
-        int get_profit();
+        float collect_rewards();
 };
