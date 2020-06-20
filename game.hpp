@@ -12,6 +12,7 @@
 #include <list>
 #include<vector>
 #include<tuple>
+#include<algorithm>
 // #include<ctime>
 #include"menu.hpp"
 #include"bird.hpp"
@@ -78,7 +79,7 @@ class Game{
     vector <Bird*> birds;
     vector <Building*> buildings;
     vector <Bank*> banks;
-    // vector <Unit *> allobjects;
+    vector <Unit *> all_objects;
     Unit * temp_object = NULL; //object that are not yet been fixed on the screen
     // vector <Unit*> allobjects;
     vector <Farm*> farms;
@@ -115,6 +116,21 @@ class Game{
     int XP_level = 0;
     int P_level = 1; // first level
     int oxygen_level = 21; // percentage of oxygen level in the city.. upper bound is 21 and lower bound 14 or lower.    
+    template<typename T>
+    struct sortbyC{
+		 bool operator() (const T &L,const T &R) const
+            { 
+             return (L->gety() < R->gety()); 
+            }
+	};
+    template<typename Mytype>
+    void Coordinate_sorting(vector<Mytype>&);
+    
+    
+    // struct sortbyYcoordinate
+    // {
+    //     bool operator() const (MyClass const & L, MyClass const & R) { return L.x < R.x; }
+    // };
     
 public:
 

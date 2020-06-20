@@ -27,4 +27,5 @@ class Unit{
         int gety();
         int getw();
         int geth();
+        // virtual ~Unit();
 };
