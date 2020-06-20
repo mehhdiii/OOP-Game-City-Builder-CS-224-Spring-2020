@@ -44,7 +44,7 @@ class Game{
     const int OPTIONBAR_CLOSE_BUTTON_WIDTH = 20;
     const int OPTIONBAR_CLOSE_HEIGHT = 20;
     const int SCROLL_SPEED = 50;
-
+    
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
 
@@ -95,7 +95,7 @@ class Game{
 
     //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
-    Menu menu; //menu objects
+    Menu * menu = new Menu(); //menu objects
     Topbar * topbar = NULL; 
     Map * map = NULL;
     // Fountain obj = Fountain(assets);
@@ -119,11 +119,18 @@ public:
 
     void update_parameters();
     bool init();
+    bool loadMenu();
     bool loadMedia();
+    void run_menu();
+    void close_menu();
+    bool exit_from_menu();
     void run();
     void close();
     SDL_Texture* loadTexture( std::string path );
-    
+    //draw menu:
+    void draw_menu(SDL_Renderer*);
+
+
     
     // void main_menu(list <SDL_Texture *>);
     void range_OptionBar(int xMouse, int yMouse);

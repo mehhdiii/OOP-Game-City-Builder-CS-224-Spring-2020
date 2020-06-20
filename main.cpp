@@ -34,13 +34,24 @@ int main(int argc, char *argv[]){
 		printf( "Failed to initialize!\n" );
         return 0;
 	}
-		//Load media
-    if( !game.loadMedia() ){ //load all media
-        printf( "Failed to load media!\n" );
+
+    if(!game.loadMenu()){
+        printf("Failed to load Menu");
         return 0;
     }
+    game.run_menu(); //run the menu of the game!
     
-    game.run(); //run the main game loop
+    // game.close_menu();
+    
+    if(!game.exit_from_menu()){ //check if user pressed exit from menu!
+        // Load media
+        if( !game.loadMedia() ){ //load all media
+            printf( "Failed to load media!\n" );
+            return 0;
+        }
+        game.run(); //run the main game loop
+    }
+    
     game.close(); //destroy all sdl objects and close game
 
     return 0; //return 0 to confirm success

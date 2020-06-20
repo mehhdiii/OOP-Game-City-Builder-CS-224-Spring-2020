@@ -100,68 +100,198 @@ bool Game::init()
 	return success;
 }
 
+bool Game::loadMenu(){
+	bool success = true;
+	int menu_sprite_range = 6;
+	string spritename;
+	SDL_Texture * tex = NULL;
+	//loading mainmenu
+	for(int i=1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Main_Menu_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if (tex!=NULL){
+			menu->add_sprite(tex, 0); 
+		}
+		else{
+			success = false;
+		}
+		
+	}
+	//loading map menu
+	for(int i=1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Map_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if(tex!= NULL){
+			menu->add_sprite(tex, 1); 
+		}
+		else{
+			success = false;
+		}
+		
+	}
+	menu_sprite_range = 4;
+	for(int i =1; i<=menu_sprite_range;i++){
+		spritename = "";
+		spritename = "mainmenu/Select_Player_" + to_string(i) + ".png";
+		cout << spritename <<endl; 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 2); 
+		}
+		else{
+			cout <<"failed to load texture" <<endl;
+			success = false;
+		}
+		
+	}
+	menu_sprite_range = 2;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/credits_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 3);
+		}
+		else{
+			success= false;
+		}
+	}
+	menu_sprite_range = 4;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/settings_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 4);
+		}
+		else{
+			success= false;
+		}
+	}
+	
+	menu_sprite_range = 2;
+	for(int i = 1; i<=menu_sprite_range; i++){
+		spritename = "";
+		spritename = "mainmenu/back_" + to_string(i) + ".png";
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			menu->add_sprite(tex, 4);
+		}
+		else{
+			success= false;
+		}
+	}	
+	
+	return success;
+}
+
 bool Game::loadMedia()
 
 {
 	//Loading success flag
 	bool success = true;
-	
+	SDL_Texture * tex = NULL;
+
 	//loading menu
 	//creating  menu object:
 	
-	int menu_sprite_range = 6;
-	string spritename;
-	//loading mainmenu
-	for(int i=1; i<menu_sprite_range; i++){
-		spritename = "";
-		spritename = "mainmenu/Main_Menu_" + to_string(i) + ".png";
-		cout << spritename <<endl; 
-		menu.add_sprite(loadTexture(spritename), 0); 
-	}
-	//loading map menu
-	for(int i=1; i<menu_sprite_range; i++){
-		spritename = "";
-		spritename = "mainmenu/Select_Map_" + to_string(i) + ".png";
-		cout << spritename <<endl; 
-		menu.add_sprite(loadTexture(spritename), 1); 
-	}
-
+	
 	//loading option bar:
-	optionBar = new OptionBar(loadTexture("bars/Shop.png"));
+	tex = loadTexture("bars/Shop.png");
+	if(tex!=NULL){
+		optionBar = new OptionBar(tex);
+	}
+	else{
+		printf("Unable to load texture");
+		success= false;
+	}
+	
 
 	//loading top bar:
-	topbar = new Topbar(loadTexture("bars/Top_Menu.png")); //main top bar sprite
+	tex = loadTexture("bars/Top_Menu.png");
+	if(tex!=NULL){
+		topbar = new Topbar(tex); //main top bar sprite
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 	//now load the statics sprites on the topbar;
 
 	// for(int i=0; i<4; i++){
-	spritename = "";
+	string spritename = "";
 	spritename = "bars/scorebar/Empty.png";
 	cout << spritename <<endl; 
-	topbar->add_static_sprite(loadTexture(spritename), -1); 
+	tex = loadTexture(spritename);
+	if(tex!=NULL){
+		topbar->add_static_sprite(tex, -1); 
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 	// }
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 0); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 0); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Gold.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 1); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 1); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Green.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 2); 
+		tex = loadTexture(spritename);
+		if(tex!=NULL){
+			topbar->add_static_sprite(tex, 2); 
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Blue.png";
 		cout << spritename <<endl; 
-		topbar->add_static_sprite(loadTexture(spritename), 3); 
+		tex = loadTexture(spritename);
+		if(tex != NULL){
+			topbar->add_static_sprite(tex, 3);
+		}
+		else{
+			success = false;
+			printf("Unable to load texture");
+		}
+		 
 	}
 
 	// topbar->add_static_sprite(loadTexture("bars/scorebar/Scores.png"));
@@ -176,6 +306,7 @@ bool Game::loadMedia()
 
 	// assets = loadTexture("images/car-front-02.svg");
 	// assets2 = loadTexture("images/house-02.svg");
+	
 	forest_texture = loadTexture("images/Farm.png");
 	house_texture = loadTexture("images/House.png");
 	bank_texture = loadTexture("images/Bank.png");
@@ -188,10 +319,22 @@ bool Game::loadMedia()
 	turbine_texture = loadTexture("images/Turbine.png");
 	vehicle_texture = loadTexture("images/Vehicle.png");
 	worker_texture = loadTexture("images/Worker.png");
+	if(forest_texture==NULL||house_texture==NULL||bank_texture==NULL||industry_texture==NULL||lab_texture==NULL||man_texture==NULL||park_texture==NULL||scientist_texture==NULL||tree_texture==NULL||turbine_texture==NULL||vehicle_texture==NULL||worker_texture==NULL){
+		success = false;
+		printf("Unable to load texture");
+	}
+
 	scientist_texture = loadTexture("images/Scientist.png");
 
 	//create scientist object;
-	scientist_obj = new Scientist(scientist_texture);
+	if(scientist_texture!=NULL){
+		scientist_obj = new Scientist(scientist_texture);
+	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
+	
 
     gTexture = loadTexture("maps/map1.png");
 	map_texture = loadTexture("maps/test_map.png");
@@ -199,12 +342,16 @@ bool Game::loadMedia()
 	if(map_texture!=NULL){
 		map = new Map(map_texture);
 	}
+	else{
+		success = false;
+		printf("Unable to load texture");
+	}
 	
-	if(gTexture==NULL || gTexture==NULL)
-    {
-        printf("Unable to run due to error: %s\n",SDL_GetError());
-        success =false;
-    }
+	// if(gTexture==NULL || gTexture==NULL)
+    // {
+    //     printf("Unable to run due to error: %s\n",SDL_GetError());
+    //     success =false;
+    // }
 
 	//loading all music for the game:
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
@@ -298,7 +445,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
 
 
-		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer		
+			
 
 		map->draw(gRenderer);
 		// SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
@@ -746,13 +893,72 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 
 }
 
+
+void Game::run_menu(){
+
+	bool click; 
+	
+	SDL_Event e;
+	while(menu->menuactive){
+		// if (true){
+		
+		// currentTime = SDL_GetTicks();
+		// cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
+
+
+
+	
+
+		//check for keyboard event
+		while( SDL_PollEvent( &e ) != 0 ){
+			// if( Mix_PlayingMusic() == 0 )
+			// {
+			// 	//Play the music
+			// 	// Mix_PlayMusic( background_music, 1 );
+			// }
+			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
+			{
+				menu->menuactive = false;
+				break;
+			}
+			int xMouse, yMouse;
+			SDL_GetMouseState(&xMouse,&yMouse);
+			cout << "xMouse: " << xMouse <<endl;
+			cout << "yMouse: " << yMouse <<endl;
+
+			SDL_RenderClear(gRenderer); //removes everything from renderer
+			
+			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
+				click =1;
+			}
+			// cout << gRenderer <<endl;
+			menu->refresh(gRenderer, xMouse, yMouse, click);
+			
+			SDL_RenderPresent(gRenderer);
+			click =0;
+
+		}
+	}
+}
+void Game::close_menu(){
+	
+	
+	delete menu;
+
+}
+
+bool Game::exit_from_menu(){
+	cout << "exit pressed: " << menu->quit_game() <<endl;
+	return menu->quit_game();
+}
+
 void Game::run( )
 {
     SDL_RenderClear( gRenderer );
 	//Main loop flag
 	bool quit = false;
 	bool pause = false;
-	bool menuactive = true;
+	
 
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;
@@ -766,48 +972,10 @@ void Game::run( )
 
 	//Event handler
 	SDL_Event e;
-	//main menu running
-	// int xMouse, yMouse;
-	bool click; 
-	// while(menuactive){
-	// 	// if (true){
-			
-	// 	currentTime = SDL_GetTicks();
-	// 	cout<< "Main menu running "<< currentTime / 1000 << " seconds." << endl;
-
-
 
 	
 
-	// 	//check for keyboard event
-	// 	while( SDL_PollEvent( &e ) != 0 ){
-	// 		if( Mix_PlayingMusic() == 0 )
-	// 		{
-	// 			//Play the music
-	// 			Mix_PlayMusic( background_music, 1 );
-	// 		}
-	// 		if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
-	// 		{
-	// 			menuactive = false;
-	// 			break;
-	// 		}
-			
-	// 		SDL_GetMouseState(&xMouse,&yMouse);
-	// 		// cout << "xMouse: " << xMouse <<endl;
-	// 		// cout << "yMouse: " << yMouse <<endl;
-
-	// 		SDL_RenderClear(gRenderer); //removes everything from renderer
-			
-	// 		if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
-	// 			click =1;
-	// 		}
-	// 		menu.refresh(gRenderer, xMouse, yMouse, click);
-	// 		SDL_RenderPresent(gRenderer);
-	// 		click =0;
-
-	// 	}
-	// }
-
+	cout << "quit " <<quit <<endl;
 	//While application is running
 	while( !quit )
 	{
@@ -872,7 +1040,7 @@ void Game::run( )
 						}
 					break;
 				case SDLK_UP:
-						cout << "upper pressed" <<endl;
+						// cout << "upper pressed" <<endl;
 						if(map->scrolling_flag(0,0,1,0)){
 							scroll_objects(0, 0, 0, 1);
 							map->scroll(0,0,1,0);
@@ -919,7 +1087,7 @@ void Game::run( )
 					// industry and lab chezein bnaein unsy paisay mileingy
 					// industry product ki progress front end py show krni h
 					if (temp_object->name == "farm"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
 						myfarm->setCoordinates(xMouse, yMouse);
 						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
@@ -929,7 +1097,7 @@ void Game::run( )
 					}
 					//check other objects here!
 					else if (temp_object->name == "bird"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bird * mybird = dynamic_cast<Bird *>(temp_object);
 						mybird->setCoordinates(xMouse, yMouse);
 						mybird->set_creation_time(currentTime);
@@ -939,7 +1107,7 @@ void Game::run( )
 					}
 					
 					else if (temp_object->name == "building"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
 						mybuilding->set_creation_time(currentTime);
@@ -949,7 +1117,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "bank"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Bank * mybank = dynamic_cast<Bank *>(temp_object);
 						mybank->setCoordinates(xMouse, yMouse);
 						mybank->set_creation_time(currentTime);
@@ -959,7 +1127,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "house"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						House * myhouse = dynamic_cast<House *>(temp_object);
 						myhouse->setCoordinates(xMouse, yMouse);
 						myhouse->set_creation_time(currentTime);
@@ -969,7 +1137,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "industry"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
 						myindustry->setCoordinates(xMouse, yMouse);
 						myindustry->set_creation_time(currentTime);
@@ -979,7 +1147,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "laboratory"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
 						mylaboratory->setCoordinates(xMouse, yMouse);
 						mylaboratory->set_creation_time(currentTime);
@@ -989,7 +1157,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "park"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Park * mypark = dynamic_cast<Park *>(temp_object);
 						mypark->setCoordinates(xMouse, yMouse);
 						mypark->set_creation_time(currentTime);
@@ -999,7 +1167,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "scientist"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 
 						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
 						myscientist->setCoordinates(xMouse, yMouse);
@@ -1012,7 +1180,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "solarpanel"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
 						mysolarpanel->setCoordinates(xMouse, yMouse);
 						mysolarpanel->set_creation_time(currentTime);
@@ -1022,7 +1190,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "tree"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
 						mytree->set_creation_time(currentTime);
@@ -1032,7 +1200,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "turbine"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
 						myturbine->setCoordinates(xMouse, yMouse);
 						myturbine->set_creation_time(currentTime);
@@ -1042,7 +1210,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "vehicle"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
 						myvehicle->setCoordinates(xMouse, yMouse);
 						myvehicle->set_creation_time(currentTime);
@@ -1052,7 +1220,7 @@ void Game::run( )
 					}
 
 					else if (temp_object->name == "worker"){
-						cout<< detect_collision( xMouse, yMouse) <<endl;
+						// cout<< detect_collision( xMouse, yMouse) <<endl;
 						Worker * myworker = dynamic_cast<Worker *>(temp_object);
 						myworker->setCoordinates(xMouse, yMouse);
 						myworker->set_creation_time(currentTime); 
@@ -1099,9 +1267,9 @@ void Game::run( )
 		SDL_Delay(120);	//causes sdl engine to delay for specified miliseconds
 
 	}
-	cout<< "Total number of laboratories in the city : "<< laboratories.size()<<endl;
-	cout<<"END"<<endl;
-	cout<<"Main Cash : "<<main_cash<<endl;
-	cout<<"XP_level : "<<XP_level<<endl;
-	cout<<"Player level : "<<P_level<<endl;
+	// cout<< "Total number of laboratories in the city : "<< laboratories.size()<<endl;
+	// cout<<"END"<<endl;
+	// cout<<"Main Cash : "<<main_cash<<endl;
+	// cout<<"XP_level : "<<XP_level<<endl;
+	// cout<<"Player level : "<<P_level<<endl;
 }
