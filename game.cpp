@@ -732,6 +732,7 @@ bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper f
         int distance = sqrt(pow((sp_of_static_obj_x +temp_object->getw()/2 - ((sp_of_temp_obj_x)+ (*i)->getw()/2)),2) + pow((sp_of_static_obj_y+temp_object->geth()/2  - (sp_of_temp_obj_y +(*i)->geth()/2)), 2));
         //new test logic of distance formula
         //checking the distance:
+
         if (distance < min_distance_for_collision){
             return 1;
         }

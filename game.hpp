@@ -116,6 +116,7 @@ class Game{
     int XP_level = 0;
     int P_level = 1; // first level
     int oxygen_level = 21; // percentage of oxygen level in the city.. upper bound is 21 and lower bound 14 or lower.    
+    
     template<typename T>
     struct sortbyC{
 		 bool operator() (const T &L,const T &R) const
