@@ -11,9 +11,9 @@ void Turbine::update_scores(int & main_cash, int & XP_level){  // updates the va
 	XP_level = XP_level + 45; // updated the XP_level | it adds 25 XP to buy a building i.e. exhaustion to your character.
 }
 
-// void Bank::setPrice(int house_price){
-//     pricing = house_price;
-// }
+int Turbine::get_green_energy(){
+    return subjective_green_energy;
+}
 
 void Turbine::set_creation_time(int c_t){
     creation_time = c_t/1000; //creation time in seconds

@@ -444,7 +444,7 @@ void Game::range_OptionBar(int xMouse, int yMouse){
 void Game::draw_all(SDL_Renderer * gRenderer){
 	SDL_RenderClear(gRenderer); //removes everything from renderer
 
-
+		green_energy = 0;
 			
 
 		map->draw(gRenderer);
@@ -472,6 +472,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		for( auto i = industries.begin(); i<industries.end(); i++){
 			// cout << "this caused" <<endl;
 			(*i)->draw(gRenderer);
+			green_energy += (*i)->get_green_energy();
 		}
 		for( auto i = parks.begin(); i<parks.end(); i++){
 			// cout << "this caused" <<endl;
@@ -502,7 +503,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 			optionBar->draw(gRenderer);
 		}
 		// topbar->draw(gRenderer);
-		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level);
+		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level, green_energy);
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
 		SDL_RenderPresent(gRenderer); //displays the updated renderer
