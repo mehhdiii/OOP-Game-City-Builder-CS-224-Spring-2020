@@ -9,10 +9,7 @@ Menu::Menu(){
         std::vector<SDL_Texture*> * v1 = new std::vector<SDL_Texture*>;
         menu_sprites.push_back(*v1); 
     }
-    // for(int i = 0; i<4; i++){
-    //     std::vector<int > * v1 = new std::vector<SDL_Texture*>;
-    //     menu_sprites.push_back(*v1); 
-    // }
+
 
 
 }
@@ -33,7 +30,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
     // 4-> settings
     switch (current_screen)
     {
-        case 0:
+        case 0: //main menu
         {
             if((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 259 && yMouse <259+selection_box_h && current_screen==0)){ //first
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[1], NULL, NULL);//Draws background to renderer
@@ -59,7 +56,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
             
             break;
         }
-        case 1:
+        case 1: //map selection screen
         {
             if(xMouse>77 && xMouse <77+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){//map1
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[1], NULL, NULL);
@@ -99,9 +96,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
             break;
         }
         case 3:{//credits
-            // if (xMouse > 542 && yMouse > 257 && xMouse < 542+selection_box_w && yMouse < 257+selection_box_h){
-            //     SDL_RenderCopy(gRenderer, (menu_sprites[3])[0], NULL, NULL);
-            // }
+            
             if(xMouse >1192 && yMouse >638){ //back is pressed in  credits
                 SDL_RenderCopy(gRenderer, (menu_sprites[3])[1], NULL, NULL);
             }
@@ -171,6 +166,11 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
                 }
             case 1:{
                 if(xMouse>77 && xMouse <77+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){
+                    selected_map = 1;
+                    current_screen =2;
+                }
+                else if (xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){
+                    selected_map = 2;
                     current_screen =2;
                 }
                 else if(xMouse >1192 && yMouse >638) //selects back
@@ -184,7 +184,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click)
                 if(xMouse > 293 && yMouse >273 && xMouse < 293+player_selection_box_w && yMouse < 273+player_selection_box_h){//selects male!
                     menuactive = false;
                 }
-                else if (xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){ //selects female!
+                else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){ //selects female!
                      menuactive = false;
                 }
                 else if(xMouse >1192 && yMouse >638) //selects back
@@ -233,6 +233,9 @@ bool Menu::quit_game(){
     return quit_;
 }
 
+int Menu::get_selected_map(){
+    return selected_map;
+}
 Menu::~Menu(){
     // for(auto i = menu_sprites.begin(); i!=menu_sprites.end(); i++){
     //     for(auto j = (*i).begin(); j!=(*i).end(); i++){

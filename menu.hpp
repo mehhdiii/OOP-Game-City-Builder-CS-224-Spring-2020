@@ -6,9 +6,16 @@
 
 
 class Menu{     
+    //0->main menu
+    // 1 -> map selection
+    // 2 -> player selection
+    // 3 -> credits
+    // 4-> settings
     
     private:
     bool quit_= 0; //if the user presses quit
+    //front end varibles:
+    int current_screen; //stores which screen user is on. <0, main menu>, <1, map selection>, <2, player selection>, <3, credits>, <4, settings>
     const int map_selection_box_width = 392-77; //map selection screen boxes 
     const int map_selection_box_height = 646 - 286;
     const int selection_box_w = 816 - 542; //main menu selection boxes
@@ -17,21 +24,25 @@ class Menu{
     const int player_selection_box_h =  612 - 273;
     const int mute_selection_box_w = 807 - 562 ;   //settings screen selection boxes
     const int mute_selection_box_h = 396- 323;
-    bool bg_muted = 0; //mute flags
-    bool sfx_muted = 0;
     SDL_Rect back_button_mover = {1192, 638, 2*210/3, 2*110/3}; //back button for settings sprite
     std::vector <std::vector <SDL_Texture*>> menu_sprites; //vector to store all menu sprites
-    // std::vector <std::vector <std::vector < int >>> coordinates_screen;
-    // std::vector <int> temp; 
-    void draw(); //draws all sprites on screen
-    int current_screen;
+    //mute flags
+    bool bg_muted = 0; 
+    bool sfx_muted = 0;
+    //vector to check which map was selected:
+    int selected_map = 1; //4 maps
+    //draws all sprites on screen
+    void draw(); 
+    
+    
     public:
-
+    bool menuactive = true; //flag which maintains the menu state
+    int get_selected_map(); //gets the value of which map to load on screen
     Menu();
     void refresh(SDL_Renderer * gRenderer, int x, int y, bool click); //checks which sprites to draw and draws them on screen;
     void add_sprite(SDL_Texture*, int screen_number); //adds a sprite to the 2d vectors of sprites. 
-    bool quit_game(); //checks if quit game was called 
+    bool quit_game(); //checks if quit game was clicked 
     
-    bool menuactive = true; //flag which maintains the menu state
+    
     ~Menu();
 };
