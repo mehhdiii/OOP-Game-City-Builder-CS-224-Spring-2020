@@ -33,7 +33,7 @@
 #include"turbine.hpp"
 #include"vehicle.hpp"
 #include"worker.hpp"
-
+#include"draw_text.hpp"
 #include "map.hpp"
 
 using namespace std;
@@ -110,6 +110,13 @@ class Game{
     Mix_Music *background_music = NULL; //plays in the background
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
+    
+    //text variables
+    //Globally used font
+    TTF_Font *gFont = NULL;
+    Draw_text texts_object; //text class object
+
+
 
     // scores for the top bar
     int main_cash = 10000;

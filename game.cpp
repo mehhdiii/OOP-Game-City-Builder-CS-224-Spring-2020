@@ -7,36 +7,7 @@ using namespace std;
 #include<list>
 
 
-void Game::update_parameters(){
-	// Objects : 1. birds - 2. building - 3. farm - 4. house - 5. laboratory - 6. industry - 7. park - 8. vehicle 
-	// - 9. worker - 10. scientist.
-	// cout<<"Updating parameters :-)"<<endl;
-	// main_cash = 10000; // dollars
-	// int electricity = 250; // MegaWatts
-	// int XP_level = 0;
-	// int P_level = 1; // first level
-	// int money = 10000; // dollars
-	int input_from_user; 	
 
-	for (int i = 0 ; i <= 10 ; i++){
-		/* initialize random seed: */
-  		srand (time(NULL));
-  		/* generate secret number between 1 and 10: */
-  		input_from_user = rand() % 10 + 1;
-
-		// cout<< "User has given input "<<input_from_user<<endl;
-		if (XP_level/200 >= 1){
-			XP_level -= 200;
-			P_level += 1;
-			main_cash += 10000;
-			// cout<<"Welcome to level "<<P_level<<" !"<<endl;
-		}
-		// cout<<"Main Cash : "<<main_cash<<endl;
-		// cout<<"XP_level : "<<XP_level<<endl;
-		// cout<<"Player level : "<<P_level<<endl;
-	}
-
-}
 
 bool Game::init()
 {
@@ -78,6 +49,8 @@ bool Game::init()
 			}
 			else
 			{
+				//set the renderer for texts
+				texts_object.set_renderer(gRenderer);
 				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
@@ -88,17 +61,26 @@ bool Game::init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+				//initialize audio
 				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
 				{
 					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
 					success = false;
 				}
+				//intialize text
+				if( TTF_Init() == -1 )
+                {
+                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+                    success = false;
+                }
 			}
 		}
 	}
 
 	return success;
 }
+
+
 
 bool Game::loadMenu(){
 	bool success = true;
@@ -350,6 +332,27 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
+
+	//Open the font
+    gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
+    if( gFont == NULL )
+    {
+        printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+        success = false;
+    }
+	else{
+		texts_object.set_font(gFont);
+	}
+    // else
+    // {
+    //     //Render text
+    //     SDL_Color textColor = { 0, 0, 0 };
+    //     if( !gTextTexture.loadFromRenderedText( "The quick brown fox jumps over the lazy dog", textColor ) )
+    //     {
+    //         printf( "Failed to render text texture!\n" );
+    //         success = false;
+    //     }
+    // }
 	
 	// if(gTexture==NULL || gTexture==NULL)
     // {
@@ -373,14 +376,11 @@ bool Game::loadMedia()
 
 void Game::close()
 {
-	//Free loaded images
-	// SDL_DestroyTexture(assets);
-	// assets=NULL;
+	
 	SDL_DestroyTexture(gTexture);
 	//free sound:
 	delete optionBar;
 	delete topbar;
-
 	// Mix_FreeChunk(eggy);
 	// Mix_FreeMusic(background_music);
 	// background_music =NULL;
@@ -424,6 +424,50 @@ SDL_Texture* Game::loadTexture( std::string path )
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+void Game::update_parameters(){
+	// Objects : 1. birds - 2. building - 3. farm - 4. house - 5. laboratory - 6. industry - 7. park - 8. vehicle 
+	// - 9. worker - 10. scientist.
+	// cout<<"Updating parameters :-)"<<endl;
+	// main_cash = 10000; // dollars
+	// int electricity = 250; // MegaWatts
+	// int XP_level = 0;
+	// int P_level = 1; // first level
+	// int money = 10000; // dollars
+	int input_from_user; 	
+
+	for (int i = 0 ; i <= 10 ; i++){
+		/* initialize random seed: */
+  		srand (time(NULL));
+  		/* generate secret number between 1 and 10: */
+  		input_from_user = rand() % 10 + 1;
+
+		// cout<< "User has given input "<<input_from_user<<endl;
+		if (XP_level/200 >= 1){
+			XP_level -= 200;
+			P_level += 1;
+			main_cash += 10000;
+			// cout<<"Welcome to level "<<P_level<<" !"<<endl;
+		}
+		// cout<<"Main Cash : "<<main_cash<<endl;
+		// cout<<"XP_level : "<<XP_level<<endl;
+		// cout<<"Player level : "<<P_level<<endl;
+	}
+
+}
+
+
+
 template<typename Mytype>
 void Game::Coordinate_sorting(vector<Mytype> &vec){
 	
@@ -441,7 +485,7 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		map->draw(gRenderer);
 		// SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
 		
-	
+
 
 		//sort all objects wrt their y coordines using the template coordinatesorting
 		Coordinate_sorting(all_objects);
@@ -506,6 +550,8 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level, green_energy);
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
+		texts_object.setCoordinates(140, 9);
+		texts_object.draw(gRenderer); 
 		SDL_RenderPresent(gRenderer); //displays the updated renderer
 }
 
