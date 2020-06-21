@@ -15,6 +15,8 @@ class Map: public Unit{
         const int MAP_WIDTH = 4964;
         const int MAP_HEIGHT = 2490;
         const int SCROLL_SPEED = 50;
+        //vector to contain all different types of maps 
+        // std::vector<SDL_Texture *> all_maps;
     public:
 
         Map(SDL_Texture * );

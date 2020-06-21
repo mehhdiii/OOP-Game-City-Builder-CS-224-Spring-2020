@@ -336,8 +336,12 @@ bool Game::loadMedia()
 	}
 	
 
-    gTexture = loadTexture("maps/map1.png");
-	map_texture = loadTexture("maps/test_map.png");
+    gTexture = loadTexture("maps/test_map.png");
+	
+	//checking which map to load and then loading that respective map:
+	spritename = "";
+	spritename = "maps/map" + to_string(menu->get_selected_map()) + ".png";
+	map_texture = loadTexture(spritename);
 
 	if(map_texture!=NULL){
 		map = new Map(map_texture);
