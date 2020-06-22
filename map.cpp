@@ -80,6 +80,21 @@ void Map::add_grid_point(){
              std::cout << "grid ka y: " <<nexty <<std::endl; 
         }
     }
+    x = nextx; 
+    y = nexty; 
+    for(int i = 1; i<10; i++){
+        nextx = x + i*GRID_WIDTH/2;
+        nexty = y + i*GRID_HEIGHT/2; 
+        int innerx; 
+        for(int j = 0; j<10 - i ; j++){
+             std::cout << "i = " << i << std::endl <<"j = " << j <<std::endl;
+             innerx  = nextx +GRID_WIDTH*j;
+             grid_x.push_back(innerx);
+             grid_y.push_back(nexty);
+             std::cout << "grid ka x: "<<innerx <<std::endl;
+             std::cout << "grid ka y: " <<nexty <<std::endl; 
+        }
+    }
 
 }
 void Map::check_grid(int &x, int&y){
