@@ -32,7 +32,7 @@ bool Game::init()
 		//Create window
 
 
-		gWindow = SDL_CreateWindow( "Green City", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "City Builder", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -50,7 +50,7 @@ bool Game::init()
 			else
 			{
 				//set the renderer for texts
-				texts_object.set_renderer(gRenderer);
+				// texts_object.set_renderer(gRenderer);
 				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
@@ -180,7 +180,17 @@ bool Game::loadMedia()
 
 	//loading menu
 	//creating  menu object:
-	
+	//Open the font
+    gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
+    if( gFont == NULL )
+    {
+		// cout << "hello jee" <<endl;
+        printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+        success = false;
+    }
+	// else{
+		// texts_object.set_font(gFont);
+	// }
 	
 	//loading option bar:
 	tex = loadTexture("bars/Shop.png");
@@ -196,6 +206,7 @@ bool Game::loadMedia()
 	//loading top bar:
 	tex = loadTexture("bars/Top_Menu.png");
 	if(tex!=NULL){
+		cout << "checking for initialization" <<(gFont==NULL) <<endl;
 		topbar = new Topbar(tex); //main top bar sprite
 	}
 	else{
@@ -333,16 +344,7 @@ bool Game::loadMedia()
 		printf("Unable to load texture");
 	}
 
-	//Open the font
-    gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
-    if( gFont == NULL )
-    {
-        printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
-        success = false;
-    }
-	else{
-		texts_object.set_font(gFont);
-	}
+	
     // else
     // {
     //     //Render text
@@ -550,8 +552,8 @@ void Game::draw_all(SDL_Renderer * gRenderer){
 		topbar->draw_modified(gRenderer, main_cash,XP_level, P_level, green_energy);
 		// SDL_RenderCopy(gRenderer, assets, &src, &mover);//Draws background to renderer
 		// (obj).draw(gRenderer);
-		texts_object.setCoordinates(140, 9);
-		texts_object.draw(gRenderer); 
+		// texts_object.setCoordinates(140, 9);
+		// texts_object.draw(gRenderer); 
 		SDL_RenderPresent(gRenderer); //displays the updated renderer
 }
 

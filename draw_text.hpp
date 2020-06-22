@@ -2,7 +2,7 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <iostream>
-
+#include<string>
 #pragma once
 
 class Draw_text
@@ -44,6 +44,7 @@ class Draw_text
         //draw function
         void draw(SDL_Renderer * );
         void setCoordinates(int, int);
+        void setText(std::string );
 
 	private:
 		//The actual hardware texture
@@ -55,6 +56,7 @@ class Draw_text
 		int mWidth;
 		int mHeight;
         int xCoordinate;
-        int yCoordinate; 
+        int yCoordinate;
+        std::string text="hello"; 
 
 };

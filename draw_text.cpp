@@ -6,6 +6,15 @@ Draw_text::Draw_text()
 	mTexture = NULL;
 	mWidth = 0;
 	mHeight = 0;
+    gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
+    if( gFont == NULL )
+    {
+        printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
+
+    }
+    
+    
+
 
 }
 
@@ -159,10 +168,13 @@ void Draw_text::set_font(TTF_Font * font){
 
 void Draw_text::draw(SDL_Renderer * Renderer){
     SDL_Color textColor = { 0, 0, 0 };
-	loadFromRenderedText("1", textColor);
     gRenderer = Renderer; 
 
+	loadFromRenderedText(text, textColor);
     render(xCoordinate, yCoordinate);
+}
+void Draw_text::setText(std::string txt){
+    text = txt;
 }
 void Draw_text::setCoordinates(int x, int y){
     xCoordinate = x;
