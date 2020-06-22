@@ -4,13 +4,20 @@
 Topbar::Topbar(SDL_Texture * asset): Unit(asset){
     setCoordinates(0,0);
     setSize(SCREEN_WIDTH, 45);
-    setRect();
+    
     
     for(int i = 0; i<number_of_bars; i++){
         std::vector<SDL_Texture*> *v1 = new std::vector<SDL_Texture*>;
         stats_sprite.push_back(*v1);
         
     }
+    std::cout<<"this shit works!" <<std::endl;
+    for(int i =0; i<number_of_bars; i++){
+        Draw_text *p = new Draw_text();
+        text_objects.push_back(p);
+    }
+    setRect();
+    
 }
 
 
@@ -150,6 +157,15 @@ void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_le
     else if (g_percent >= 80.0 ){ //&& cash_percent <= 100.0
         SDL_RenderCopy(gRenderer, stats_sprite[2][4], NULL, &greenenergy_mover);
     }
+
+    //now draw the text on screen
+    //player level drawing
+    text_objects[0]->setText("THIS FREAKIN IS WORKING!!");
+    text_objects[1]->setText("THIS FREAKIN IS WORKING!!");
+    // text_objects[0]->set_renderer(gRenderer);
+    text_objects[0]->draw(gRenderer);
+    text_objects[1]->draw(gRenderer);
+    
 }
 
 void Topbar::setRect(){
@@ -202,7 +218,10 @@ void Topbar::setRect(){
     oxygenlevel_mover.w = width;
     oxygenlevel_mover.h = height;
 
-
+    //setting coordinates of text object
+    text_objects[0]->setCoordinates(greenenergy_mover.x+greenenergy_mover.w, greenenergy_mover.y);
+    text_objects[1]->setCoordinates(oxygenlevel_mover.x+oxygenlevel_mover.w, oxygenlevel_mover.y );
+    
 
     
 
