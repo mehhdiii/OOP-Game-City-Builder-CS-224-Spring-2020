@@ -6,38 +6,6 @@
 using namespace std;
 #include<list>
 
-
-void Game::update_parameters(){
-	// Objects : 1. birds - 2. building - 3. farm - 4. house - 5. laboratory - 6. industry - 7. park - 8. vehicle 
-	// - 9. worker - 10. scientist.
-	// cout<<"Updating parameters :-)"<<endl;
-	// main_cash = 10000; // dollars
-	// int electricity = 250; // MegaWatts
-	// int XP_level = 0;
-	// int P_level = 1; // first level
-	// int money = 10000; // dollars
-	int input_from_user; 	
-
-	for (int i = 0 ; i <= 10 ; i++){
-		/* initialize random seed: */
-  		srand (time(NULL));
-  		/* generate secret number between 1 and 10: */
-  		input_from_user = rand() % 10 + 1;
-
-		// cout<< "User has given input "<<input_from_user<<endl;
-		if (XP_level/200 >= 1){
-			XP_level -= 200;
-			P_level += 1;
-			main_cash += 10000;
-			// cout<<"Welcome to level "<<P_level<<" !"<<endl;
-		}
-		// cout<<"Main Cash : "<<main_cash<<endl;
-		// cout<<"XP_level : "<<XP_level<<endl;
-		// cout<<"Player level : "<<P_level<<endl;
-	}
-
-}
-
 bool Game::init()
 {
 	
@@ -186,6 +154,21 @@ bool Game::loadMenu(){
 		}
 	}	
 	
+	//loading all music for the game:
+	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
+	menu_background_music = Mix_LoadMUS("game_sounds/Inception.wav");
+	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
+	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
+	if(menu_background_music ==NULL )
+	{
+		cout<<"back ground music loading failed"<<endl;
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+	cout<<"back ground music loading sccessful"<<endl;
+	// return success;
+
+
 	return success;
 }
 
@@ -358,16 +341,19 @@ bool Game::loadMedia()
     // }
 
 	//loading all music for the game:
+
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	// background_music = Mix_LoadMUS("music/inception.wav");
+	game_background_music = Mix_LoadMUS("game_sounds/Game_Background.wav");
 	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
 	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	// if(background_music ==NULL )
-	// {
-	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-	// 	success = false;
-	// }
-	
+	if(game_background_music ==NULL )
+	{
+		cout<<"back ground music loading failed"<<endl;
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+	cout<<"back ground music loading sccessful"<<endl;
+
 	return success;
 }
 
@@ -688,9 +674,6 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 		break;
 		}
 	}
-	
-
-
 }
 
 void Game::hover_object_with_cursor(){
@@ -956,11 +939,12 @@ void Game::run_menu(){
 
 		//check for keyboard event
 		while( SDL_PollEvent( &e ) != 0 ){
-			// if( Mix_PlayingMusic() == 0 )
-			// {
-			// 	//Play the music
-			// 	// Mix_PlayMusic( background_music, 1 );
-			// }
+			cout << " Mix_PlayingMusic() : "<<Mix_PlayingMusic()<<endl;
+			if( Mix_PlayingMusic() == 0 )
+			{
+				//Play the music
+				Mix_PlayMusic( menu_background_music, -1 );
+			}
 			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
 				menu->menuactive = false;
@@ -968,8 +952,6 @@ void Game::run_menu(){
 			}
 			int xMouse, yMouse;
 			SDL_GetMouseState(&xMouse,&yMouse);
-			// cout << "xMouse: " << xMouse <<endl;
-			// cout << "yMouse: " << yMouse <<endl;
 
 			SDL_RenderClear(gRenderer); //removes everything from renderer
 			
@@ -1004,7 +986,7 @@ void Game::run( )
 	bool quit = false;
 	bool pause = false;
 	
-
+	Mix_HaltMusic();
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;
 	cout<<"Player level : "<<P_level<<endl;
@@ -1029,11 +1011,12 @@ void Game::run( )
 		currentTime = SDL_GetTicks()/1000; //time in seconds
 		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
-		
+		cout<< "game mix playing music : "<<Mix_PlayingMusic()<<endl;
 		if( Mix_PlayingMusic() == 0 )
 		{
+			SDL_Delay(2500);
 			//Play the music
-			// Mix_PlayMusic( background_music, 1 );
+			Mix_PlayMusic( game_background_music, -1 );
 		}		
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
