@@ -19,3 +19,4 @@ void InAnimate::refresh_coordinates(int x, int y){
 // void InAnimate::setfont(TTF_Font * myFont){
     
 // }
+

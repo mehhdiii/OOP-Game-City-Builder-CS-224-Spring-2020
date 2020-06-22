@@ -343,6 +343,7 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
+	map->add_grid_point(); //adding grids to the map
 
 	
     // else
@@ -744,7 +745,8 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 void Game::hover_object_with_cursor(){
 	if(temp_object!=NULL){
 		int xMouse, yMouse; 
-		SDL_GetMouseState(&xMouse, &yMouse);
+		SDL_GetMouseState(&xMouse, &yMouse); 
+		map->check_grid(xMouse, yMouse);
 		temp_object->setCoordinates(xMouse - (temp_object->getw())/2, yMouse - (temp_object->geth())/2); //centralizing the hovering operation as unit does not include the overridden centralizing setCoordinate function of inAnimate
 	}
 }
@@ -815,7 +817,7 @@ bool Game::detect_collision(int x, int y){
 	bool f8 = helper_detect_collision <Tree>(x,y, trees);
 	bool f9 = helper_detect_collision <Turbine>(x,y, turbines);
 	bool f10 = helper_detect_collision <Vehicle>(x,y, vehicles);
-	cout << f1 << f2<<f3<<f4<<f5<<f6<<f7<<f8<<f9<<f10 <<endl;
+	// cout << f1 << f2<<f3<<f4<<f5<<f6<<f7<<f8<<f9<<f10 <<endl;
 	// helper_detect_collision(x,y, workers);
 	return (f1||f2||f3||f4||f5||f6||f7||f8||f9||f10);
 
@@ -1158,7 +1160,7 @@ void Game::run( )
 				
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
-
+				
 				// cout << xMouse << " " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
@@ -1177,6 +1179,7 @@ void Game::run( )
 				if(temp_object!=NULL && yMouse < SCREEN_HEIGHT - 300  &&  !detect_collision( xMouse, yMouse)){
 					
 					// store the object in a master all_object vector, 
+					map->check_grid(xMouse, yMouse);
 					all_objects.push_back(temp_object);
 
 					// make individual class functions to update cash and XP_level
