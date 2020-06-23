@@ -168,6 +168,25 @@ bool Game::loadMenu(){
 		}
 	}	
 	
+	//loading all music for the game:
+	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
+	// menu_background_music = sound->load_menu_background_music();
+	// menu_background_music = Mix_LoadMUS("game_sounds/Inception.wav");
+	success = sound.load_menu_background_music();
+	success = sound.load_all_SFX_music();
+	// sound->load_menu_background_music();
+	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
+	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
+	// if(menu_background_music ==NULL )
+	// {
+	// 	cout<<"back ground music loading failed"<<endl;
+	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+	// 	success = false;
+	// }
+	// cout<<"back ground music loading sccessful"<<endl;
+	// return success;
+
+
 	return success;
 }
 
@@ -364,16 +383,20 @@ bool Game::loadMedia()
     // }
 
 	//loading all music for the game:
+
 	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	// background_music = Mix_LoadMUS("music/inception.wav");
+	success = sound.load_game_background_music();
+	// game_background_music = Mix_LoadMUS("game_sounds/Game_Background.wav");
 	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
-	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	// if(background_music ==NULL )
+	// // bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
+	// if(game_background_music ==NULL )
 	// {
+	// 	cout<<"back ground music loading failed"<<endl;
 	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
 	// 	success = false;
 	// }
-	
+	// cout<<"back ground music loading sccessful"<<endl;
+
 	return success;
 }
 
@@ -737,9 +760,6 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 		break;
 		}
 	}
-	
-
-
 }
 
 void Game::hover_object_with_cursor(){
@@ -1006,10 +1026,15 @@ void Game::run_menu(){
 
 		//check for keyboard event
 		while( SDL_PollEvent( &e ) != 0 ){
+			// cout << " Mix_PlayingMusic() : "<<Mix_PlayingMusic()<<endl;
+
+			// playing menu background music
+			sound.play_menu_background_music();
+			// sound.play_hover_music();
 			// if( Mix_PlayingMusic() == 0 )
 			// {
 			// 	//Play the music
-			// 	// Mix_PlayMusic( background_music, 1 );
+			// 	Mix_PlayMusic( menu_background_music, -1 );
 			// }
 			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
@@ -1018,22 +1043,21 @@ void Game::run_menu(){
 			}
 			int xMouse, yMouse;
 			SDL_GetMouseState(&xMouse,&yMouse);
-			// cout << "xMouse: " << xMouse <<endl;
-			// cout << "yMouse: " << yMouse <<endl;
 
 			SDL_RenderClear(gRenderer); //removes everything from renderer
 			
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
 				click =1;
 			}
-			// cout << gRenderer <<endl;
-			menu->refresh(gRenderer, xMouse, yMouse, click);
+			cout << "going into the refresh menu" <<endl;
+			menu->refresh(gRenderer, xMouse, yMouse, click, sound);
 			
 			SDL_RenderPresent(gRenderer);
 			click =0;
 
 		}
 	}
+	sound.stop_music();
 }
 void Game::close_menu(){
 	
@@ -1054,7 +1078,9 @@ void Game::run( )
 	bool quit = false;
 	bool pause = false;
 	
-
+	// stopping the menu background music
+	
+	// Mix_HaltMusic();
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;
 	cout<<"Player level : "<<P_level<<endl;
@@ -1079,12 +1105,15 @@ void Game::run( )
 		currentTime = SDL_GetTicks()/1000; //time in seconds
 		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
-		
-		if( Mix_PlayingMusic() == 0 )
-		{
-			//Play the music
-			// Mix_PlayMusic( background_music, 1 );
-		}		
+		// play game back music here
+		sound.play_game_background_music();
+		// cout<< "game mix playing music : "<<Mix_PlayingMusic()<<endl;
+		// if( Mix_PlayingMusic() == 0 )
+		// {
+		// 	SDL_Delay(2500);
+		// 	//Play the music
+		// 	Mix_PlayMusic( game_background_music, -1 );
+		// }		
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
 		{

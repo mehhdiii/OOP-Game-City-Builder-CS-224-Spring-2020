@@ -36,6 +36,8 @@
 #include"draw_text.hpp"
 #include "map.hpp"
 
+#include "sound.hpp"
+
 using namespace std;
 Uint32 SDL_GetTicks(void);
 
@@ -104,10 +106,12 @@ class Game{
     // Fountain obj = Fountain(assets);
     // SDL_Rect src = {0, 0, 360, 400}; //object containing the coordinates to render from assets
     // SDL_Rect mover = {25,25,50,100}; //size of the object to draw on screen
+
     //sound variables:
     // Mix_Chunk *eggy = NULL; //egg splash.
     
-    Mix_Music *background_music = NULL; //plays in the background
+    // Mix_Music *menu_background_music = NULL; //plays in the background in the menu
+    // Mix_Music *game_background_music = NULL; //plays in the background in the game
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
     
@@ -135,7 +139,9 @@ class Game{
     template<typename Mytype>
     void Coordinate_sorting(vector<Mytype>&);
     
-    
+
+    // sound object
+    Sound sound;
     // struct sortbyYcoordinate
     // {
     //     bool operator() const (MyClass const & L, MyClass const & R) { return L.x < R.x; }
