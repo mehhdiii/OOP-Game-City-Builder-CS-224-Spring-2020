@@ -203,10 +203,6 @@ void Topbar::setRect(){
     oxygenlevel_mover.h = height;
 
 
-
-    
-
-
 }
 
 

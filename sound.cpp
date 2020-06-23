@@ -64,39 +64,25 @@ bool Sound::load_all_SFX_music(){
 }
 
 void Sound::play_click_music(){
-    //Play the music
     Mix_PlayChannel(-1, click_music, 0);
-    // Mix_PlayMusic( click_music, 1 );
 }
 
 void Sound::play_error_music(){
-    //Play the music
-    // Mix_PlayMusic( error_music, 1 );
+    Mix_PlayChannel(-1, error_music, 0);
 }
 
 void Sound::play_hover_music(){
-    // if( Mix_PlayingMusic() == 0 )
-    // {
-    //     //Play the music
-    //     Mix_PlayMusic( hover_music, -1 );
-    // }
-    //Play the music
-    
     Mix_PlayChannel(-1, hover_music, 0);
-    // Mix_PlayMusic( hover_music, 1);
 }   
 
 void Sound::play_loss_music(){
-    //Play the music
-    // Mix_PlayMusic( loss_music, 1 );
+    Mix_PlayChannel(-1, loss_music, 0);
 }
 
 void Sound::play_positive_music(){
-    //Play the music
-    // Mix_PlayMusic( positive_music, 1 );
+    Mix_PlayChannel(-1, positive_music, 0);
 }
 
 void Sound::play_victory_music(){
-    //Play the music
-    // Mix_PlayMusic( victory_music, 1 );
+    Mix_PlayChannel(-1, victory_music, 0);
 }
