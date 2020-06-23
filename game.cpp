@@ -1176,11 +1176,11 @@ void Game::run( )
 				}
 
 				//fix the object if the user clicks on the map with the object selected:
-				if(temp_object!=NULL && yMouse < SCREEN_HEIGHT - 300  &&  !detect_collision( xMouse, yMouse)){
+				else if(temp_object!=NULL && yMouse < SCREEN_HEIGHT - 300  &&  !detect_collision( xMouse, yMouse)){
 					
-					// store the object in a master all_object vector, 
-					map->check_grid(xMouse, yMouse);
-					all_objects.push_back(temp_object);
+					
+					map->check_grid(xMouse, yMouse); //corrects the mouse coordinates according to the grid. 
+					all_objects.push_back(temp_object); // store the object in a master all_object vector, 
 
 					// make individual class functions to update cash and XP_level
 					// industry and lab chezein bnaein unsy paisay mileingy

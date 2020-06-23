@@ -160,12 +160,14 @@ void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_le
 
     //now draw the text on screen
     //player level drawing
-    text_objects[0]->setText("THIS FREAKIN IS WORKING!!");
+    text_objects[0]->setText(std::to_string(main_cash));
     text_objects[1]->setText("THIS FREAKIN IS WORKING!!");
     // text_objects[0]->set_renderer(gRenderer);
     text_objects[0]->draw(gRenderer);
     text_objects[1]->draw(gRenderer);
-    
+    text_objects[2]->draw(gRenderer);
+    text_objects[3]->draw(gRenderer);
+    // text_objects[4]->draw(gRenderer);
 }
 
 void Topbar::setRect(){
