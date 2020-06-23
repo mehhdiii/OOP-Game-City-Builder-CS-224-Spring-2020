@@ -2,6 +2,7 @@
 #include<vector>
 #include<string>
 #include<iostream>
+#include"sound.hpp"
 #pragma once
 
 
@@ -39,7 +40,7 @@ class Menu{
     bool menuactive = true; //flag which maintains the menu state
     int get_selected_map(); //gets the value of which map to load on screen
     Menu();
-    void refresh(SDL_Renderer * gRenderer, int x, int y, bool click); //checks which sprites to draw and draws them on screen;
+    void refresh(SDL_Renderer * gRenderer, int x, int y, bool click, Sound &); //checks which sprites to draw and draws them on screen;
     void add_sprite(SDL_Texture*, int screen_number); //adds a sprite to the 2d vectors of sprites. 
     bool quit_game(); //checks if quit game was clicked 
     

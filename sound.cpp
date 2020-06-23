@@ -1,75 +1,101 @@
-// #include"sound.hpp"
+#include"sound.hpp"
 
 
-// Sound::Sound(SDL_Texture * asset){
-//     // setCoordinates(0,0);
-//     setSize(SCREEN_WIDTH, 45);
-//     setRect();
-    
-//     for(int i = 0; i<number_of_bars; i++){
-//         std::vector<SDL_Texture*> *v1 = new std::vector<SDL_Texture*>;
-//         stats_sprite.push_back(*v1);
-        
-//     }
-// }
+Sound::Sound(){
+}
 
+bool Sound::load_menu_background_music(){
+    bool success = true;
+    menu_background_music = Mix_LoadMUS("game_sounds/Inception.wav");
+    if(menu_background_music ==NULL ) // checks whether music has been loaded
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+    return success;
+}
 
-// void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
-//     // stats_sprite = sprite_texture;
-//     //pink == 0;    // xp_level
-//     //gold ==1;     // cash
-//     //green==2;     // green energy
-//     //blue==4;      // oxygen level
-//     if(sprite_color == -1){
-//         for(int i=0; i<4; i++){
-//             stats_sprite[i].push_back(sprite_texture);
-//         }
-//     }
-//     else{
-//         stats_sprite[sprite_color].push_back(sprite_texture);
-//     }
-// }
+void Sound::play_menu_background_music(){
+    if( Mix_PlayingMusic() == 0 )
+    {
+        //Play the music
+        Mix_PlayMusic( menu_background_music, -1 );
+    }
+}
 
-// void Topbar::draw(SDL_Renderer * gRenderer){ //, int & main_cash, int & XP_level
-//     SDL_RenderCopy(gRenderer, stats_sprite[1][4], NULL, &greenenergy_mover);
+void Sound::stop_music(){
+    Mix_HaltMusic();
+}
 
-//     SDL_RenderCopy(gRenderer, stats_sprite[2][2], NULL, &xplevel_mover);
+bool Sound::load_game_background_music(){
+    bool success = true;
+    game_background_music = Mix_LoadMUS("game_sounds/Game_Background.wav");
+	if(game_background_music ==NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+    return success;
+}
 
-//     SDL_RenderCopy(gRenderer, stats_sprite[3][3], NULL, &oxygenlevel_mover);
-// }
+void Sound::play_game_background_music(){
+    if( Mix_PlayingMusic() == 0 )
+    {
+        SDL_Delay(2500);
+        //Play the music
+        Mix_PlayMusic( game_background_music, -1 );
+    }	
+}    
 
-// void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_level, int & P_level, int & green_energy){
-    
-// }
+bool Sound::load_all_SFX_music(){
+    bool success = true;
+    click_music = Mix_LoadWAV("game_sounds/Click.wav");
+    error_music = Mix_LoadWAV("game_sounds/Error.wav");
+    hover_music = Mix_LoadWAV("game_sounds/Hover.wav");
+    loss_music = Mix_LoadWAV("game_sounds/Loss.wav");
+    positive_music = Mix_LoadWAV("game_sounds/Positive.wav"); 
+    victory_music = Mix_LoadWAV("game_sounds/Victory.wav");
+    if(click_music == NULL || error_music == NULL || hover_music == NULL || loss_music == NULL || positive_music ==NULL || victory_music == NULL) 
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+    return success;
+}
 
-// void Topbar::setRect(){
-//     int width = 103;
-//     int height = 32;
+void Sound::play_click_music(){
+    //Play the music
+    Mix_PlayChannel(-1, click_music, 0);
+    // Mix_PlayMusic( click_music, 1 );
+}
 
-//     cash_mover.x =150 + 10 + 20;
-//     cash_mover.y = 7;
-//     cash_mover.w = width;
-//     cash_mover.h = height;
+void Sound::play_error_music(){
+    //Play the music
+    // Mix_PlayMusic( error_music, 1 );
+}
 
-//     greenenergy_mover.x = 409 + 25 + 25 + 20 + 30 +10;
-//     greenenergy_mover.y = 7;
-//     greenenergy_mover.w = width;
-//     greenenergy_mover.h = height;
+void Sound::play_hover_music(){
+    // if( Mix_PlayingMusic() == 0 )
+    // {
+    //     //Play the music
+    //     Mix_PlayMusic( hover_music, -1 );
+    // }
+    //Play the music
+    Mix_PlayChannel(-1, hover_music, 0);
+    // Mix_PlayMusic( hover_music, 1);
+}   
 
-//     xplevel_mover.x = 736 + 20 + 20 +20 +20 +10;
-//     xplevel_mover.y = 7;
-//     xplevel_mover.w = width;
-//     xplevel_mover.h =height;
+void Sound::play_loss_music(){
+    //Play the music
+    // Mix_PlayMusic( loss_music, 1 );
+}
 
-//     oxygenlevel_mover.x = 1049+15 + 15;
-//     oxygenlevel_mover.y = 7;
-//     oxygenlevel_mover.w = width;
-//     oxygenlevel_mover.h = height;  
-// }
+void Sound::play_positive_music(){
+    //Play the music
+    // Mix_PlayMusic( positive_music, 1 );
+}
 
-
-// Topbar::~Topbar(){
-//     for(int i =0; i<number_of_bars; i++){
-//         stats_sprite[i].clear();
-//     }
-// }
+void Sound::play_victory_music(){
+    //Play the music
+    // Mix_PlayMusic( victory_music, 1 );
+}

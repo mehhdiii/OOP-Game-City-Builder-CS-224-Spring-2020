@@ -35,6 +35,8 @@
 
 #include "map.hpp"
 
+#include "sound.hpp"
+
 using namespace std;
 Uint32 SDL_GetTicks(void);
 
@@ -107,8 +109,8 @@ class Game{
     //sound variables:
     // Mix_Chunk *eggy = NULL; //egg splash.
     
-    Mix_Music *menu_background_music = NULL; //plays in the background in the menu
-    Mix_Music *game_background_music = NULL; //plays in the background in the game
+    // Mix_Music *menu_background_music = NULL; //plays in the background in the menu
+    // Mix_Music *game_background_music = NULL; //plays in the background in the game
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
 
@@ -129,7 +131,9 @@ class Game{
     template<typename Mytype>
     void Coordinate_sorting(vector<Mytype>&);
     
-    
+
+    // sound object
+    Sound sound;
     // struct sortbyYcoordinate
     // {
     //     bool operator() const (MyClass const & L, MyClass const & R) { return L.x < R.x; }
