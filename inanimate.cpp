@@ -16,7 +16,5 @@ void InAnimate::refresh_coordinates(int x, int y){
     Unit::setCoordinates(x, y); //
 }
 
-// void InAnimate::setfont(TTF_Font * myFont){
-    
-// }
+
 
