@@ -975,6 +975,7 @@ void Game::run_menu(){
 
 		}
 	}
+	sound.stop_music();
 }
 void Game::close_menu(){
 	
@@ -996,7 +997,7 @@ void Game::run( )
 	bool pause = false;
 	
 	// stopping the menu background music
-	sound.stop_music();
+	
 	// Mix_HaltMusic();
 	cout<<"Main Cash : "<<main_cash<<endl;
 	cout<<"XP_level : "<<XP_level<<endl;

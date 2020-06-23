@@ -17,6 +17,14 @@ class Menu{
     bool quit_= 0; //if the user presses quit
     //front end varibles:
     int current_screen; //stores which screen user is on. <0, main menu>, <1, map selection>, <2, player selection>, <3, credits>, <4, settings>
+    SDL_Texture * screen_ptr1; 
+    SDL_Texture * screen_ptr2; 
+    //these variables store which sprites are currently rendered to the screen and which were previously
+    // this is used to detect transition between sprites!
+    int previous_sprite_selected; 
+    int present_sprite_selected; 
+    
+    // int previous_screen; //stores which screen user was on before the current screen
     const int map_selection_box_width = 392-77; //map selection screen boxes 
     const int map_selection_box_height = 646 - 286;
     const int selection_box_w = 816 - 542; //main menu selection boxes

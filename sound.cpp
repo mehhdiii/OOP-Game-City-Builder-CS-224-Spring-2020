@@ -81,6 +81,7 @@ void Sound::play_hover_music(){
     //     Mix_PlayMusic( hover_music, -1 );
     // }
     //Play the music
+    
     Mix_PlayChannel(-1, hover_music, 0);
     // Mix_PlayMusic( hover_music, 1);
 }   

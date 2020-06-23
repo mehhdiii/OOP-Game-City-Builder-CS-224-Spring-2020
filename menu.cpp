@@ -4,6 +4,8 @@
 Menu::Menu(){
     current_screen = 0; //game starts at screen 0
     
+    present_sprite_selected = 0; 
+    previous_sprite_selected = present_sprite_selected;
     
     for(int i = 0; i<5; i++){
         std::vector<SDL_Texture*> * v1 = new std::vector<SDL_Texture*>;
@@ -31,37 +33,50 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
     std::cout << "in refresh menu "<<std::endl;
     std::cout << "music volume  "<< Mix_VolumeMusic(-1) <<std::endl;
     // sound.play_hover_music();
+    previous_sprite_selected = present_sprite_selected; //stores the previous selected sprite
     switch (current_screen)
     {
         // sound.play_hover_music();
+        
         case 0: //main menu
         {
             if((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 259 && yMouse <259+selection_box_h && current_screen==0)){ //first
+                present_sprite_selected = 1;
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[1], NULL, NULL);//Draws background to renderer
-                sound.play_hover_music();
+                if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if ((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 348 && yMouse <348+selection_box_h && current_screen==0)) {//second
+                present_sprite_selected = 2;
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[2], NULL, NULL);//Draws background to renderer
-                sound.play_hover_music();
+                if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             
             }
             else if ((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 433 && yMouse <433+selection_box_h && current_screen==0)) {//second
+                present_sprite_selected = 3;
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[3], NULL, NULL);//Draws background to renderer
-                sound.play_hover_music();
+                if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             
             }
             else if ((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 522 && yMouse <522+selection_box_h && current_screen==0)) {//second
+                present_sprite_selected = 4;
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[4], NULL, NULL);//Draws background to renderer
-                sound.play_hover_music();
+                if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             
             }
             else if ((xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 607 && yMouse <607+selection_box_h && current_screen==0)) {//second
+                present_sprite_selected = 5;
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[5], NULL, NULL);//Draws background to renderer
-                sound.play_hover_music();
+                if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else{
                 SDL_RenderCopy(gRenderer, (menu_sprites[0])[0], NULL, NULL);
-                sound.play_hover_music();
+                present_sprite_selected = 0; 
+                // sound.play_hover_music();
             }
             
             break;
