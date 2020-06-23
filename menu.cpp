@@ -84,28 +84,38 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
         case 1: //map selection screen
         {
             if(xMouse>77 && xMouse <77+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){//map1
+                present_sprite_selected = 1;
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[1], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){//map2
+                present_sprite_selected = 2;
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[2], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if(xMouse>704 && xMouse <704+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){//map3
+                present_sprite_selected = 3;
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[3], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if(xMouse>1018 && xMouse <1018+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){//map4
+                present_sprite_selected = 4;
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[4], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if(xMouse >1192 && yMouse >638){ //back!
+                present_sprite_selected = 5;
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[5], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else{
                 SDL_RenderCopy(gRenderer, (menu_sprites[1])[0], NULL, NULL); //unselected sprite
-                sound.play_hover_music();
+                // sound.play_hover_music();
             }
             break;
         }
@@ -113,16 +123,22 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
             
             
             if(xMouse > 293 && yMouse >273 && xMouse < 293+player_selection_box_w && yMouse < 273+player_selection_box_h){
+                present_sprite_selected = 1;
                 SDL_RenderCopy(gRenderer, (menu_sprites[2])[1], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if(xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){
+                present_sprite_selected = 2;
                 SDL_RenderCopy(gRenderer, (menu_sprites[2])[2], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else if(xMouse >1192 && yMouse >638){ 
+                present_sprite_selected = 3;
                 SDL_RenderCopy(gRenderer, (menu_sprites[2])[3], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else{
                 SDL_RenderCopy(gRenderer, (menu_sprites[2])[0], NULL, NULL);
@@ -133,12 +149,14 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
         case 3:{//credits
             
             if(xMouse >1192 && yMouse >638){ //back is pressed in  credits
+                present_sprite_selected = 1;
                 SDL_RenderCopy(gRenderer, (menu_sprites[3])[1], NULL, NULL);
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else{//normal credits!
                 SDL_RenderCopy(gRenderer, (menu_sprites[3])[0], NULL, NULL);
-                sound.play_hover_music();
+                // sound.play_hover_music();
             }
             
             break;
@@ -163,12 +181,15 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
 
             //rendering the back button
             if(xMouse >1192 && yMouse >638){
+                present_sprite_selected = 5;
                 SDL_RenderCopy(gRenderer, (menu_sprites[4])[5], NULL, &back_button_mover );
-                sound.play_hover_music();
+                 if(previous_sprite_selected!=present_sprite_selected)
+                    sound.play_hover_music();
             }
             else{
                 SDL_RenderCopy(gRenderer, (menu_sprites[4])[4], NULL, &back_button_mover );
-                sound.play_hover_music();
+                //  if(previous_sprite_selected!=present_sprite_selected)
+                //     sound.play_hover_music();
             }
             break;
 
@@ -190,11 +211,13 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
             case 0:{
                 if(xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 259 && yMouse <259+selection_box_h && current_screen==0){ //user selects new game
                 current_screen =1;
+                present_sprite_selected = 0; //resetting the sprite count
                 sound.play_click_music();
                 std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
                 else if( xMouse>545 && yMouse > 522 && xMouse < 545+selection_box_w && yMouse < 522+selection_box_h && current_screen==0){//user selects credits
                     current_screen = 3;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
@@ -202,11 +225,13 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
                     //exit!
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
+                    present_sprite_selected = 0; //resetting the sprite count
                     menuactive = false;
                     quit_ = true;
                 }
                 else if (xMouse > 545 && xMouse < 545+selection_box_w && yMouse > 433 && yMouse <433+selection_box_h){
                     current_screen = 4;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
@@ -216,18 +241,21 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
                 if(xMouse>77 && xMouse <77+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){
                     selected_map = 1;
                     current_screen =2;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
                 else if (xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){
                     selected_map = 2;
                     current_screen =2;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
                 else if(xMouse >1192 && yMouse >638) //selects back
                 {
                     current_screen = 0;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
@@ -237,17 +265,20 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
             case 2:{
                 if(xMouse > 293 && yMouse >273 && xMouse < 293+player_selection_box_w && yMouse < 273+player_selection_box_h){//selects male!
                     menuactive = false;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
                 else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){ //selects female!
                      menuactive = false;
+                     present_sprite_selected = 0; //resetting the sprite count
                      sound.play_click_music();
                      std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
                 else if(xMouse >1192 && yMouse >638) //selects back
                 {
                     current_screen = 1;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
@@ -256,6 +287,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
             case 3:{
                 if(xMouse >1192 && yMouse >638 && current_screen==3){//back from credits
                     current_screen = 0;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
@@ -264,6 +296,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
             case 4:{//settings
                 if(xMouse >1192 && yMouse >638){
                     current_screen = 0;
+                    present_sprite_selected = 0; //resetting the sprite count
                     sound.play_click_music();
                     std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
