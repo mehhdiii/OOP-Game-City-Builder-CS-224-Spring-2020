@@ -1024,7 +1024,10 @@ void Game::run( )
 		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
 		// play game back music here
-		sound.play_game_background_music();
+		if (sound.check_mute() != 1){
+			sound.play_game_background_music();
+		}
+		
 		// cout<< "game mix playing music : "<<Mix_PlayingMusic()<<endl;
 		// if( Mix_PlayingMusic() == 0 )
 		// {
@@ -1133,7 +1136,9 @@ void Game::run( )
 					// industry product ki progress front end py show krni h
 					if (temp_object->name == "farm"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Farm * myfarm = dynamic_cast<Farm *>(temp_object);
 						myfarm->setCoordinates(xMouse, yMouse);
 						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
@@ -1144,7 +1149,9 @@ void Game::run( )
 					//check other objects here!
 					else if (temp_object->name == "bird"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Bird * mybird = dynamic_cast<Bird *>(temp_object);
 						mybird->setCoordinates(xMouse, yMouse);
 						mybird->set_creation_time(currentTime);
@@ -1155,7 +1162,9 @@ void Game::run( )
 					
 					else if (temp_object->name == "building"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Building * mybuilding = dynamic_cast<Building *>(temp_object);
 						mybuilding->setCoordinates(xMouse, yMouse);
 						mybuilding->set_creation_time(currentTime);
@@ -1166,7 +1175,9 @@ void Game::run( )
 
 					else if (temp_object->name == "bank"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Bank * mybank = dynamic_cast<Bank *>(temp_object);
 						mybank->setCoordinates(xMouse, yMouse);
 						mybank->set_creation_time(currentTime);
@@ -1177,7 +1188,9 @@ void Game::run( )
 
 					else if (temp_object->name == "house"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						House * myhouse = dynamic_cast<House *>(temp_object);
 						myhouse->setCoordinates(xMouse, yMouse);
 						myhouse->set_creation_time(currentTime);
@@ -1188,7 +1201,9 @@ void Game::run( )
 
 					else if (temp_object->name == "industry"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Industry * myindustry = dynamic_cast<Industry *>(temp_object);
 						myindustry->setCoordinates(xMouse, yMouse);
 						myindustry->set_creation_time(currentTime);
@@ -1199,7 +1214,9 @@ void Game::run( )
 
 					else if (temp_object->name == "laboratory"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Laboratory * mylaboratory = dynamic_cast<Laboratory *>(temp_object);
 						mylaboratory->setCoordinates(xMouse, yMouse);
 						mylaboratory->set_creation_time(currentTime);
@@ -1210,7 +1227,9 @@ void Game::run( )
 
 					else if (temp_object->name == "park"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Park * mypark = dynamic_cast<Park *>(temp_object);
 						mypark->setCoordinates(xMouse, yMouse);
 						mypark->set_creation_time(currentTime);
@@ -1221,7 +1240,9 @@ void Game::run( )
 
 					else if (temp_object->name == "scientist"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Scientist * myscientist = dynamic_cast<Scientist *>(temp_object);
 						myscientist->setCoordinates(xMouse, yMouse);
 						myscientist->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for scientist
@@ -1234,7 +1255,9 @@ void Game::run( )
 
 					else if (temp_object->name == "solarpanel"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						SolarPanel * mysolarpanel = dynamic_cast<SolarPanel *>(temp_object);
 						mysolarpanel->setCoordinates(xMouse, yMouse);
 						mysolarpanel->set_creation_time(currentTime);
@@ -1245,7 +1268,9 @@ void Game::run( )
 
 					else if (temp_object->name == "tree"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Tree * mytree = dynamic_cast<Tree *>(temp_object);
 						mytree->setCoordinates(xMouse, yMouse);
 						mytree->set_creation_time(currentTime);
@@ -1256,7 +1281,9 @@ void Game::run( )
 
 					else if (temp_object->name == "turbine"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Turbine * myturbine = dynamic_cast<Turbine *>(temp_object);
 						myturbine->setCoordinates(xMouse, yMouse);
 						myturbine->set_creation_time(currentTime);
@@ -1267,7 +1294,9 @@ void Game::run( )
 
 					else if (temp_object->name == "vehicle"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Vehicle * myvehicle = dynamic_cast<Vehicle *>(temp_object);
 						myvehicle->setCoordinates(xMouse, yMouse);
 						myvehicle->set_creation_time(currentTime);
@@ -1278,7 +1307,9 @@ void Game::run( )
 
 					else if (temp_object->name == "worker"){
 						// cout<< detect_collision( xMouse, yMouse) <<endl;
-						sound.play_positive_music();
+						if (sound.check_sfx_mute() != 1){
+							sound.play_positive_music();
+						}
 						Worker * myworker = dynamic_cast<Worker *>(temp_object);
 						myworker->setCoordinates(xMouse, yMouse);
 						myworker->set_creation_time(currentTime); 

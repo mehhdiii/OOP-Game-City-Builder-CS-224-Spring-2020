@@ -62,6 +62,37 @@ bool Sound::load_all_SFX_music(){
 	}
     return success;
 }
+void Sound::pause_music(){
+    Mix_PauseMusic();
+}
+
+void Sound::resume_music(){
+    Mix_ResumeMusic();
+}
+
+void Sound::pause_sfx_music(){
+    Mix_Pause(-1);
+}
+
+void Sound::resume_sfx_music(){
+    Mix_Resume(-1);
+}
+
+bool Sound::check_mute(){
+    return bg_muted;
+}
+
+void Sound::set_mute(bool input){
+    bg_muted = input;
+}
+
+bool Sound::check_sfx_mute(){
+    return sfx_muted;
+}
+
+void Sound::set_sfx_mute(bool input){
+    sfx_muted = input;
+}
 
 void Sound::play_click_music(){
     Mix_PlayChannel(-1, click_music, 0);
