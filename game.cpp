@@ -5,16 +5,10 @@
 #include <time.h>       /* time */
 using namespace std;
 #include<list>
-
-
-
-
 bool Game::init()
 {
-	
 	//Initialization flag
 	bool success = true;
-
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
 	{
@@ -28,10 +22,7 @@ bool Game::init()
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
 		}
-
 		//Create window
-
-
 		gWindow = SDL_CreateWindow( "City Builder", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
@@ -49,11 +40,7 @@ bool Game::init()
 			}
 			else
 			{
-				//set the renderer for texts
-				// texts_object.set_renderer(gRenderer);
-				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -79,9 +66,6 @@ bool Game::init()
 
 	return success;
 }
-
-
-
 bool Game::loadMenu(){
 	bool success = true;
 	int menu_sprite_range = 6;
@@ -99,7 +83,6 @@ bool Game::loadMenu(){
 		else{
 			success = false;
 		}
-		
 	}
 	//loading map menu
 	for(int i=1; i<=menu_sprite_range; i++){
@@ -128,7 +111,6 @@ bool Game::loadMenu(){
 			cout <<"failed to load texture" <<endl;
 			success = false;
 		}
-		
 	}
 	menu_sprite_range = 2;
 	for(int i = 1; i<=menu_sprite_range; i++){
@@ -167,50 +149,23 @@ bool Game::loadMenu(){
 			success= false;
 		}
 	}	
-	
-	//loading all music for the game:
-	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	// menu_background_music = sound->load_menu_background_music();
-	// menu_background_music = Mix_LoadMUS("game_sounds/Inception.wav");
 	success = sound.load_menu_background_music();
 	success = sound.load_all_SFX_music();
-	// sound->load_menu_background_music();
-	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
-	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	// if(menu_background_music ==NULL )
-	// {
-	// 	cout<<"back ground music loading failed"<<endl;
-	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-	// 	success = false;
-	// }
-	// cout<<"back ground music loading sccessful"<<endl;
-	// return success;
-
-
 	return success;
 }
 
 bool Game::loadMedia()
-
 {
 	//Loading success flag
 	bool success = true;
 	SDL_Texture * tex = NULL;
-
-	//loading menu
-	//creating  menu object:
 	//Open the font
     gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
     if( gFont == NULL )
     {
-		// cout << "hello jee" <<endl;
         printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
         success = false;
     }
-	// else{
-		// texts_object.set_font(gFont);
-	// }
-	
 	//loading option bar:
 	tex = loadTexture("bars/Shop.png");
 	if(tex!=NULL){
@@ -220,8 +175,6 @@ bool Game::loadMedia()
 		printf("Unable to load texture");
 		success= false;
 	}
-	
-
 	//loading top bar:
 	tex = loadTexture("bars/Top_Menu.png");
 	if(tex!=NULL){
@@ -232,10 +185,7 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
-	
 	//now load the statics sprites on the topbar;
-
-	// for(int i=0; i<4; i++){
 	string spritename = "";
 	spritename = "bars/scorebar/Empty.png";
 	cout << spritename <<endl; 
@@ -247,8 +197,6 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
-	
-	// }
 	for(int i=0; i<4; i++){
 		spritename = "";
 		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
@@ -261,7 +209,6 @@ bool Game::loadMedia()
 			success = false;
 			printf("Unable to load texture");
 		}
-		
 	}
 	for(int i=0; i<4; i++){
 		spritename = "";
