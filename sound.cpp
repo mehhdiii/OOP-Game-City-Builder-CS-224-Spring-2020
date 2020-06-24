@@ -100,3 +100,7 @@ void Sound::play_victory_music(){
     //Play the music
     // Mix_PlayMusic( victory_music, 1 );
 }
+
+Sound::~Sound(){
+    
+}

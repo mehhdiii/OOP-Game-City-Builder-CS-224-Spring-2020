@@ -21,5 +21,6 @@ class Tree: public InAnimate{
         void update_scores(int &, int &);
         void showOxygenGen();
         void set_creation_time(int);
+        ~Tree();
 };
 

@@ -20,5 +20,6 @@ class SolarPanel: public InAnimate{
         void setEnergy(int);
         void show_all_features();
         void set_creation_time(int);
+        ~SolarPanel();
 };
 

@@ -22,3 +22,7 @@ int Unit::getw(){
 int Unit::geth(){
     return mover.h;
 }
+
+Unit::~Unit(){
+    
+}

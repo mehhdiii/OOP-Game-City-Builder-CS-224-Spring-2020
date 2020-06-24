@@ -45,6 +45,7 @@ class Draw_text
         void draw(SDL_Renderer * );
         void setCoordinates(int, int);
         void setText(std::string );
+		// ~Draw_text();
 
 	private:
 		//The actual hardware texture

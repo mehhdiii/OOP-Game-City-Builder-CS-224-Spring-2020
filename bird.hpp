@@ -15,4 +15,5 @@ class Bird: public Animate{
         void update_scores(int &, int &);
         void setCoordinates(int , int );
         void set_creation_time(int);
+        ~Bird();
 };

@@ -32,4 +32,7 @@ class Map: public Unit{
 
         void add_grid_point(); //add the grid point into the map array
         void check_grid(int&, int&);
+        void get_relative_coordinates(int &xr, int &yr);
+        void set_relative_coordinates(int, int);
+        ~Map();
 };

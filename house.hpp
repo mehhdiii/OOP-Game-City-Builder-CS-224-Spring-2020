@@ -23,4 +23,5 @@ class House: public Building{
         void setPeoplecount(int);
         void setPrice(int);
         void set_creation_time(int);
+        ~House();
 };

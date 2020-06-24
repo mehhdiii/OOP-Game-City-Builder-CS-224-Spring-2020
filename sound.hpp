@@ -33,4 +33,5 @@ class Sound{
     void stop_music();
     bool load_game_background_music();
     void play_game_background_music();    
+    ~Sound();
 };

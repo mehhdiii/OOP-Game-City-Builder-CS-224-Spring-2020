@@ -37,6 +37,14 @@
 #include"draw_text.hpp"
 #include "map.hpp"
 #include "sound.hpp"
+
+
+// Forward declaration of class boost::serialization::access
+namespace boost {
+namespace serialization {
+class access;
+}
+}
 using namespace std;
 Uint32 SDL_GetTicks(void);
 class Game{
@@ -102,6 +110,7 @@ class Game{
     int XP_level = 0;
     int P_level = 1; // first level
     int oxygen_level = 21; // percentage of oxygen level in the city.. upper bound is 21 and lower bound 14 or lower.    
+    //a template which sorts the array of objects to draw on screen by using stl sorting algorithm (with respect to the y coordinate of objects)
     template<typename T>
     struct sortbyC{
 		 bool operator() (const T &L,const T &R) const
@@ -113,6 +122,17 @@ class Game{
     void Coordinate_sorting(vector<Mytype>&);
     // sound object
     Sound sound;
+    //creating serialization template
+    // Allow serialization to access non-public data members.
+    friend class boost::serialization::access;
+    template<typename Archive>
+    void serialize(Archive& ar, const unsigned version) {
+        ar & all_objects;  // serializing drawn objects on screen
+    }
+    //load game template: this is called to recreate all the objects stored in the game
+    template<typename T>
+    void recreate_object(vector<T*> &v, int size, vector<int>&, SDL_Texture* texture_name);
+    void clear_memory();
 public:
     void update_parameters();
     bool init();
@@ -136,5 +156,9 @@ public:
     void draw_all(SDL_Renderer *);
     template<typename mytype> //template to store a generic type of object vector for passing into the function
     bool helper_detect_collision(int x, int y, vector<mytype*> obj); //helper function for detect collision using template
+    void save_game();
+    void load_game();
+    void delete_all_objects_in_memory();
+    ~Game();
 };
 

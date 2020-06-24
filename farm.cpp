@@ -33,3 +33,7 @@ void Farm::addProduct(std::string product, int balance){
 void Farm::set_creation_time(int c_t){
     creation_time = c_t/1000; //creation time in seconds
 }
+
+Farm::~Farm(){
+    
+}

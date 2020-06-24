@@ -130,3 +130,15 @@ void Map::check_grid(int &x, int&y){
     // }
 
 }
+void Map::get_relative_coordinates(int &xr, int &yr){
+    xr = src.x;
+    yr = src.y;
+}
+void Map::set_relative_coordinates(int xr, int yr){
+    src.x = xr; 
+    src. y = yr; 
+}
+
+Map::~Map(){
+    
+}

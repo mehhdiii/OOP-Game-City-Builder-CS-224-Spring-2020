@@ -18,11 +18,7 @@ Draw_text::Draw_text()
 
 }
 
-Draw_text::~Draw_text()
-{
-	//Deallocate
-	free();
-}
+
 
 bool Draw_text::loadFromFile( std::string path )
 {
@@ -179,4 +175,9 @@ void Draw_text::setText(std::string txt){
 void Draw_text::setCoordinates(int x, int y){
     xCoordinate = x;
     yCoordinate = y;
+}
+Draw_text::~Draw_text()
+{
+	//Deallocate
+	free();
 }

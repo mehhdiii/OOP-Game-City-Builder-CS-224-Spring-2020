@@ -42,3 +42,6 @@ void Building::show_progress(){
         std::cout << "Your product is still in progress " << progress << " %." << std::endl; 
     }
 }
+Building::~Building(){
+    
+}

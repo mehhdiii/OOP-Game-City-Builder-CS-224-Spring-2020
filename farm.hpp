@@ -5,6 +5,13 @@
 
 #pragma once
 #include<vector>
+//creating serialization namespace
+namespace boost {
+namespace serialization {
+class access;
+}
+}
+
 class Farm: public Building{
 
     private:
@@ -15,10 +22,21 @@ class Farm: public Building{
         std::vector <int> product_cost; //costs of all products
         std::vector <bool> active_products;
         float creation_time;
+        //serialization template
+        friend class boost::serialization::access;
+        template<typename Archive>
+        void serialize(Archive& ar, const unsigned version) {
+            ar & products & product_cost;  // Simply serialize the data members of Obj
+        }
+
+
+
+
     public:
 
         Farm(SDL_Texture * );
         void update_scores(int &, int &);
         void addProduct(std::string, int);
         void set_creation_time(int);
+        ~Farm();
 };

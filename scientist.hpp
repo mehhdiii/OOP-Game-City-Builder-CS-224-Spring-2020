@@ -25,4 +25,5 @@ class Scientist: public Animate{
 
         void increase_scientist();
         int show_scientist_count();
+        ~Scientist();
 };

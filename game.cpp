@@ -954,6 +954,182 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 
 
 }
+void Game::save_game(){
+	{
+    // Create an output archive
+	int xr, yr; 
+	map->get_relative_coordinates(xr, yr);
+    std::ofstream ofs("saved_game.txt");
+    boost::archive::text_oarchive ar(ofs);
+	int all_obj_saving = all_objects.size(); //saving all objects count
+	ar & xr & yr; 
+	// int farms_size = farms.size();
+	// int banks_size = banks.size();
+	// int houses_size = houses.size();
+	//sending sizes of all objects
+	ar & farms.size() ;
+	// ar & farms_size; 
+	for(auto i = farms.begin(); i!= farms.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar & banks.size() ;
+
+	for(auto i = banks.begin(); i!= banks.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar& houses.size() ;
+
+	for(auto i = houses.begin(); i!= houses.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar & industries.size() ;
+
+	for(auto i = industries.begin(); i!= industries.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar & laboratories.size() ;
+
+	for(auto i = laboratories.begin(); i!= laboratories.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar& parks.size() ;
+	for(auto i = parks.begin(); i!= parks.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	// ar& solarpanels.size() ;
+	// for(auto i = solarpanels.begin(); i!= solarpanels.end(); i++){//running loop to count how many farms and stuff etc!
+	// 	ar & (*i)->getx() & (*i)->gety(); 
+	// }
+	ar&trees.size() ;
+	for(auto i = trees.begin(); i!= trees.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar& turbines.size() ;
+	for(auto i = turbines.begin(); i!= turbines.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+	ar& vehicles.size();
+	for(auto i = vehicles.begin(); i!= vehicles.end(); i++){//running loop to count how many farms and stuff etc!
+		ar & (*i)->getx() & (*i)->gety(); 
+	}
+  }
+}
+
+void Game::delete_all_objects_in_memory(){
+	Unit * temp_ptr; 
+	for(auto i = farms.begin(); i!=farms.end(); i++){
+		temp_ptr=*i;
+		// delete (*i);
+		farms.erase(i);
+		delete temp_ptr;
+	}
+}
+void Game::load_game(){
+	delete_all_objects_in_memory();
+	cout << "load game called" <<endl;
+	// vector<Farm *> test_farms; 
+	int size_of_all_loaded_objects;
+	int obj_count; 
+	int xr, yr; 
+	{
+    // Create and input archive
+    std::ifstream ifs("saved_game.txt");
+    boost::archive::text_iarchive ar(ifs);
+	vector<int> coordinates; 
+    // Load data coordinates
+	ar & xr & yr; 
+	map->set_relative_coordinates(xr, yr);
+	ar & obj_count;
+	int tempx, tempy; //coordinates temporary variable
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Farm> (farms, obj_count, coordinates, forest_texture); 
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Bank> (banks, obj_count, coordinates, bank_texture);
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<House> (houses, obj_count, coordinates, house_texture);
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Industry> (industries, obj_count, coordinates, industry_texture);
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Laboratory> (laboratories, obj_count, coordinates, lab_texture);
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Park> (parks, obj_count, coordinates, park_texture);
+	// ar & obj_count;
+	// for(auto i = 0; i<obj_count; i++){
+	// 	ar & tempx; 
+	// 	ar & tempy;
+	// 	coordinates.push_back(tempx);
+	// 	coordinates.push_back(tempy);
+	// }
+    // recreate_object<SolarPanel> (solarpanels, obj_count, coordinates, solarpanel_texture);
+	ar & obj_count;
+	for(auto i = 0; i<obj_count; i++){
+		ar & tempx; 
+		ar & tempy;
+		coordinates.push_back(tempx);
+		coordinates.push_back(tempy);
+	}
+    recreate_object<Tree> (trees, obj_count, coordinates, tree_texture);
+	
+  	}
+	map->set_relative_coordinates(xr, yr);
+	// cout << "successfully saved and loaded: " <<  << endl;
+}
+template<typename T>
+void Game::recreate_object(vector<T*>& v, int size,vector<int> &coordinates, SDL_Texture *texture_name){
+	T *temp_pointer; 
+	int x, y;
+	for(int i = 0;  i<size; i++){
+		temp_pointer = new T(texture_name);
+		if(temp_pointer==NULL){
+			cout << "Failed to create a new object." <<endl;
+		}
+		x = (*(coordinates.begin()));
+		coordinates.erase(coordinates.begin());
+		y = (*(coordinates.begin()));
+		coordinates.erase(coordinates.begin());
+		temp_pointer->refresh_coordinates(x, y); 
+		v.push_back(temp_pointer);
+		all_objects.push_back(temp_pointer);
+	}
+
+}
+
+
 
 
 void Game::run_menu(){
@@ -988,6 +1164,7 @@ void Game::run_menu(){
 				menu->menuactive = false;
 				break;
 			}
+			
 			int xMouse, yMouse;
 			SDL_GetMouseState(&xMouse,&yMouse);
 
@@ -1054,13 +1231,6 @@ void Game::run( )
 		
 		// play game back music here
 		sound.play_game_background_music();
-		// cout<< "game mix playing music : "<<Mix_PlayingMusic()<<endl;
-		// if( Mix_PlayingMusic() == 0 )
-		// {
-		// 	SDL_Delay(2500);
-		// 	//Play the music
-		// 	Mix_PlayMusic( game_background_music, -1 );
-		// }		
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
 		{
@@ -1075,9 +1245,16 @@ void Game::run( )
 			//User requests quit
 			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
-				
 				quit = true;
 				break;
+			}
+			//check if user requests save game:
+			if(e.key.keysym.sym == SDLK_s && e.type == SDL_KEYDOWN){
+				save_game();
+				
+			}
+			else if(e.key.keysym.sym == SDLK_l && e.type == SDL_KEYDOWN){
+				load_game();
 			}
 			//user requests pause
 			// if (e.type==SDL_KEYDOWN ){
@@ -1356,4 +1533,8 @@ void Game::run( )
 	// cout<<"Main Cash : "<<main_cash<<endl;
 	// cout<<"XP_level : "<<XP_level<<endl;
 	// cout<<"Player level : "<<P_level<<endl;
+}
+
+Game::~Game(){
+	
 }

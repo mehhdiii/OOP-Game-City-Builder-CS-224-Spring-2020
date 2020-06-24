@@ -33,4 +33,5 @@ class Laboratory: public Building{
         std::string getTechnology();
         void set_creation_time(int);
         float collect_rewards();
+        ~Laboratory();
 };
