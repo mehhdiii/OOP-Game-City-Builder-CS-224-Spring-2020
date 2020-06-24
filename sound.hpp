@@ -17,6 +17,8 @@ class Sound{
         Mix_Chunk *loss_music = NULL; //plays in the background in the menu
         Mix_Chunk *positive_music = NULL; //plays in the background in the game
         Mix_Chunk *victory_music = NULL; //plays in the background in the menu
+        bool bg_muted = 0;
+        bool sfx_muted = 0;
     public:
 
     Sound();
@@ -33,4 +35,12 @@ class Sound{
     void stop_music();
     bool load_game_background_music();
     void play_game_background_music();    
+    void pause_music();
+    void resume_music();
+    void pause_sfx_music();
+    void resume_sfx_music();
+    bool check_mute();
+    void set_mute(bool);
+    bool check_sfx_mute();
+    void set_sfx_mute(bool);
 };

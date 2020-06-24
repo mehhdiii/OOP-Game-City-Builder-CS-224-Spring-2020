@@ -46,6 +46,7 @@ class Menu{
     
     public:
     bool menuactive = true; //flag which maintains the menu state
+    bool check_mute();
     int get_selected_map(); //gets the value of which map to load on screen
     Menu();
     void refresh(SDL_Renderer * gRenderer, int x, int y, bool click, Sound &); //checks which sprites to draw and draws them on screen;

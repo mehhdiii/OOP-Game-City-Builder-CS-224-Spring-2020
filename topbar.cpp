@@ -223,9 +223,6 @@ void Topbar::setRect(){
     //setting coordinates of text object
     text_objects[0]->setCoordinates(greenenergy_mover.x+greenenergy_mover.w, greenenergy_mover.y);
     text_objects[1]->setCoordinates(oxygenlevel_mover.x+oxygenlevel_mover.w, oxygenlevel_mover.y );
-    
-
-    
 
 
 }
