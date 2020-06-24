@@ -167,7 +167,7 @@ void Draw_text::set_font(TTF_Font * font){
 
 
 void Draw_text::draw(SDL_Renderer * Renderer){
-    SDL_Color textColor = { 0, 0, 0 };
+    SDL_Color textColor = { 255, 255, 255 };
     gRenderer = Renderer; 
 
 	loadFromRenderedText(text, textColor);

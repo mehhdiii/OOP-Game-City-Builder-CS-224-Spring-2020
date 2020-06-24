@@ -123,7 +123,7 @@ class Game{
 
 
     // scores for the top bar
-    int main_cash = 100000000;
+    int main_cash = 10000;
     int green_energy = 0; // MegaWatts
     int XP_level = 0;
     int P_level = 1; // first level
