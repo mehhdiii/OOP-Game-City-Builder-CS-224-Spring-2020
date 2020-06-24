@@ -237,21 +237,21 @@ bool Game::loadMedia()
 
 	// for(int i=0; i<4; i++){
 	string spritename = "";
-	spritename = "bars/scorebar/Empty.png";
-	cout << spritename <<endl; 
-	tex = loadTexture(spritename);
-	if(tex!=NULL){
-		topbar->add_static_sprite(tex, -1); 
-	}
-	else{
-		success = false;
-		printf("Unable to load texture");
-	}
+	// spritename = "bars/scorebar/Empty.png";
+	// cout << spritename <<endl; 
+	// tex = loadTexture(spritename);
+	// if(tex!=NULL){
+	// 	topbar->add_static_sprite(tex, -1); 
+	// }
+	// else{
+	// 	success = false;
+	// 	printf("Unable to load texture");
+	// }
 	
 	// }
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Pink.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -263,9 +263,9 @@ bool Game::loadMedia()
 		}
 		
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Gold.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Gold.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -277,9 +277,9 @@ bool Game::loadMedia()
 		}
 		
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Green.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Green.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -291,9 +291,9 @@ bool Game::loadMedia()
 		}
 		
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Blue.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Blue.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex != NULL){

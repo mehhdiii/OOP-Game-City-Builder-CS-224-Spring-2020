@@ -24,14 +24,17 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     //gold ==1;     // cash
     //green==2;     // green energy
     //blue==4;      // oxygen level
-    if(sprite_color == -1){
-        for(int i=0; i<4; i++){
-            stats_sprite[i].push_back(sprite_texture);
-        }
-    }
-    else{
-        stats_sprite[sprite_color].push_back(sprite_texture);
-    }   
+    // for(int i=0; i<5; i++){
+    stats_sprite[sprite_color].push_back(sprite_texture);
+    
+    // if(sprite_color == -1){
+    //     for(int i=0; i<4; i++){
+    //         stats_sprite[i].push_back(sprite_texture);
+    //     }
+    // }
+    // else{
+    //     stats_sprite[sprite_color].push_back(sprite_texture);
+    // }   
 }
 
 void Topbar::draw(SDL_Renderer * gRenderer){ //, int & main_cash, int & XP_level
@@ -168,35 +171,35 @@ void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_le
 }
 
 void Topbar::setRect(){
-    int width = 103;
-    int height = 32;
+    int width = 120;
+    int height = 40;
     
     cash_mover.x =180+20;
-    cash_mover.y = 7;
+    cash_mover.y = 3;
     cash_mover.w = width;
     cash_mover.h = height;
 
     greenenergy_mover.x = 519+20;
-    greenenergy_mover.y = 7;
+    greenenergy_mover.y = 3;
     greenenergy_mover.w = width;
     greenenergy_mover.h = height;
 
     xplevel_mover.x = 826+20;
-    xplevel_mover.y = 7;
+    xplevel_mover.y = 3;
     xplevel_mover.w = width;
     xplevel_mover.h =height;
 
     oxygenlevel_mover.x = 1079+45;
-    oxygenlevel_mover.y = 7;
+    oxygenlevel_mover.y = 3;
     oxygenlevel_mover.w = width;
     oxygenlevel_mover.h = height;
 
     //setting coordinates of text object
 
-    text_objects[0]->setCoordinates(1079 -30, oxygenlevel_mover.y); //+oxygenlevel_mover.w
-    text_objects[1]->setCoordinates(826 -40, xplevel_mover.y );//+xplevel_mover.w
-    text_objects[2]->setCoordinates(519-35, greenenergy_mover.y);//+greenenergy_mover.w
-    text_objects[3]->setCoordinates(180-40, cash_mover.y ); //+cash_mover.w  
+    text_objects[0]->setCoordinates(1079 -30, oxygenlevel_mover.y+5); //+oxygenlevel_mover.w
+    text_objects[1]->setCoordinates(826 -40, xplevel_mover.y +5);//+xplevel_mover.w
+    text_objects[2]->setCoordinates(519-35, greenenergy_mover.y+5);//+greenenergy_mover.w
+    text_objects[3]->setCoordinates(180-40, cash_mover.y +5); //+cash_mover.w  
 }
 
 
