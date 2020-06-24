@@ -96,4 +96,6 @@ void OptionBar::place_object(bool click, int x, int y){
 // void optionBar::setPrice(int house_price){
 //     // pricing = house_price;
 // }
-
+OptionBar::~OptionBar(){
+    
+}

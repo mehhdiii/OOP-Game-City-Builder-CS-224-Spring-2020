@@ -111,7 +111,7 @@ void Map::check_grid(int &x, int&y){
             min_dis = temp_dis; 
             minx = grid_x[i];
             miny = grid_y[i]; 
-            std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
+            // std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
         }
         // if(x > grid_x[i] && )
 
@@ -129,4 +129,16 @@ void Map::check_grid(int &x, int&y){
         
     // }
 
+}
+void Map::get_relative_coordinates(int &xr, int &yr){
+    xr = src.x;
+    yr = src.y;
+}
+void Map::set_relative_coordinates(int xr, int yr){
+    src.x = xr; 
+    src. y = yr; 
+}
+
+Map::~Map(){
+    
 }

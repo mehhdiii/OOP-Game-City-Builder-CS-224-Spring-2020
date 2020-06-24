@@ -17,4 +17,9 @@ void InAnimate::refresh_coordinates(int x, int y){
 }
 
 
+InAnimate::~InAnimate(){
+    
+}
+
+
 

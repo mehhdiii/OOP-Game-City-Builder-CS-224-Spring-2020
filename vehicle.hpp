@@ -17,4 +17,5 @@ class Vehicle: public InAnimate{
         void update_scores(int &, int &);
         void upgrade(int current_balance);
         void set_creation_time(int);
+        ~Vehicle();
 };

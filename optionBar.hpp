@@ -27,4 +27,5 @@ class OptionBar: public Unit{
         // int getLocalityGrading();
         // void setPeoplecount(int);
         // void setPrice(int);
+        ~OptionBar();
 };

@@ -21,4 +21,5 @@ class Turbine: public InAnimate{
         // void setPeoplecount(int);
         // void setPrice(int);
         void set_creation_time(int);
+        ~Turbine();
 };

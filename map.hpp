@@ -30,4 +30,7 @@ class Map: public Unit{
         bool scrolling_flag(bool, bool, bool, bool); // checks if scrolling is possible
         void add_grid_point(); //add the grid point into the map array
         void check_grid(int&, int&);
+        void get_relative_coordinates(int &xr, int &yr);
+        void set_relative_coordinates(int, int);
+        ~Map();
 };

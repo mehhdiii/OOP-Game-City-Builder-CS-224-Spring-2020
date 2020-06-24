@@ -39,4 +39,7 @@ class Industry: public Building{
         void show_all_features();
         float collect_rewards();
         void set_creation_time(int);
+
+        ~Industry();
 };
+

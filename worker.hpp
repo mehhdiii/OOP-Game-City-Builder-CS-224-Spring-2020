@@ -19,4 +19,6 @@ class Worker: public Animate{
         void deploy();
         void show_all_features();
         void set_creation_time(int);
+        ~Worker();
+        
 };

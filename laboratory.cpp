@@ -90,3 +90,7 @@ float Laboratory::collect_rewards(){
         return -1.0;
     }
 }
+
+Laboratory::~Laboratory(){
+    
+}
