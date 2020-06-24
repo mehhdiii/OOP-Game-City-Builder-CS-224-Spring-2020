@@ -11,6 +11,7 @@
 class Farm: public Building{
 
     private:
+    
         const int WIDTH = 80;
         const int HEIGHT = 0.5625*WIDTH;
         std::string type;

@@ -11,6 +11,7 @@ class Topbar: public Unit{
     private:
         int number_of_bars=4;
         int transition_in_stat_sprite =5;
+        int cash;
         std::vector<std::vector<SDL_Texture*>> stats_sprite;
         SDL_Rect cash_mover;
         SDL_Rect greenenergy_mover;
