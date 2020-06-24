@@ -5,16 +5,10 @@
 #include <time.h>       /* time */
 using namespace std;
 #include<list>
-
-
-
-
 bool Game::init()
 {
-	
 	//Initialization flag
 	bool success = true;
-
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
 	{
@@ -28,10 +22,7 @@ bool Game::init()
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
 		}
-
 		//Create window
-
-
 		gWindow = SDL_CreateWindow( "City Builder", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
@@ -49,11 +40,7 @@ bool Game::init()
 			}
 			else
 			{
-				//set the renderer for texts
-				// texts_object.set_renderer(gRenderer);
-				//Initialize renderer color
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -79,9 +66,6 @@ bool Game::init()
 
 	return success;
 }
-
-
-
 bool Game::loadMenu(){
 	bool success = true;
 	int menu_sprite_range = 6;
@@ -99,7 +83,6 @@ bool Game::loadMenu(){
 		else{
 			success = false;
 		}
-		
 	}
 	//loading map menu
 	for(int i=1; i<=menu_sprite_range; i++){
@@ -128,7 +111,6 @@ bool Game::loadMenu(){
 			cout <<"failed to load texture" <<endl;
 			success = false;
 		}
-		
 	}
 	menu_sprite_range = 2;
 	for(int i = 1; i<=menu_sprite_range; i++){
@@ -167,50 +149,23 @@ bool Game::loadMenu(){
 			success= false;
 		}
 	}	
-	
-	//loading all music for the game:
-	// eggy = Mix_LoadWAV( "eggy_splash.wav" );
-	// menu_background_music = sound->load_menu_background_music();
-	// menu_background_music = Mix_LoadMUS("game_sounds/Inception.wav");
 	success = sound.load_menu_background_music();
 	success = sound.load_all_SFX_music();
-	// sound->load_menu_background_music();
-	// bird1 = Mix_LoadWAV("Waltz-music-loop/bird1.wav");
-	// bird2 = Mix_LoadWAV("Waltz-music-loop/bird2.wav");
-	// if(menu_background_music ==NULL )
-	// {
-	// 	cout<<"back ground music loading failed"<<endl;
-	// 	printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-	// 	success = false;
-	// }
-	// cout<<"back ground music loading sccessful"<<endl;
-	// return success;
-
-
 	return success;
 }
 
 bool Game::loadMedia()
-
 {
 	//Loading success flag
 	bool success = true;
 	SDL_Texture * tex = NULL;
-
-	//loading menu
-	//creating  menu object:
 	//Open the font
     gFont = TTF_OpenFont( "fonts/EvilEmpire-4BBVK.ttf", 28 );
     if( gFont == NULL )
     {
-		// cout << "hello jee" <<endl;
         printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
         success = false;
     }
-	// else{
-		// texts_object.set_font(gFont);
-	// }
-	
 	//loading option bar:
 	tex = loadTexture("bars/Shop_new.png");
 	if(tex!=NULL){
@@ -220,8 +175,6 @@ bool Game::loadMedia()
 		printf("Unable to load texture");
 		success= false;
 	}
-	
-
 	//loading top bar:
 	tex = loadTexture("bars/Top_Bar_new.png");
 	if(tex!=NULL){
@@ -232,10 +185,7 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
-	
 	//now load the statics sprites on the topbar;
-
-	// for(int i=0; i<4; i++){
 	string spritename = "";
 	// spritename = "bars/scorebar/Empty.png";
 	// cout << spritename <<endl; 
@@ -261,7 +211,6 @@ bool Game::loadMedia()
 			success = false;
 			printf("Unable to load texture");
 		}
-		
 	}
 	for(int i=0; i<5; i++){
 		spritename = "";
@@ -774,50 +723,12 @@ void Game::hover_object_with_cursor(){
 
 template<typename mytype> //template to store a generic type of object vector for passing into the function
 bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
-    {
-	
-	int sp_of_temp_obj_x = temp_object->getx();
-	int sp_of_temp_obj_y = temp_object->gety();
-	int ep_of_temp_obj_x = x+temp_object->getw();
-	int ep_of_temp_obj_y = y + temp_object->geth();
-    int min_distance_for_collision;
-	//static object
-	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
-	
-	bool yChecksp = 0;
-	bool yCheckep = 0;
-	bool xChecksp = 0;
-	bool xCheckep = 0;
-    
+{
 	for(auto i = obj.begin(); i!= obj.end(); i++){
-        // min_distance_for_collision = sqrt(pow( (temp_object->getw() ), 2 ) + pow((temp_object->geth()), 2))/2 + sqrt(pow( ((*i)->getw() ), 2 ) + pow(((*i)->geth()), 2))/2;
-		min_distance_for_collision = temp_object->getw()/4 + (*i)->getw()/4;
-		sp_of_static_obj_x = (*i)->getx();
-		sp_of_static_obj_y = (*i)->gety();
-		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
-		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
-
-		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
-		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
-		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
-		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
-
-		// if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
-			
-		// 	break;
-		// }
-        int distance = sqrt(pow((sp_of_static_obj_x +temp_object->getw()/2 - ((sp_of_temp_obj_x)+ (*i)->getw()/2)),2) + pow((sp_of_static_obj_y+temp_object->geth()/2  - (sp_of_temp_obj_y +(*i)->geth()/2)), 2));
-        //new test logic of distance formula
-        //checking the distance:
-
-        if (distance < min_distance_for_collision){
-            return 1;
+		if ((*(*i)==temp_object)){ //overloaded operator
+			return 1;
         }
-
-        
-
     }
-	// return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
 	return 0; 
 }
 
@@ -1009,6 +920,8 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 }
 
 
+
+
 void Game::run_menu(){
 
 	bool click; 
@@ -1041,6 +954,7 @@ void Game::run_menu(){
 				menu->menuactive = false;
 				break;
 			}
+			
 			int xMouse, yMouse;
 			SDL_GetMouseState(&xMouse,&yMouse);
 
@@ -1106,6 +1020,7 @@ void Game::run( )
 		// cout<< "Game running "<< currentTime / 1000 << " seconds." << endl;
 		
 		// play game back music here
+
 		if (sound.check_mute() != 1){
 			sound.play_game_background_music();
 		}
@@ -1117,6 +1032,7 @@ void Game::run( )
 		// 	//Play the music
 		// 	Mix_PlayMusic( game_background_music, -1 );
 		// }		
+
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
 		{
@@ -1131,9 +1047,16 @@ void Game::run( )
 			//User requests quit
 			if( e.type == SDL_QUIT || (e.key.keysym.sym == SDLK_ESCAPE && e.type == SDL_KEYDOWN))
 			{
-				
 				quit = true;
 				break;
+			}
+			//check if user requests save game:
+			if(e.key.keysym.sym == SDLK_s && e.type == SDL_KEYDOWN){
+				// save_game();
+				
+			}
+			else if(e.key.keysym.sym == SDLK_l && e.type == SDL_KEYDOWN){
+				// load_game();
 			}
 			//user requests pause
 			// if (e.type==SDL_KEYDOWN ){
@@ -1444,4 +1367,8 @@ void Game::run( )
 	// cout<<"Main Cash : "<<main_cash<<endl;
 	// cout<<"XP_level : "<<XP_level<<endl;
 	// cout<<"Player level : "<<P_level<<endl;
+}
+
+Game::~Game(){
+	
 }

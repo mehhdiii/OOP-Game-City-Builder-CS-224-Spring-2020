@@ -21,8 +21,9 @@ class Sound{
         Mix_Chunk *victory_music = NULL; //plays in the background in the menu
     public:
 
+
         Sound();
-        // ~Sound();
+        ~Sound();
         void stop_music();
         void pause_music();
         void resume_music();

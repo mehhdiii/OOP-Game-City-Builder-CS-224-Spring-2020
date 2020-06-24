@@ -18,3 +18,6 @@ void Vehicle::set_creation_time(int c_t){
     creation_time = c_t/1000; //creation time in seconds
 }
 
+Vehicle::~Vehicle(){
+    
+}

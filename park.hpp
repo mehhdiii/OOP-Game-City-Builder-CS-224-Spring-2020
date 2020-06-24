@@ -16,4 +16,5 @@ class Park: public InAnimate{
         void update_scores(int &, int &);
         int showEnvImpact();   
         void set_creation_time(int);
+        ~Park();
 };

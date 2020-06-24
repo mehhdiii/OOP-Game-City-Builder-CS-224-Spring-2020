@@ -3,6 +3,7 @@
 #include<string>
 #include <vector>
 #include <iostream>
+#include<cmath>
 #pragma once
 
 class Bank: public Building{
@@ -22,4 +23,5 @@ class Bank: public Building{
         void loan(int&);
         bool check_outstanding_loan();
         void set_creation_time(int);
+        ~Bank();
 };

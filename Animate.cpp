@@ -12,4 +12,6 @@ void Animate::setSpeed(){}
 
 void Animate::movement(){}
 
-
+Animate::~Animate(){
+    
+}

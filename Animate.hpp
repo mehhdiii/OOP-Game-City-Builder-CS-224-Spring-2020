@@ -17,4 +17,5 @@ class Animate: public Unit{
         void draw(SDL_Renderer *);
         void setSpeed();
         void movement();
+        ~Animate();
 };

@@ -37,3 +37,6 @@ int Scientist::show_scientist_count(){
     
     return scientist_count;
 }
+Scientist::~Scientist(){
+    
+}

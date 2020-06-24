@@ -115,5 +115,13 @@ void Sound::play_positive_music(){
 }
 
 void Sound::play_victory_music(){
-    Mix_PlayChannel(-1, victory_music, 0);
+
+  Mix_PlayChannel(-1, victory_music, 0);
+    //Play the music
+    // Mix_PlayMusic( victory_music, 1 );
+}
+
+Sound::~Sound(){
+    
+
 }

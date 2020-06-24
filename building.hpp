@@ -13,6 +13,7 @@ class Building: public InAnimate{
         int upgrade_cost = 100;
         float creation_time;
         float progress;
+
     public:
 
         Building(SDL_Texture *);
@@ -21,4 +22,6 @@ class Building: public InAnimate{
         int showStructureLevel();
         void set_creation_time(int);
         void show_progress();
+        ~Building();
+
 };
