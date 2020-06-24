@@ -3,6 +3,8 @@
 #include<string>
 #include<iostream>
 #include<vector>
+#include"draw_text.hpp"
+
 #pragma once
 
 class Topbar: public Unit{
@@ -16,6 +18,9 @@ class Topbar: public Unit{
         SDL_Rect oxygenlevel_mover;
         const int SPRITE_W = 103;
         const int SPRITE_H = 32;
+
+        //text rendering objects
+        std::vector<Draw_text*> text_objects; 
         // SDL_Rect cash_mover; //size of the object to draw on screen
         void setRect(); //cropping out the sprite from the sheet
     public:

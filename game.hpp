@@ -3,7 +3,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-// #include <SDL_ttf.h>
+
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -32,7 +33,7 @@
 #include"turbine.hpp"
 #include"vehicle.hpp"
 #include"worker.hpp"
-
+#include"draw_text.hpp"
 #include "map.hpp"
 
 #include "sound.hpp"
@@ -113,9 +114,16 @@ class Game{
     // Mix_Music *game_background_music = NULL; //plays in the background in the game
     // Mix_Chunk *bird1 = NULL;
     // Mix_Chunk *bird2 = NULL;
+    
+    //text variables
+    //Globally used font
+    TTF_Font *gFont = NULL;
+    // Draw_text texts_object; //text class object
+
+
 
     // scores for the top bar
-    int main_cash = 10000;
+    int main_cash = 100000000;
     int green_energy = 0; // MegaWatts
     int XP_level = 0;
     int P_level = 1; // first level
