@@ -9,6 +9,7 @@
 class Map: public Unit{
 
     private:
+
         int xmouse;
         int ymouse;
         float creation_time;
@@ -24,12 +25,9 @@ class Map: public Unit{
 
         Map(SDL_Texture * );
         void draw(SDL_Renderer *);
-        
         void set_creation_time(int);
-
         void scroll(bool, bool, bool, bool);
         bool scrolling_flag(bool, bool, bool, bool); // checks if scrolling is possible
-
         void add_grid_point(); //add the grid point into the map array
         void check_grid(int&, int&);
 };

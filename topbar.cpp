@@ -5,7 +5,6 @@ Topbar::Topbar(SDL_Texture * asset): Unit(asset){
     setCoordinates(0,0);
     setSize(SCREEN_WIDTH, 45);
     
-    
     for(int i = 0; i<number_of_bars; i++){
         std::vector<SDL_Texture*> *v1 = new std::vector<SDL_Texture*>;
         stats_sprite.push_back(*v1);
@@ -17,9 +16,7 @@ Topbar::Topbar(SDL_Texture * asset): Unit(asset){
         text_objects.push_back(p);
     }
     setRect();
-    
 }
-
 
 void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     // stats_sprite = sprite_texture;
@@ -34,10 +31,8 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     }
     else{
         stats_sprite[sprite_color].push_back(sprite_texture);
-    }
-    
+    }   
 }
-
 
 void Topbar::draw(SDL_Renderer * gRenderer){ //, int & main_cash, int & XP_level
     int top_cash = 30000;
@@ -165,44 +160,17 @@ void Topbar::draw_modified(SDL_Renderer* gRenderer, int & main_cash, int & XP_le
     text_objects[1]->setText(std::to_string(XP_level)); //"XP level "+
     text_objects[2]->setText(std::to_string(green_energy)); //"Green energy "+
     text_objects[3]->setText(std::to_string(P_level)); //"player level "+
-    // text_objects[0]->set_renderer(gRenderer);
+    
     text_objects[0]->draw(gRenderer);
     text_objects[1]->draw(gRenderer);
     text_objects[2]->draw(gRenderer);
     text_objects[3]->draw(gRenderer);
-    // text_objects[4]->draw(gRenderer);
 }
 
 void Topbar::setRect(){
     int width = 103;
     int height = 32;
     
-    // for(int i=0; i<4;i++){
-    //     cash[i].x = 0;
-    //     cash[i].y = i*height;
-    //     cash[i].w = width;
-    //     cash[i].h = height;
-
-
-    //     xplevel[i].x = width;
-    //     xplevel[i].y = i*height;
-    //     xplevel[i].w = width;
-    //     xplevel[i].h = height;
-
-    //     greenenergy[i].x = 2*width;
-    //     greenenergy[i].y = i*height;
-    //     greenenergy[i].w = width;
-    //     greenenergy[i].h = height;
-
-    //     oxygenlevel[i].x = 3*width;
-    //     oxygenlevel[i].y = i*height;
-    //     oxygenlevel[i].w = width;
-    //     oxygenlevel[i].h = height;
-
-    // }
-    
-
-
     cash_mover.x =180+20;
     cash_mover.y = 7;
     cash_mover.w = width;
@@ -226,10 +194,7 @@ void Topbar::setRect(){
     //setting coordinates of text object
 
     text_objects[0]->setCoordinates(1079 -30, oxygenlevel_mover.y); //+oxygenlevel_mover.w
-
-
     text_objects[1]->setCoordinates(826 -40, xplevel_mover.y );//+xplevel_mover.w
-
     text_objects[2]->setCoordinates(519-35, greenenergy_mover.y);//+greenenergy_mover.w
     text_objects[3]->setCoordinates(180-40, cash_mover.y ); //+cash_mover.w  
 }
