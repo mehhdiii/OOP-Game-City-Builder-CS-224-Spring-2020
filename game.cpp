@@ -167,7 +167,7 @@ bool Game::loadMedia()
         success = false;
     }
 	//loading option bar:
-	tex = loadTexture("bars/Shop.png");
+	tex = loadTexture("bars/Shop_new.png");
 	if(tex!=NULL){
 		optionBar = new OptionBar(tex);
 	}
@@ -176,7 +176,7 @@ bool Game::loadMedia()
 		success= false;
 	}
 	//loading top bar:
-	tex = loadTexture("bars/Top_Menu.png");
+	tex = loadTexture("bars/Top_Bar_new.png");
 	if(tex!=NULL){
 		cout << "checking for initialization" <<(gFont==NULL) <<endl;
 		topbar = new Topbar(tex); //main top bar sprite
@@ -187,19 +187,21 @@ bool Game::loadMedia()
 	}
 	//now load the statics sprites on the topbar;
 	string spritename = "";
-	spritename = "bars/scorebar/Empty.png";
-	cout << spritename <<endl; 
-	tex = loadTexture(spritename);
-	if(tex!=NULL){
-		topbar->add_static_sprite(tex, -1); 
-	}
-	else{
-		success = false;
-		printf("Unable to load texture");
-	}
-	for(int i=0; i<4; i++){
+	// spritename = "bars/scorebar/Empty.png";
+	// cout << spritename <<endl; 
+	// tex = loadTexture(spritename);
+	// if(tex!=NULL){
+	// 	topbar->add_static_sprite(tex, -1); 
+	// }
+	// else{
+	// 	success = false;
+	// 	printf("Unable to load texture");
+	// }
+	
+	// }
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Pink.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Pink.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -210,9 +212,9 @@ bool Game::loadMedia()
 			printf("Unable to load texture");
 		}
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Gold.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Gold.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -224,9 +226,9 @@ bool Game::loadMedia()
 		}
 		
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Green.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Green.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex!=NULL){
@@ -238,9 +240,9 @@ bool Game::loadMedia()
 		}
 		
 	}
-	for(int i=0; i<4; i++){
+	for(int i=0; i<5; i++){
 		spritename = "";
-		spritename = "bars/scorebar/" + to_string(i+1) + "_Blue.png";
+		spritename = "bars/Scores/" + to_string(i+1) + "_Blue.png";
 		cout << spritename <<endl; 
 		tex = loadTexture(spritename);
 		if(tex != NULL){
@@ -712,7 +714,7 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 void Game::hover_object_with_cursor(){
 	if(temp_object!=NULL){
 		int xMouse, yMouse; 
-		SDL_GetMouseState(&xMouse, &yMouse); 
+		SDL_GetMouseState(&xMouse, &yMouse);
 		map->check_grid(xMouse, yMouse);
 		temp_object->setCoordinates(xMouse - (temp_object->getw())/2, yMouse - (temp_object->geth())/2); //centralizing the hovering operation as unit does not include the overridden centralizing setCoordinate function of inAnimate
 	}
@@ -961,7 +963,7 @@ void Game::run_menu(){
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
 				click =1;
 			}
-			cout << "going into the refresh menu" <<endl;
+			// cout << "going into the refresh menu" <<endl;
 			menu->refresh(gRenderer, xMouse, yMouse, click, sound);
 			
 			SDL_RenderPresent(gRenderer);
@@ -1114,7 +1116,7 @@ void Game::run( )
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 				
-				// cout << xMouse << " " << yMouse <<endl;
+				// cout << "X : "<< xMouse << " Y : " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);
