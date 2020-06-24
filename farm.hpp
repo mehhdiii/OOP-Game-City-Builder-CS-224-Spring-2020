@@ -2,6 +2,7 @@
 #include "building.hpp"
 #include <string>
 #include <iostream>
+#include<cmath>
 
 #pragma once
 #include<vector>

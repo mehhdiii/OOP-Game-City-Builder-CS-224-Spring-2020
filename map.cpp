@@ -111,7 +111,7 @@ void Map::check_grid(int &x, int&y){
             min_dis = temp_dis; 
             minx = grid_x[i];
             miny = grid_y[i]; 
-            std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
+            // std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
         }
         // if(x > grid_x[i] && )
 

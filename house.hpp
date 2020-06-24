@@ -3,6 +3,7 @@
 #include<string>
 #include <vector>
 #include <iostream>
+#include<cmath>
 #pragma once
 
 class House: public Building{

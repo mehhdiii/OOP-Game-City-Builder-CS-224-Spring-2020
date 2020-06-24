@@ -1,5 +1,7 @@
 #include "SDL.h"
 #include<string>
+#include<cmath>
+#include<iostream>
 #pragma once
 Uint32 SDL_GetTicks(void);
 
@@ -38,5 +40,6 @@ class Unit{
         int gety();
         int getw();
         int geth();
+        bool operator == (Unit * );
         virtual ~Unit();
 };
