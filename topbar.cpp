@@ -224,7 +224,9 @@ void Topbar::setRect(){
     oxygenlevel_mover.h = height;
 
     //setting coordinates of text object
+
     text_objects[0]->setCoordinates(1079 -30, oxygenlevel_mover.y); //+oxygenlevel_mover.w
+
 
     text_objects[1]->setCoordinates(826 -40, xplevel_mover.y );//+xplevel_mover.w
 

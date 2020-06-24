@@ -2,6 +2,7 @@
 #include<vector>
 #include<string>
 #include<iostream>
+#include"sound.hpp"
 #pragma once
 
 
@@ -16,6 +17,14 @@ class Menu{
     bool quit_= 0; //if the user presses quit
     //front end varibles:
     int current_screen; //stores which screen user is on. <0, main menu>, <1, map selection>, <2, player selection>, <3, credits>, <4, settings>
+    SDL_Texture * screen_ptr1; 
+    SDL_Texture * screen_ptr2; 
+    //these variables store which sprites are currently rendered to the screen and which were previously
+    // this is used to detect transition between sprites!
+    int previous_sprite_selected; 
+    int present_sprite_selected; 
+    
+    // int previous_screen; //stores which screen user was on before the current screen
     const int map_selection_box_width = 392-77; //map selection screen boxes 
     const int map_selection_box_height = 646 - 286;
     const int selection_box_w = 816 - 542; //main menu selection boxes
@@ -37,9 +46,10 @@ class Menu{
     
     public:
     bool menuactive = true; //flag which maintains the menu state
+    bool check_mute();
     int get_selected_map(); //gets the value of which map to load on screen
     Menu();
-    void refresh(SDL_Renderer * gRenderer, int x, int y, bool click); //checks which sprites to draw and draws them on screen;
+    void refresh(SDL_Renderer * gRenderer, int x, int y, bool click, Sound &); //checks which sprites to draw and draws them on screen;
     void add_sprite(SDL_Texture*, int screen_number); //adds a sprite to the 2d vectors of sprites. 
     bool quit_game(); //checks if quit game was clicked 
     
