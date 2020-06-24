@@ -212,7 +212,7 @@ bool Game::loadMedia()
 	// }
 	
 	//loading option bar:
-	tex = loadTexture("bars/Shop.png");
+	tex = loadTexture("bars/Shop_new.png");
 	if(tex!=NULL){
 		optionBar = new OptionBar(tex);
 	}
@@ -223,7 +223,7 @@ bool Game::loadMedia()
 	
 
 	//loading top bar:
-	tex = loadTexture("bars/Top_Menu.png");
+	tex = loadTexture("bars/Top_Bar_new.png");
 	if(tex!=NULL){
 		cout << "checking for initialization" <<(gFont==NULL) <<endl;
 		topbar = new Topbar(tex); //main top bar sprite
@@ -765,7 +765,7 @@ void Game::select_object_in_optionbar(int xMouse, int yMouse){
 void Game::hover_object_with_cursor(){
 	if(temp_object!=NULL){
 		int xMouse, yMouse; 
-		SDL_GetMouseState(&xMouse, &yMouse); 
+		SDL_GetMouseState(&xMouse, &yMouse);
 		map->check_grid(xMouse, yMouse);
 		temp_object->setCoordinates(xMouse - (temp_object->getw())/2, yMouse - (temp_object->geth())/2); //centralizing the hovering operation as unit does not include the overridden centralizing setCoordinate function of inAnimate
 	}
@@ -1049,7 +1049,7 @@ void Game::run_menu(){
 			if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
 				click =1;
 			}
-			cout << "going into the refresh menu" <<endl;
+			// cout << "going into the refresh menu" <<endl;
 			menu->refresh(gRenderer, xMouse, yMouse, click, sound);
 			
 			SDL_RenderPresent(gRenderer);
@@ -1193,7 +1193,7 @@ void Game::run( )
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
 				
-				// cout << xMouse << " " << yMouse <<endl;
+				// cout << "X : "<< xMouse << " Y : " << yMouse <<endl;
 				//checking for option bar
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);

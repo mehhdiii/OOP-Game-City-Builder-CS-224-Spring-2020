@@ -76,8 +76,8 @@ void Map::add_grid_point(){
              innerx  = nextx +GRID_WIDTH*j;
              grid_x.push_back(innerx);
              grid_y.push_back(nexty);
-             std::cout << "grid ka x: "<<innerx <<std::endl;
-             std::cout << "grid ka y: " <<nexty <<std::endl; 
+            //  std::cout << "grid ka x: "<<innerx <<std::endl;
+            //  std::cout << "grid ka y: " <<nexty <<std::endl; 
         }
     }
     x = nextx; 
@@ -91,8 +91,8 @@ void Map::add_grid_point(){
             innerx  = nextx +GRID_WIDTH*j;
             grid_x.push_back(innerx);
             grid_y.push_back(nexty);
-            std::cout << "grid ka x: "<<innerx <<std::endl;
-            std::cout << "grid ka y: " <<nexty <<std::endl; 
+            // std::cout << "grid ka x: "<<innerx <<std::endl;
+            // std::cout << "grid ka y: " <<nexty <<std::endl; 
         }
     }
 
@@ -111,7 +111,7 @@ void Map::check_grid(int &x, int&y){
             min_dis = temp_dis; 
             minx = grid_x[i];
             miny = grid_y[i]; 
-            std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
+            // std::cout << "minx: " <<minx <<"\n" << "miny: " << miny << std::endl;
         }
         // if(x > grid_x[i] && )
 

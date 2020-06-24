@@ -9,6 +9,7 @@
 
 class Topbar: public Unit{
     private:
+    
         int number_of_bars=4;
         int transition_in_stat_sprite =5;
         int cash;

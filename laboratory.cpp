@@ -16,7 +16,7 @@ void Laboratory::upgrade_laboratory(int & main_cash, int & XP_level, int &green_
     upgrade_count +=1;
     main_cash = main_cash-upgrade_cost;
     upgrade_cost = upgrade_cost*2;
-    XP_level += 5 + upgrade_count;
+    XP_level +=  5*upgrade_count;
     green_energy += 2*upgrade_count;
     technology_selling_profit += 20*upgrade_count;
 }
