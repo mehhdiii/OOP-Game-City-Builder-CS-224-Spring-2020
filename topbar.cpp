@@ -26,15 +26,7 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     //blue==4;      // oxygen level
     // for(int i=0; i<5; i++){
     stats_sprite[sprite_color].push_back(sprite_texture);
-    
-    // if(sprite_color == -1){
-    //     for(int i=0; i<4; i++){
-    //         stats_sprite[i].push_back(sprite_texture);
-    //     }
-    // }
-    // else{
-    //     stats_sprite[sprite_color].push_back(sprite_texture);
-    // }   
+      
 }
 
 void Topbar::draw(SDL_Renderer * gRenderer){ //, int & main_cash, int & XP_level
