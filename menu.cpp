@@ -303,7 +303,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
                     }
                     // std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
-                else if (xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){
+                else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){
                     selected_map = 2;
                     current_screen =2;
                     present_sprite_selected = 0; //resetting the sprite count
@@ -312,6 +312,23 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
                     }
                     // std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
+                else if (xMouse>704 && xMouse <704+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){
+                    selected_map = 3;
+                    current_screen =2;
+                    present_sprite_selected = 0; //resetting the sprite count
+                    if (sfx_muted != 1){
+                        sound.play_click_music();
+                    }
+                }
+                else if(xMouse>1018 && xMouse <1018+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){
+                    selected_map = 4;
+                    current_screen =2;
+                    present_sprite_selected = 0; //resetting the sprite count
+                    if (sfx_muted != 1){
+                        sound.play_click_music();
+                    }
+                }
+
                 else if(xMouse >1192 && yMouse >638) //selects back
                 {
                     current_screen = 0;
@@ -333,7 +350,7 @@ void Menu::refresh(SDL_Renderer * gRenderer, int xMouse, int yMouse, bool click,
                     }
                     // std::cout << " detect a click " << Mix_VolumeMusic(-1) << std::endl;
                 }
-                else if (xMouse>392 && xMouse <392+map_selection_box_width && yMouse >286 && yMouse <286+map_selection_box_height){ //selects female!
+                else if (xMouse > 779 && yMouse >272 && xMouse < 779+player_selection_box_w && yMouse < 272+player_selection_box_h){ //selects female!
                      menuactive = false;
                      present_sprite_selected = 0; //resetting the sprite count
                      if (sfx_muted != 1){
