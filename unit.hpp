@@ -5,11 +5,7 @@
 #pragma once
 Uint32 SDL_GetTicks(void);
 
-namespace boost {
-namespace serialization {
-class access;
-}
-}
+
 class Unit{
 
 
@@ -21,13 +17,7 @@ class Unit{
         SDL_Texture* assets; //picture object
         SDL_Rect src; //object containing the coordinates to render from assets
         SDL_Rect mover = {0,0,50,50}; //size of the object to draw on screen
-         // Allow serialization to access non-public data members.
-        friend class boost::serialization::access;
 
-        template<typename Archive>
-        void serialize(Archive& ar, const unsigned version) {
-            ar & & src.x & src.y;  // Simply serialize the data members of Obj
-        }
 
     public:
        

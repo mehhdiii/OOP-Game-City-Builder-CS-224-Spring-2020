@@ -721,52 +721,12 @@ void Game::hover_object_with_cursor(){
 
 template<typename mytype> //template to store a generic type of object vector for passing into the function
 bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper function for detect collision using template
-    {
-	
-	int sp_of_temp_obj_x = temp_object->getx();
-	int sp_of_temp_obj_y = temp_object->gety();
-	int ep_of_temp_obj_x = x+temp_object->getw();
-	int ep_of_temp_obj_y = y + temp_object->geth();
-    int min_distance_for_collision;
-	//static object
-	int sp_of_static_obj_x, sp_of_static_obj_y, ep_of_static_obj_x, ep_of_static_obj_y; 
-	
-	bool yChecksp = 0;
-	bool yCheckep = 0;
-	bool xChecksp = 0;
-	bool xCheckep = 0;
-    
+{
 	for(auto i = obj.begin(); i!= obj.end(); i++){
-        // min_distance_for_collision = sqrt(pow( (temp_object->getw() ), 2 ) + pow((temp_object->geth()), 2))/2 + sqrt(pow( ((*i)->getw() ), 2 ) + pow(((*i)->geth()), 2))/2;
-		min_distance_for_collision = temp_object->getw()/4 + (*i)->getw()/4;
-		sp_of_static_obj_x = (*i)->getx();
-		sp_of_static_obj_y = (*i)->gety();
-		ep_of_static_obj_x = (*i)->getw() + (*i)->getx();
-		ep_of_static_obj_y = (*i)->geth() + (*i)->gety();
-
-		xChecksp = (sp_of_temp_obj_x  >= sp_of_static_obj_x && sp_of_temp_obj_x <= ep_of_static_obj_x);
-		xCheckep = (ep_of_temp_obj_x >= sp_of_static_obj_x && ep_of_temp_obj_x <= ep_of_static_obj_x);
-		yChecksp = (sp_of_temp_obj_y  >= sp_of_static_obj_y && sp_of_temp_obj_y <= ep_of_static_obj_y);
-		yCheckep = (ep_of_temp_obj_y >= sp_of_static_obj_y && ep_of_temp_obj_y <= ep_of_static_obj_y);
-
-		// if((xChecksp||xCheckep) && (yChecksp ||yCheckep)){
-			
-		// 	break;
-		// }
-        int distance = sqrt(pow((sp_of_static_obj_x +temp_object->getw()/2 - ((sp_of_temp_obj_x)+ (*i)->getw()/2)),2) + pow((sp_of_static_obj_y+temp_object->geth()/2  - (sp_of_temp_obj_y +(*i)->geth()/2)), 2));
-        //new test logic of distance formula
-        //checking the distance:
-		// cout << "verification: " << ((distance < min_distance_for_collision) ==  (*i)==temp_object) <<endl;
-        cout << "overload collision " << (*(*i)==temp_object) <<endl;;
-		if ((*(*i)==temp_object)){
-			cout << "collision detected with " << (*i)->name << endl; 
-            return 1;
+		if ((*(*i)==temp_object)){ //overloaded operator
+			return 1;
         }
-
-        
-
     }
-	// return ((xCheckep || xChecksp)&&(yCheckep||yChecksp)); 
 	return 0; 
 }
 
@@ -956,180 +916,6 @@ void Game::scroll_objects(bool xL,bool  xR, bool yU, bool yD){
 
 
 }
-void Game::save_game(){
-	{
-    // Create an output archive
-	int xr, yr; 
-	map->get_relative_coordinates(xr, yr);
-    std::ofstream ofs("saved_game.txt");
-    boost::archive::text_oarchive ar(ofs);
-	int all_obj_saving = all_objects.size(); //saving all objects count
-	ar & xr & yr; 
-	// int farms_size = farms.size();
-	// int banks_size = banks.size();
-	// int houses_size = houses.size();
-	//sending sizes of all objects
-	ar & farms.size() ;
-	// ar & farms_size; 
-	for(auto i = farms.begin(); i!= farms.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar & banks.size() ;
-
-	for(auto i = banks.begin(); i!= banks.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar& houses.size() ;
-
-	for(auto i = houses.begin(); i!= houses.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar & industries.size() ;
-
-	for(auto i = industries.begin(); i!= industries.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar & laboratories.size() ;
-
-	for(auto i = laboratories.begin(); i!= laboratories.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar& parks.size() ;
-	for(auto i = parks.begin(); i!= parks.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	// ar& solarpanels.size() ;
-	// for(auto i = solarpanels.begin(); i!= solarpanels.end(); i++){//running loop to count how many farms and stuff etc!
-	// 	ar & (*i)->getx() & (*i)->gety(); 
-	// }
-	ar&trees.size() ;
-	for(auto i = trees.begin(); i!= trees.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar& turbines.size() ;
-	for(auto i = turbines.begin(); i!= turbines.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-	ar& vehicles.size();
-	for(auto i = vehicles.begin(); i!= vehicles.end(); i++){//running loop to count how many farms and stuff etc!
-		ar & (*i)->getx() & (*i)->gety(); 
-	}
-  }
-}
-
-void Game::delete_all_objects_in_memory(){
-	Unit * temp_ptr; 
-	for(auto i = farms.begin(); i!=farms.end(); i++){
-		temp_ptr=*i;
-		// delete (*i);
-		farms.erase(i);
-		delete temp_ptr;
-	}
-}
-void Game::load_game(){
-	delete_all_objects_in_memory();
-	cout << "load game called" <<endl;
-	// vector<Farm *> test_farms; 
-	int size_of_all_loaded_objects;
-	int obj_count; 
-	int xr, yr; 
-	{
-    // Create and input archive
-    std::ifstream ifs("saved_game.txt");
-    boost::archive::text_iarchive ar(ifs);
-	vector<int> coordinates; 
-    // Load data coordinates
-	ar & xr & yr; 
-	map->set_relative_coordinates(xr, yr);
-	ar & obj_count;
-	int tempx, tempy; //coordinates temporary variable
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Farm> (farms, obj_count, coordinates, forest_texture); 
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Bank> (banks, obj_count, coordinates, bank_texture);
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<House> (houses, obj_count, coordinates, house_texture);
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Industry> (industries, obj_count, coordinates, industry_texture);
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Laboratory> (laboratories, obj_count, coordinates, lab_texture);
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Park> (parks, obj_count, coordinates, park_texture);
-	// ar & obj_count;
-	// for(auto i = 0; i<obj_count; i++){
-	// 	ar & tempx; 
-	// 	ar & tempy;
-	// 	coordinates.push_back(tempx);
-	// 	coordinates.push_back(tempy);
-	// }
-    // recreate_object<SolarPanel> (solarpanels, obj_count, coordinates, solarpanel_texture);
-	ar & obj_count;
-	for(auto i = 0; i<obj_count; i++){
-		ar & tempx; 
-		ar & tempy;
-		coordinates.push_back(tempx);
-		coordinates.push_back(tempy);
-	}
-    recreate_object<Tree> (trees, obj_count, coordinates, tree_texture);
-	
-  	}
-	map->set_relative_coordinates(xr, yr);
-	// cout << "successfully saved and loaded: " <<  << endl;
-}
-template<typename T>
-void Game::recreate_object(vector<T*>& v, int size,vector<int> &coordinates, SDL_Texture *texture_name){
-	T *temp_pointer; 
-	int x, y;
-	for(int i = 0;  i<size; i++){
-		temp_pointer = new T(texture_name);
-		if(temp_pointer==NULL){
-			cout << "Failed to create a new object." <<endl;
-		}
-		x = (*(coordinates.begin()));
-		coordinates.erase(coordinates.begin());
-		y = (*(coordinates.begin()));
-		coordinates.erase(coordinates.begin());
-		temp_pointer->refresh_coordinates(x, y); 
-		v.push_back(temp_pointer);
-		all_objects.push_back(temp_pointer);
-	}
-
-}
 
 
 
@@ -1252,11 +1038,11 @@ void Game::run( )
 			}
 			//check if user requests save game:
 			if(e.key.keysym.sym == SDLK_s && e.type == SDL_KEYDOWN){
-				save_game();
+				// save_game();
 				
 			}
 			else if(e.key.keysym.sym == SDLK_l && e.type == SDL_KEYDOWN){
-				load_game();
+				// load_game();
 			}
 			//user requests pause
 			// if (e.type==SDL_KEYDOWN ){

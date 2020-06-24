@@ -2,12 +2,7 @@
 #include "inanimate.hpp"
 #include<iostream>
 #pragma once
-//creating serialization namespace
-namespace boost {
-namespace serialization {
-class access;
-}
-}
+
 class Building: public InAnimate{
     
     protected:
@@ -18,12 +13,7 @@ class Building: public InAnimate{
         int upgrade_cost = 100;
         float creation_time;
         float progress;
-         //serialization template
-        friend class boost::serialization::access;
-        template<typename Archive>
-        void serialize(Archive& ar, const unsigned version) {
-            ar & structure_level & height & price & upgrade_cost;  // Simply serialize the data members of Obj
-        }
+
     public:
 
         Building(SDL_Texture *);

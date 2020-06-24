@@ -6,12 +6,7 @@
 
 #pragma once
 #include<vector>
-//creating serialization namespace
-namespace boost {
-namespace serialization {
-class access;
-}
-}
+
 
 class Farm: public Building{
 
@@ -24,11 +19,6 @@ class Farm: public Building{
         std::vector <bool> active_products;
         float creation_time;
         //serialization template
-        friend class boost::serialization::access;
-        template<typename Archive>
-        void serialize(Archive& ar, const unsigned version) {
-            ar & products & product_cost;  // Simply serialize the data members of Obj
-        }
 
 
 

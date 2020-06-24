@@ -1,7 +1,7 @@
 #pragma once
-#include <fstream>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
+// #include <fstream>
+// #include <boost/archive/text_iarchive.hpp>
+// #include <boost/archive/text_oarchive.hpp>
 #include<cmath>
 #include <SDL.h>
 #include <SDL_image.h>
@@ -39,12 +39,6 @@
 #include "sound.hpp"
 
 
-// Forward declaration of class boost::serialization::access
-namespace boost {
-namespace serialization {
-class access;
-}
-}
 using namespace std;
 Uint32 SDL_GetTicks(void);
 class Game{
@@ -124,15 +118,6 @@ class Game{
     Sound sound;
     //creating serialization template
     // Allow serialization to access non-public data members.
-    friend class boost::serialization::access;
-    template<typename Archive>
-    void serialize(Archive& ar, const unsigned version) {
-        ar & all_objects;  // serializing drawn objects on screen
-    }
-    //load game template: this is called to recreate all the objects stored in the game
-    template<typename T>
-    void recreate_object(vector<T*> &v, int size, vector<int>&, SDL_Texture* texture_name);
-    void clear_memory();
 public:
     void update_parameters();
     bool init();
@@ -156,9 +141,6 @@ public:
     void draw_all(SDL_Renderer *);
     template<typename mytype> //template to store a generic type of object vector for passing into the function
     bool helper_detect_collision(int x, int y, vector<mytype*> obj); //helper function for detect collision using template
-    void save_game();
-    void load_game();
-    void delete_all_objects_in_memory();
     ~Game();
 };
 
