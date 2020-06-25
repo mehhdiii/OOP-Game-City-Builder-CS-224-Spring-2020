@@ -24,9 +24,11 @@ void InAnimate::refresh_coordinates(int x, int y){
 }
 
 void InAnimate::load_description_texture(SDL_Texture * new_asset, SDL_Renderer * gRenderer){
-    InfoBoxes * infobox = new InfoBoxes(new_asset);
+    std::cout << "In load Inanimate" <<std::endl;
     description_tex = new_asset;
+    InfoBoxes * infobox = new InfoBoxes(description_tex);
     if (box_flag == 1){
+        std::cout <<"box_flag "<<box_flag <<std::endl;
         // we will renderer the panel box here
         (*infobox).draw(gRenderer);
     }

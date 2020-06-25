@@ -104,7 +104,7 @@ void Map::check_grid(int &x, int&y){
     int min_dis = 99999;
     int temp_dis;  
     int obj_xabs =  x+src.x;
-    int obj_yabs = y + src.y;
+    int obj_yabs = y+src.y;
     for(int i = 0; i<grid_x.size(); i++){
         temp_dis = sqrt(pow(grid_x[i] - obj_xabs, 2) + pow(grid_y[i] - obj_yabs, 2));
         if (temp_dis <min_dis){
