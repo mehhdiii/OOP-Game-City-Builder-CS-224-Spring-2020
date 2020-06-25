@@ -786,6 +786,7 @@ void Game::search_object_description(vector <T*> objs, int xMouse, int yMouse, b
 			cout << "Got a match "<<endl;
 			if(description_pass){
 				if(click){
+					//toggle the box
 					if((*i)->get_box_flag()){
 						(*i)->set_box_flag(0);
 					}
@@ -795,10 +796,13 @@ void Game::search_object_description(vector <T*> objs, int xMouse, int yMouse, b
 					
 				}
 				
-			}
+			}//else turn off the box
 			else{
 				(*i)->set_box_flag(0); 
 			}
+		}
+		else{ //turn off the box if click detected at any other coordinate
+			(*i)->set_box_flag(0);
 		}
 	}
 }
@@ -1311,9 +1315,8 @@ void Game::run( )
 				
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);
-					
 				}
-				//checkingif any object is selected, if yes then do not draw the description sheet
+				//checking if any object is selected, if yes then do not draw the description sheet
 				if(temp_object==NULL){
 					description_pass = 1; 
 				}
@@ -1321,7 +1324,7 @@ void Game::run( )
 					//turn off the description window:
 					description_pass = 0; 
 				}
-				display_object_description(xMouse, yMouse, 1); // displaying box for info
+				display_object_description(xMouse, yMouse, 1); // setting boxes on/off for info
 				//toggling option_bar
 				if (xMouse >SCREEN_WIDTH-80 && yMouse < 80  && !optionBar->enabled){ // to enable option bar when clicked at a specific point
 					optionBar->enabled = true; // option bar is enabled
