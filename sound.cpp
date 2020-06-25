@@ -122,6 +122,13 @@ void Sound::play_victory_music(){
 }
 
 Sound::~Sound(){
-    
-
+    Mix_FreeChunk(click_music);
+    Mix_FreeChunk(error_music);
+    Mix_FreeChunk(hover_music);
+    Mix_FreeChunk(loss_music);
+    Mix_FreeChunk(error_music);
+    Mix_FreeChunk(positive_music);
+    Mix_FreeChunk(victory_music);
+	Mix_FreeMusic(game_background_music);
+    Mix_FreeMusic(menu_background_music);
 }
