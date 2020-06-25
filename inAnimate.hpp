@@ -19,6 +19,7 @@ class InAnimate: public Unit{
         int price;
         SDL_Texture * description_tex = NULL;
         bool box_flag = 0;
+        InfoBoxes * infobox;
 
          //serialization template
         friend class boost::serialization::access;
@@ -36,6 +37,7 @@ class InAnimate: public Unit{
         void setCoordinates(int, int); //overriding the default setCoordinates to centralize the object coordinates
         void refresh_coordinates(int, int); //refreshes the position of the static object
         void set_box_flag(bool );
+        bool get_box_flag();
         void load_description_texture(SDL_Texture * , SDL_Renderer *);
         // void setfont(TTF_Font*);
         ~InAnimate();

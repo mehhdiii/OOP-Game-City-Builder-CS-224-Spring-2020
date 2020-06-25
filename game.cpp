@@ -726,7 +726,7 @@ void Game::display_object_description(int xMouse, int yMouse){ 	// this function
 	// SDL_GetMouseState(&xMouse, &yMouse);
 	cout << "In display object "<<endl;
 	cout << "Before grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
-	map->check_grid(xMouse, yMouse);
+	// map->check_grid(xMouse, yMouse);
 	cout << "After grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
 	bool box_flag = 0; 	// no box panel is drawn
 	string boxname = "";
@@ -736,10 +736,60 @@ void Game::display_object_description(int xMouse, int yMouse){ 	// this function
 		cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
 		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
 			cout << "Got a match "<<endl;
-			if (box_flag == 0){	// we need to draw the panel
+			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
 				box_flag = 1;
 				boxname = "";
 				boxname = "info_boxes/Farm.png";
+				cout<<boxname <<endl;
+				tex = loadTexture(boxname);
+				if(tex != NULL){
+					(*i)->set_box_flag(box_flag);
+					(*i)->load_description_texture(tex, gRenderer);
+				}
+				else{
+					// success = false;
+					printf("Unable to load texture");
+				}				
+			}
+			else {
+				box_flag = 0;
+				(*i)->set_box_flag(box_flag);
+			}
+		}
+	}
+	for( auto i = banks.begin(); i<banks.end(); i++){
+		// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
+		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
+			// cout << "Got a match "<<endl;
+			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
+				box_flag = 1;
+				boxname = "";
+				boxname = "info_boxes/Bank_3.png";
+				cout<<boxname <<endl;
+				tex = loadTexture(boxname);
+				if(tex != NULL){
+					(*i)->set_box_flag(box_flag);
+					(*i)->load_description_texture(tex, gRenderer);
+				}
+				else{
+					// success = false;
+					printf("Unable to load texture");
+				}				
+			}
+			else {
+				box_flag = 0;
+				(*i)->set_box_flag(box_flag);
+			}
+		}
+	}
+	for( auto i = houses.begin(); i<houses.end(); i++){
+		// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
+		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
+			// cout << "Got a match "<<endl;
+			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
+				box_flag = 1;
+				boxname = "";
+				boxname = "info_boxes/house.png";
 				cout<<boxname <<endl;
 				tex = loadTexture(boxname);
 				if(tex != NULL){
