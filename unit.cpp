@@ -27,8 +27,6 @@ bool Unit::operator==(Unit * temp_obj){
     int static_y = this->gety();
     int min_distance_for_collision = temp_obj->getw()/4 + this->getw()/4;
     int distance = sqrt(pow((static_x +temp_obj->getw()/2 - ((temp_x)+ (this)->getw()/2)),2) + pow((static_y+temp_obj->geth()/2  - (temp_y +(this)->geth()/2)), 2));
-    // std::cout << "operator min d: " << min_distance_for_collision <<std::endl;
-    // std::cout << "operator cal d: " << distance <<std::endl;
     if (distance < min_distance_for_collision){
         return 1;
     }

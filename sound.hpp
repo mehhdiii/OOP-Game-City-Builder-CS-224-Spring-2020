@@ -24,6 +24,7 @@ class Sound{
 
         Sound();
         ~Sound();
+        //play functions for all different types of sounds
         void stop_music();
         void pause_music();
         void resume_music();

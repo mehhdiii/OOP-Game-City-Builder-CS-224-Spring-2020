@@ -14,8 +14,8 @@ class Vehicle: public InAnimate{
     public:
 
         Vehicle(SDL_Texture *);
-        void update_scores(int &, int &);
-        void upgrade(int current_balance);
-        void set_creation_time(int);
+        void update_scores(int &, int &); //updates the scores
+        void upgrade(int current_balance); //upgrades the vehicle 
+        void set_creation_time(int); 
         ~Vehicle();
 };

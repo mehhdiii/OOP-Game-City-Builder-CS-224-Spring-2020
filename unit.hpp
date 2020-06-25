@@ -30,6 +30,6 @@ class Unit{
         int gety();
         int getw();
         int geth();
-        bool operator == (Unit * );
+        bool operator == (Unit * ); //overloads the == operator to check for collisions
         virtual ~Unit();
 };

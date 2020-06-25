@@ -18,8 +18,8 @@ class Tree: public InAnimate{
     public:
     
         Tree (SDL_Texture *);
-        void update_scores(int &, int &);
-        void showOxygenGen();
+        void update_scores(int &, int &); //updates the scores
+        void showOxygenGen(); //show the green energy count of the class
         void set_creation_time(int);
         ~Tree();
 };
