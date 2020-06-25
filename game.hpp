@@ -141,6 +141,7 @@ public:
     void hover_object_with_cursor(); //hovers the object on screen with the cursors coordintes!
     void scroll_objects(bool, bool, bool, bool);
     bool detect_collision(int, int); 
+    void display_object_description();
     //draw
     void draw_all(SDL_Renderer *);
     template<typename mytype> //template to store a generic type of object vector for passing into the function

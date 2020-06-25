@@ -187,18 +187,7 @@ bool Game::loadMedia()
 	}
 	//now load the statics sprites on the topbar;
 	string spritename = "";
-	// spritename = "bars/scorebar/Empty.png";
-	// cout << spritename <<endl; 
-	// tex = loadTexture(spritename);
-	// if(tex!=NULL){
-	// 	topbar->add_static_sprite(tex, -1); 
-	// }
-	// else{
-	// 	success = false;
-	// 	printf("Unable to load texture");
-	// }
 	
-	// }
 	for(int i=0; i<5; i++){
 		spritename = "";
 		spritename = "bars/Scores/" + to_string(i+1) + "_Pink.png";
@@ -732,6 +721,166 @@ bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper f
 	return 0; 
 }
 
+void Game::display_object_description(){ 	// this function will be used to display thefunctionality of objects.
+	int xMouse, yMouse; 
+	SDL_GetMouseState(&xMouse, &yMouse);
+	map->check_grid(xMouse, yMouse);
+	bool box_flag = 0; 	// no box panel is drawn
+	string boxname = "";
+	SDL_Texture * tex = NULL;
+	// for(int i=0; i<5; i++){
+	// 	spritename = "";
+	// 	spritename = "bars/Scores/" + to_string(i+1) + "_Pink.png";
+	// 	cout << spritename <<endl; 
+	// 	tex = loadTexture(spritename);
+
+	for( auto i = farms.begin(); i<farms.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "farm"){
+				if (box_flag == 0){	// we need to draw the panel
+					box_flag = 1;
+					boxname = "";
+					boxname = "info_boxes/Farm.png";
+					tex = loadTexture(boxname);
+					(*i)->set_box_flag(box_flag);
+					(*i)->load_description_texture(tex, gRenderer);
+					
+				}
+				else {
+					box_flag = 0;
+					(*i)->set_box_flag(box_flag);
+				}
+			}
+		}
+	}
+	for( auto i = banks.begin(); i<banks.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "bank"){
+				boxname = "";
+				boxname = "info_boxes/Bank_1.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+	for( auto i = houses.begin(); i<houses.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "house"){
+				boxname = "";
+				boxname = "info_boxes/House.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+	for( auto i = laboratories.begin(); i<laboratories.end(); i++){
+
+	}
+	for( auto i = industries.begin(); i<industries.end(); i++){
+
+	}
+	for( auto i = parks.begin(); i<parks.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "park"){
+				boxname = "";
+				boxname = "info_boxes/Park.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+	for( auto i = trees.begin(); i<trees.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "tree"){
+				boxname = "";
+				boxname = "info_boxes/Tree.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+	for( auto i = vehicles.begin(); i<vehicles.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "vehicle"){
+				boxname = "";
+				boxname = "info_boxes/Vehicle.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+	for(auto i = turbines.begin(); i<turbines.end(); i++){
+		if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+			if ((*i)->name == "turbine"){
+				boxname = "";
+				boxname = "info_boxes/Turbine.png";
+				tex = loadTexture(boxname);
+				(*i)->load_description_texture(tex, gRenderer);
+			}
+		}
+	}
+
+
+	// for(auto i = all_objects.begin(); i!=all_objects.end(); i++){
+	// 	if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
+	// 		if ((*i)->name == "industry"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Industry_1.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "laboratory"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Lab_1.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "bank"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Bank_1.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "house"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/House.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "farm"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Farm.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "park"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Park.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "tree"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Tree.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "turbine"){
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Turbine.png";
+	// 			tex = loadTexture(boxname);
+	// 			(*i)->load_description_texture(tex);
+	// 		}
+	// 		else if ((*i)->name == "scientist"){
+
+	// 		}
+	// 		else if ((*i)->name == "worker"){
+
+	// 		}
+	// 	}
+	// }
+	
+}
 
 bool Game::detect_collision(int x, int y){
 	// bool Collision = 0;

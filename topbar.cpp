@@ -24,7 +24,6 @@ void Topbar::add_static_sprite(SDL_Texture* sprite_texture, int sprite_color){
     //gold ==1;     // cash
     //green==2;     // green energy
     //blue==4;      // oxygen level
-    // for(int i=0; i<5; i++){
     stats_sprite[sprite_color].push_back(sprite_texture);
       
 }

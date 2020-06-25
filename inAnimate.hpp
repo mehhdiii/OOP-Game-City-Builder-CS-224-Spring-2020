@@ -3,6 +3,7 @@
 #include<iostream>
 #include<SDL_ttf.h>
 #include<vector>
+#include"infoBoxes.hpp"
 #pragma once
 namespace boost {
 namespace serialization {
@@ -16,6 +17,9 @@ class InAnimate: public Unit{
         int width;
         int height;
         int price;
+        SDL_Texture * description_tex = NULL;
+        bool box_flag = 0;
+
          //serialization template
         friend class boost::serialization::access;
         template<typename Archive>
@@ -31,6 +35,8 @@ class InAnimate: public Unit{
         void draw(SDL_Renderer *);
         void setCoordinates(int, int); //overriding the default setCoordinates to centralize the object coordinates
         void refresh_coordinates(int, int); //refreshes the position of the static object
+        void set_box_flag(bool );
+        void load_description_texture(SDL_Texture * , SDL_Renderer *);
         // void setfont(TTF_Font*);
         ~InAnimate();
 
