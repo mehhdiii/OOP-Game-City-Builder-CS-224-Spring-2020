@@ -37,6 +37,7 @@
 #include"draw_text.hpp"
 #include "map.hpp"
 #include "sound.hpp"
+#include "infoBoxes.hpp"
 
 
 using namespace std;
@@ -48,6 +49,7 @@ class Game{
     const int OPTIONBAR_CLOSE_BUTTON_WIDTH = 20;
     const int OPTIONBAR_CLOSE_HEIGHT = 20;
     const int SCROLL_SPEED = 50;
+    bool description_pass = 0; 
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
     //The window renderer
@@ -89,6 +91,7 @@ class Game{
     vector <Worker*> workers;
     vector <Scientist*> scientists;
     Scientist * scientist_obj = NULL;
+    vector <SDL_Texture*> info_boxes_texture; //farm, bank, house, lab, industry, parks, trees, vehicles, turbine
     //menus and bars:
     OptionBar * optionBar = NULL; //option bar variable
     Menu * menu = new Menu(); //menu objects
@@ -141,7 +144,9 @@ public:
     void hover_object_with_cursor(); //hovers the object on screen with the cursors coordintes!
     void scroll_objects(bool, bool, bool, bool);
     bool detect_collision(int, int); 
-    void display_object_description(int, int);
+    void display_object_description(int, int, bool);
+    template <typename T>
+    void search_object_description(vector <T*>, int, int, bool);
     //draw
     void draw_all(SDL_Renderer *);
     template<typename mytype> //template to store a generic type of object vector for passing into the function

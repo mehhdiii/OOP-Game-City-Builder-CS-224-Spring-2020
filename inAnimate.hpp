@@ -38,7 +38,7 @@ class InAnimate: public Unit{
         void refresh_coordinates(int, int); //refreshes the position of the static object
         void set_box_flag(bool );
         bool get_box_flag();
-        void load_description_texture(SDL_Texture * , SDL_Renderer *);
+        void load_description_texture(SDL_Texture *);
         // void setfont(TTF_Font*);
         ~InAnimate();
 

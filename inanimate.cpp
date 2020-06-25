@@ -28,7 +28,7 @@ void InAnimate::refresh_coordinates(int x, int y){
     Unit::setCoordinates(x, y); //
 }
 
-void InAnimate::load_description_texture(SDL_Texture * new_asset, SDL_Renderer * gRenderer){
+void InAnimate::load_description_texture(SDL_Texture * new_asset){
     std::cout << "In load Inanimate" <<std::endl;
     description_tex = new_asset;
     infobox = new InfoBoxes(description_tex);
@@ -36,5 +36,5 @@ void InAnimate::load_description_texture(SDL_Texture * new_asset, SDL_Renderer *
 }
 
 InAnimate::~InAnimate(){
-    // delete infobox; 
+    delete infobox; 
 }

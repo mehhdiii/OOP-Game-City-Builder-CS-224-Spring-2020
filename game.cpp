@@ -300,6 +300,64 @@ bool Game::loadMedia()
 		success = false;
 		printf("Unable to load texture");
 	}
+	SDL_Texture * temp; 
+	temp = loadTexture("info_boxes/Farm.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/Bank_3.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/House.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/Lab_4.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/industry_4.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/Park.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/vehicle.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+	temp = loadTexture("info_boxes/turbine.png"); 
+	if(temp!=NULL){
+		info_boxes_texture.push_back(temp); 
+	}
+	else{
+		cout << "cannot load SDL texture" <<endl;
+	}
+
 	map->add_grid_point(); //adding grids to the map
 
 	
@@ -720,93 +778,84 @@ bool Game::helper_detect_collision(int x, int y, vector<mytype*> obj) //helper f
     }
 	return 0; 
 }
-
-void Game::display_object_description(int xMouse, int yMouse){ 	// this function will be used to display thefunctionality of objects.
-	// int xMouse, yMouse; 
-	// SDL_GetMouseState(&xMouse, &yMouse);
-	cout << "In display object "<<endl;
-	cout << "Before grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
-	// map->check_grid(xMouse, yMouse);
-	cout << "After grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
-	bool box_flag = 0; 	// no box panel is drawn
-	string boxname = "";
-	SDL_Texture * tex = NULL;
-
-	for( auto i = farms.begin(); i<farms.end(); i++){
+template <typename T>
+void Game::search_object_description(vector <T*> objs, int xMouse, int yMouse, bool click){
+	for(auto i = objs.begin(); i!=objs.end(); i++){
 		cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
 		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
 			cout << "Got a match "<<endl;
-			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
-				box_flag = 1;
-				boxname = "";
-				boxname = "info_boxes/Farm.png";
-				cout<<boxname <<endl;
-				tex = loadTexture(boxname);
-				if(tex != NULL){
-					(*i)->set_box_flag(box_flag);
-					(*i)->load_description_texture(tex, gRenderer);
+			if(description_pass){
+				if(click){
+					if((*i)->get_box_flag()){
+						(*i)->set_box_flag(0);
+					}
+					else{
+						(*i)->set_box_flag(1);
+					}
+					
 				}
-				else{
-					// success = false;
-					printf("Unable to load texture");
-				}				
+				
 			}
-			else {
-				box_flag = 0;
-				(*i)->set_box_flag(box_flag);
+			else{
+				(*i)->set_box_flag(0); 
 			}
 		}
 	}
-	for( auto i = banks.begin(); i<banks.end(); i++){
-		// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
-		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
-			// cout << "Got a match "<<endl;
-			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
-				box_flag = 1;
-				boxname = "";
-				boxname = "info_boxes/Bank_3.png";
-				cout<<boxname <<endl;
-				tex = loadTexture(boxname);
-				if(tex != NULL){
-					(*i)->set_box_flag(box_flag);
-					(*i)->load_description_texture(tex, gRenderer);
-				}
-				else{
-					// success = false;
-					printf("Unable to load texture");
-				}				
-			}
-			else {
-				box_flag = 0;
-				(*i)->set_box_flag(box_flag);
-			}
-		}
-	}
-	for( auto i = houses.begin(); i<houses.end(); i++){
-		// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
-		if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
-			// cout << "Got a match "<<endl;
-			if ((*i)->get_box_flag() == 0){	// we need to draw the panel
-				box_flag = 1;
-				boxname = "";
-				boxname = "info_boxes/house.png";
-				cout<<boxname <<endl;
-				tex = loadTexture(boxname);
-				if(tex != NULL){
-					(*i)->set_box_flag(box_flag);
-					(*i)->load_description_texture(tex, gRenderer);
-				}
-				else{
-					// success = false;
-					printf("Unable to load texture");
-				}				
-			}
-			else {
-				box_flag = 0;
-				(*i)->set_box_flag(box_flag);
-			}
-		}
-	}
+}
+void Game::display_object_description(int xMouse, int yMouse, bool click){ 	// this function will be used to display thefunctionality of objects.
+
+
+	search_object_description<Farm>(farms, xMouse, yMouse, click ); 
+	// for( auto i = banks.begin(); i<banks.end(); i++){
+	// 	// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
+	// 	if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
+	// 		// cout << "Got a match "<<endl;
+	// 		if ((*i)->get_box_flag() == 0){	// we need to draw the panel
+	// 			box_flag = 1;
+	// 			boxname = "";
+	// 			boxname = "info_boxes/Bank_3.png";
+	// 			cout<<boxname <<endl;
+	// 			tex = loadTexture(boxname);
+	// 			if(tex != NULL){
+	// 				(*i)->set_box_flag(box_flag);
+	// 				// (*i)->load_description_texture(tex, gRenderer);
+	// 			}
+	// 			else{
+	// 				// success = false;
+	// 				printf("Unable to load texture");
+	// 			}				
+	// 		}
+	// 		else {
+	// 			box_flag = 0;
+	// 			(*i)->set_box_flag(box_flag);
+	// 		}
+	// 	}
+	// }
+	// for( auto i = houses.begin(); i<houses.end(); i++){
+	// 	// cout << "get x " << (*i)->getx() << " get y "<<(*i)->gety() << " get h " << (*i)->geth() << " get w "<<(*i)->getw()<<endl;
+	// 	if (xMouse > (*i)->getx() && xMouse < ((*i)->getx()+(*i)->getw()) && yMouse > (*i)->gety() && yMouse < ((*i)->gety()+(*i)->geth())){
+	// 		// cout << "Got a match "<<endl;
+	// 		if ((*i)->get_box_flag() == 0){	// we need to draw the panel
+	// 			box_flag = 1;
+	// 			boxname = "";
+	// 			boxname = "info_boxes/house.png";
+	// 			cout<<boxname <<endl;
+	// 			tex = loadTexture(boxname);
+	// 			if(tex != NULL){
+	// 				(*i)->set_box_flag(box_flag);
+	// 				// (*i)->load_description_texture(tex, gRenderer);
+	// 			}
+	// 			else{
+	// 				// success = false;
+	// 				printf("Unable to load texture");
+	// 			}				
+	// 		}
+	// 		else {
+	// 			box_flag = 0;
+	// 			(*i)->set_box_flag(box_flag);
+	// 		}
+	// 	}
+	// }
 	// for( auto i = banks.begin(); i<banks.end(); i++){
 	// 	if ((*i)->getx() == xMouse && (*i)->gety() == yMouse){
 	// 		if ((*i)->name == "bank"){
@@ -1257,15 +1306,22 @@ void Game::run( )
 				
 				int xMouse, yMouse;
 				SDL_GetMouseState(&xMouse,&yMouse);
-
-				display_object_description(xMouse, yMouse); // displaying box for info
-				
 				// cout << "X : "<< xMouse << " Y : " << yMouse <<endl;
 				//checking for option bar
+				
 				if (optionBar->enabled){
 					select_object_in_optionbar(xMouse, yMouse);
 					
 				}
+				//checkingif any object is selected, if yes then do not draw the description sheet
+				if(temp_object==NULL){
+					description_pass = 1; 
+				}
+				else{
+					//turn off the description window:
+					description_pass = 0; 
+				}
+				display_object_description(xMouse, yMouse, 1); // displaying box for info
 				//toggling option_bar
 				if (xMouse >SCREEN_WIDTH-80 && yMouse < 80  && !optionBar->enabled){ // to enable option bar when clicked at a specific point
 					optionBar->enabled = true; // option bar is enabled
@@ -1277,6 +1333,7 @@ void Game::run( )
 				//fix the object if the user clicks on the map with the object selected:
 				else if(temp_object!=NULL && yMouse < SCREEN_HEIGHT - 300  &&  !detect_collision( xMouse, yMouse)){
 					
+
 					// cout << "Before grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
 					map->check_grid(xMouse, yMouse); //corrects the mouse coordinates according to the grid. 
 					// cout << "After grid " << "x mouse "<<xMouse <<" y "<<yMouse<<endl;
@@ -1294,6 +1351,7 @@ void Game::run( )
 						myfarm->setCoordinates(xMouse, yMouse);
 						myfarm->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for farm
 						myfarm->set_creation_time(currentTime);
+						myfarm->load_description_texture(info_boxes_texture[0]);
 						farms.push_back(myfarm);
 						temp_object = NULL;	
 					}
@@ -1333,6 +1391,7 @@ void Game::run( )
 						mybank->setCoordinates(xMouse, yMouse);
 						mybank->set_creation_time(currentTime);
 						mybank->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for bank
+						mybank->load_description_texture(info_boxes_texture[1]);
 						banks.push_back(mybank);
 						temp_object = NULL;
 					}
@@ -1346,6 +1405,7 @@ void Game::run( )
 						myhouse->setCoordinates(xMouse, yMouse);
 						myhouse->set_creation_time(currentTime);
 						myhouse->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for house
+						myhouse->load_description_texture(info_boxes_texture[2]);
 						houses.push_back(myhouse);
 						temp_object = NULL;
 					}
@@ -1359,6 +1419,7 @@ void Game::run( )
 						myindustry->setCoordinates(xMouse, yMouse);
 						myindustry->set_creation_time(currentTime);
 						myindustry->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for industryt
+						myindustry->load_description_texture(info_boxes_texture[4]);
 						industries.push_back(myindustry);
 						temp_object = NULL;
 					}
@@ -1372,6 +1433,7 @@ void Game::run( )
 						mylaboratory->setCoordinates(xMouse, yMouse);
 						mylaboratory->set_creation_time(currentTime);
 						mylaboratory->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for laboratory
+						mylaboratory->load_description_texture(info_boxes_texture[3]);
 						laboratories.push_back(mylaboratory);
 						temp_object = NULL;
 					}
@@ -1385,6 +1447,7 @@ void Game::run( )
 						mypark->setCoordinates(xMouse, yMouse);
 						mypark->set_creation_time(currentTime);
 						mypark->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for park
+						mypark->load_description_texture(info_boxes_texture[5]);
 						parks.push_back(mypark);
 						temp_object = NULL;
 					}
@@ -1426,6 +1489,7 @@ void Game::run( )
 						mytree->setCoordinates(xMouse, yMouse);
 						mytree->set_creation_time(currentTime);
 						mytree->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for tree
+						mytree->load_description_texture(info_boxes_texture[6]);
 						trees.push_back(mytree);
 						temp_object = NULL;
 					}
@@ -1439,6 +1503,7 @@ void Game::run( )
 						myturbine->setCoordinates(xMouse, yMouse);
 						myturbine->set_creation_time(currentTime);
 						myturbine->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for turbine
+						myturbine->load_description_texture(info_boxes_texture[8]);
 						turbines.push_back(myturbine);
 						temp_object = NULL;
 					}
@@ -1452,6 +1517,7 @@ void Game::run( )
 						myvehicle->setCoordinates(xMouse, yMouse);
 						myvehicle->set_creation_time(currentTime);
 						myvehicle->update_scores(main_cash, XP_level);	// updates the values of cash and XP_level for vehicle
+						myvehicle->load_description_texture(info_boxes_texture[7]);
 						vehicles.push_back(myvehicle);
 						temp_object = NULL;
 					}
@@ -1469,6 +1535,7 @@ void Game::run( )
 						temp_object = NULL;
 					}
 				}
+
 
 			}
 			//checking mouse hovering
