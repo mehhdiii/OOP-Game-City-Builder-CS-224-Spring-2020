@@ -354,8 +354,8 @@ void Game::close()
 	
 	SDL_DestroyTexture(gTexture);
 	//free sound:
-	delete optionBar;
-	delete topbar;
+	// delete optionBar;
+	// delete topbar;
 	// Mix_FreeChunk(eggy);
 	// Mix_FreeMusic(background_music);
 	// background_music =NULL;
@@ -1370,5 +1370,29 @@ void Game::run( )
 }
 
 Game::~Game(){
-	
+	farms.clear();
+	birds.clear();
+    buildings.clear();
+    banks.clear();
+    houses.clear();
+    laboratories.clear();
+    industries.clear();
+    parks.clear();
+    trees.clear();
+    turbines.clear();
+    solarpanels.clear();
+    vehicles.clear();
+    workers.clear();
+    scientists.clear();
+    //menus and bars:
+    delete optionBar; 
+    delete menu; 
+    delete topbar; 
+    // delete map;
+	Unit * temp; 
+	while(all_objects.size()>0){
+		temp = *(all_objects.begin());
+		all_objects.erase(all_objects.begin());
+		delete temp; 
+	}
 }

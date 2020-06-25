@@ -429,9 +429,11 @@ int Menu::get_selected_map(){
     return selected_map;
 }
 Menu::~Menu(){
-    // for(auto i = menu_sprites.begin(); i!=menu_sprites.end(); i++){
-    //     for(auto j = (*i).begin(); j!=(*i).end(); i++){
-    //         SDL_DestroyTexture(*j);
-    //     }
-    // }
+    std::vector<SDL_Texture*>  *temp;
+    while(menu_sprites.size()>0){
+        temp = &(*(menu_sprites.begin()));
+        menu_sprites.erase(menu_sprites.begin()); 
+        delete temp; 
+    }
+    
 }
