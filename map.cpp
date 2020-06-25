@@ -140,5 +140,6 @@ void Map::set_relative_coordinates(int xr, int yr){
 }
 
 Map::~Map(){
-    
+    grid_x.clear();
+    grid_y.clear();
 }

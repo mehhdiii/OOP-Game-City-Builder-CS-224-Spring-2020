@@ -196,7 +196,7 @@ void Topbar::setRect(){
 
 
 Topbar::~Topbar(){
-    for(int i =0; i<number_of_bars; i++){
-        stats_sprite[i].clear();
-    }
+
+    stats_sprite.clear();
+    text_objects.clear();
 }

@@ -128,7 +128,6 @@ public:
     bool loadMenu();
     bool loadMedia();
     void run_menu();
-    void close_menu();
     bool exit_from_menu();
     void run();
     void close();

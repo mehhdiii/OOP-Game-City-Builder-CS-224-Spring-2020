@@ -353,9 +353,20 @@ void Game::close()
 {
 	
 	SDL_DestroyTexture(gTexture);
+	SDL_DestroyTexture(forest_texture);
+	SDL_DestroyTexture(house_texture);
+	SDL_DestroyTexture(industry_texture);
+	SDL_DestroyTexture(lab_texture);
+	SDL_DestroyTexture(man_texture);
+	SDL_DestroyTexture(park_texture);
+	SDL_DestroyTexture(scientist_texture);
+	SDL_DestroyTexture(tree_texture);
+	SDL_DestroyTexture(turbine_texture);
+	SDL_DestroyTexture(vehicle_texture);
+	SDL_DestroyTexture(worker_texture);
+	SDL_DestroyTexture(vehicle_texture);
+	SDL_DestroyTexture(map_texture);
 	//free sound:
-	// delete optionBar;
-	// delete topbar;
 	// Mix_FreeChunk(eggy);
 	// Mix_FreeMusic(background_music);
 	// background_music =NULL;
@@ -972,12 +983,6 @@ void Game::run_menu(){
 		}
 	}
 	sound.stop_music();
-}
-void Game::close_menu(){
-	
-	
-	delete menu;
-
 }
 
 bool Game::exit_from_menu(){

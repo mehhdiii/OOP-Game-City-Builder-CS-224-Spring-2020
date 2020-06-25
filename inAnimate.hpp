@@ -4,11 +4,7 @@
 #include<SDL_ttf.h>
 #include<vector>
 #pragma once
-namespace boost {
-namespace serialization {
-class access;
-}
-}
+
 class InAnimate: public Unit{
     
     private:
@@ -16,12 +12,7 @@ class InAnimate: public Unit{
         int width;
         int height;
         int price;
-         //serialization template
-        friend class boost::serialization::access;
-        template<typename Archive>
-        void serialize(Archive& ar, const unsigned version) {
-            ar & width & height & price;  // Simply serialize the data members of Obj
-        }
+
     protected:
         int OBJECT_WIDHT = 5*80;
         int OBJECT_HEIGHT =  5* 0.5625*80;
