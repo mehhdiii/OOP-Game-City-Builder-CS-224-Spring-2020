@@ -2,6 +2,8 @@
 
 Be the game changer of your very own city as you design and create a sustainable metropolis in this world defaced by global warming.
 
+## Demonstration Video
+Video can be found at: https://youtu.be/6U7HFlrmCiE
 ## Abstract
 
 Amidst the global crisis of climate change, there is little to no chance of having
